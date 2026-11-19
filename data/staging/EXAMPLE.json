@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Alt",
+    "website": "https://alt.xyz",
+    "country": "US",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": 120,
+    "stage": "series_b",
+    "why_live_data": "Pricing model is fed by listing and transaction data scraped from dozens of external marketplaces and auction houses.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://jobs.ashbyhq.com/alt/7d199f51-8c8c-48e9-baf7-aae4a6fe6513",
+    "notes": "Role names data coverage as the owned metric.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-08-24",
+        "evidence_url": "https://jobs.ashbyhq.com/alt/7d199f51-8c8c-48e9-baf7-aae4a6fe6513",
+        "evidence_note": "Data Engineer role owning scrape pipelines for marketplace and auction data.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

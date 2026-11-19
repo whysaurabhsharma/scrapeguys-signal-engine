@@ -1,0 +1,4 @@
+domain,expected,why
+alt.xyz,buy,"pricing model fed by marketplace scraping, role owns data coverage"
+seon.io,buy,enrichment API runs collection on the live request path
+cube.global,buy,"role names geo-blocking, Cloudflare and CAPTCHA as the job"
