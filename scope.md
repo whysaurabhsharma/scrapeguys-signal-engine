@@ -1,4 +1,4 @@
-﻿# Scope — ScrapeGuys signal engine
+# Scope — ScrapeGuys signal engine
 
 Built independently as an interview project. Not affiliated with ScrapeGuys.
 

@@ -1,4 +1,4 @@
-﻿# ScrapeGuys signal engine
+# ScrapeGuys signal engine
 
 Built independently as an interview project. Not affiliated with ScrapeGuys.
 

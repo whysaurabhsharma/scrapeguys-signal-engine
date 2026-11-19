@@ -1,4 +1,4 @@
-﻿{
+{
   "permissions": {
     "allow": [
       "Bash(python scripts/*)",
@@ -17,9 +17,6 @@
       "Bash(scp *)",
       "Bash(nc *)",
       "Bash(git push *)",
-      "Write(data/accounts.csv)",
-      "Write(data/signals.csv)",
-      "Write(data/scored.csv)",
       "Edit(data/accounts.csv)",
       "Edit(data/signals.csv)",
       "Edit(data/scored.csv)"
