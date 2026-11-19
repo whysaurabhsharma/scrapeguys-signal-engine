@@ -1,0 +1,28 @@
+﻿{
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/*)",
+      "Read(**)",
+      "Write(data/staging/**)",
+      "Write(out/**)",
+      "Edit(out/**)",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Bash(rm *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(nc *)",
+      "Bash(git push *)",
+      "Write(data/accounts.csv)",
+      "Write(data/signals.csv)",
+      "Write(data/scored.csv)",
+      "Edit(data/accounts.csv)",
+      "Edit(data/signals.csv)",
+      "Edit(data/scored.csv)"
+    ]
+  }
+}
