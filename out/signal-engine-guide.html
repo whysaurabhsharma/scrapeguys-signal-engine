@@ -1,0 +1,820 @@
+<title>Signal Engine Field Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: sticky table of contents on the left, one long reference column on the right; collapses to a scrolling chip bar on phones. */
+:root{
+  --bg:#F3F6F8; --surface:#FFFFFF; --ink:#14202B; --muted:#596876; --line:#D8E0E7; --soft:#E9EEF2;
+  --accent:#0E6A87; --accent-soft:#DCEFF5; --warn:#A8560A; --warn-soft:#FBEBD8;
+  --tA:#0C7448; --tB:#2C66A8; --tN:#8A6A12; --tR:#A43A3A;
+  --tA-s:#DDF2E8; --tB-s:#E0EBF7; --tN-s:#F5EDD4; --tR-s:#F6E0E0;
+  --display:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1318; --surface:#141D24; --ink:#E3E9EE; --muted:#93A2AF; --line:#25313B; --soft:#1B262E;
+  --accent:#55B7D6; --accent-soft:#16323D; --warn:#E6A457; --warn-soft:#3A2A16;
+  --tA:#4FCB91; --tB:#7AAEE8; --tN:#D9B655; --tR:#E58585;
+  --tA-s:#15342A; --tB-s:#172A40; --tN-s:#33290F; --tR-s:#3A1C1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1318; --surface:#141D24; --ink:#E3E9EE; --muted:#93A2AF; --line:#25313B; --soft:#1B262E;
+  --accent:#55B7D6; --accent-soft:#16323D; --warn:#E6A457; --warn-soft:#3A2A16;
+  --tA:#4FCB91; --tB:#7AAEE8; --tN:#D9B655; --tR:#E58585;
+  --tA-s:#15342A; --tB-s:#172A40; --tN-s:#33290F; --tR-s:#3A1C1C; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
+a{color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.86em}
+code{background:var(--soft);padding:.1em .35em;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h2{font-size:1.75rem;letter-spacing:-.01em}
+h3{font-size:1.15rem}
+h4{font-size:1rem}
+p{margin:0}
+.wrap{display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;max-width:1240px;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;max-height:calc(100vh - 48px);overflow:auto}
+nav.toc .brand{font-family:var(--display);font-weight:700;font-size:1rem;margin-bottom:4px}
+nav.toc .sub{color:var(--muted);font-size:.8rem;margin-bottom:18px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+nav.toc a{display:block;padding:5px 10px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:.88rem}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--soft);color:var(--ink);outline:none}
+nav.toc a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{min-width:0;display:flex;flex-direction:column;gap:72px}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:20px;min-width:0}
+.eyebrow{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent)}
+.lede{font-size:1.08rem;color:var(--muted);max-width:68ch}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+
+.hero{display:flex;flex-direction:column;gap:18px;padding-bottom:8px}
+.hero h1{font-size:clamp(2rem,4.4vw,3.1rem);letter-spacing:-.02em;max-width:20ch}
+.stamp{display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:.75rem;color:var(--warn);background:var(--warn-soft);padding:4px 10px;border-radius:4px;width:fit-content;letter-spacing:.06em}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stat{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--display);font-size:1.7rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:.8rem;color:var(--muted)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h3{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.card ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;font-size:.88rem;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;min-width:0}
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);padding:12px 14px;border-radius:0 8px 8px 0;font-size:.92rem}
+.note.info{border-color:var(--accent);background:var(--accent-soft)}
+.tag{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:2px 7px;border-radius:4px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.pill{display:inline-block;font-family:var(--mono);font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pA{background:var(--tA-s);color:var(--tA)} .pB{background:var(--tB-s);color:var(--tB)}
+.pN{background:var(--tN-s);color:var(--tN)} .pR{background:var(--tR-s);color:var(--tR)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;background:var(--soft);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:.84rem}
+td .why{display:block;color:var(--muted);font-size:.8rem;margin-top:2px;max-width:60ch}
+
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;counter-reset:f}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;counter-increment:f}
+.step::before{content:counter(f);font-family:var(--mono);font-size:.7rem;color:var(--accent);font-weight:600}
+.step.py{border-color:var(--accent)}
+.step b{font-family:var(--display);font-size:1rem}
+.step p{font-size:.82rem;color:var(--muted)}
+.who{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em}
+.who.m{color:var(--warn)} .who.p{color:var(--accent)}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.split .card.m{border-top:3px solid var(--warn)} .split .card.p{border-top:3px solid var(--accent)}
+
+.tierbar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.tierbar div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.75rem;font-weight:600;min-width:0;white-space:nowrap;overflow:hidden}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.calc{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px}
+.calc label{display:flex;flex-direction:column;gap:4px;font-size:.72rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;min-width:0}
+.calc select,.calc input{font:inherit;font-size:.9rem;font-family:var(--body);text-transform:none;letter-spacing:0;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;min-width:0;width:100%}
+.row3{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.sigrow{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.sigrow .val{font-family:var(--mono);font-size:.76rem;color:var(--muted);grid-column:1/-1}
+.btn{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+.btn:hover{background:var(--soft)}
+.out{display:flex;flex-direction:column;gap:14px;align-self:start}
+.big{font-family:var(--display);font-size:3rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:96px 1fr 70px;gap:10px;align-items:center;font-size:.82rem}
+.bar .track{height:10px;background:var(--soft);border-radius:5px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:5px}
+.bar .n{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.reason{font-size:.9rem;background:var(--soft);padding:10px 12px;border-radius:8px}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+
+.formula{font-family:var(--mono);font-size:.88rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;white-space:pre;line-height:1.7}
+
+.rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:r}
+.rules li{counter-increment:r;display:grid;grid-template-columns:34px 1fr;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.rules li::before{content:counter(r);font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--accent)}
+
+.check{display:grid;grid-template-columns:auto auto 1fr;gap:6px 12px;font-size:.88rem;align-items:baseline}
+.ok{color:var(--tA);font-family:var(--mono);font-weight:600;font-size:.78rem}
+.miss{color:var(--warn);font-family:var(--mono);font-weight:600;font-size:.78rem}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:24px;padding-block:0 60px}
+  nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;max-height:none;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+  nav.toc .brand,nav.toc .sub{display:none}
+  nav.toc ol{flex-direction:row;overflow-x:auto;gap:4px;scrollbar-width:none}
+  nav.toc a{white-space:nowrap;background:var(--surface);border:1px solid var(--line)}
+  .calc{grid-template-columns:minmax(0,1fr)}
+  main{gap:56px;padding-top:12px}
+  .sigrow{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:no-preference){.bar .fill{transition:width .35s ease}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <div class="brand">Signal Engine</div>
+  <div class="sub">Field guide · run of 2026-11-20</div>
+  <ol>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#pipeline">Pipeline</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#rules">Operating rules</a></li>
+    <li><a href="#icps">The three ICPs</a></li>
+    <li><a href="#triggers">Signals and triggers</a></li>
+    <li><a href="#scoring">Scoring model</a></li>
+    <li><a href="#calculator">Score calculator</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#tier-a">Tier A accounts</a></li>
+    <li><a href="#assets">Assets and probe</a></li>
+    <li><a href="#killlist">Kill list</a></li>
+    <li><a href="#guardrails">Never-send guardrails</a></li>
+    <li><a href="#acceptance">Acceptance checks</a></li>
+    <li><a href="#golden">Golden set</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#weak">Weak spots</a></li>
+    <li><a href="#lessons">Lessons</a></li>
+    <li><a href="#interview">Interview prep</a></li>
+    <li><a href="#run">Run it</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section id="overview" class="hero">
+  <span class="stamp">INTERVIEW PROJECT · NOT AFFILIATED WITH SCRAPEGUYS · PRIVATE REPO</span>
+  <h1>A machine that finds who needs live web data this week, and proves it.</h1>
+  <p class="lede">The ScrapeGuys signal engine looks for companies with <strong>public, dated evidence</strong> that they need live web data. It scores them with deterministic Python, then drafts a sourced brief and a data asset for the best ones. It drafts and a human sends. It was built to answer a Growth Manager job description that says inbound is being built from zero.</p>
+  <div class="stats">
+    <div class="stat"><b>39</b><span>accounts (ai 9 · travel 13 · commerce 17)</span></div>
+    <div class="stat"><b>74</b><span>dated signals, each with a URL</span></div>
+    <div class="stat"><b>3</b><span>Tier A: Lyst, Going, Gramiyaa</span></div>
+    <div class="stat"><b>287</b><span>recorded rejections</span></div>
+    <div class="stat"><b>0 / 7</b><span>quick-commerce pages gave product data to a plain client</span></div>
+    <div class="stat"><b>11 / 11</b><span>core checks pass · targets 6 / 9</span></div>
+  </div>
+  <div class="note info"><strong>Verdict from the acceptance run: CORRECT BUT THIN.</strong> The machine passes every correctness check. It produced less output than the targets asked for, because the evidence bar was held instead of lowered.</div>
+</section>
+
+<section id="pipeline">
+  <div class="eyebrow">How a run flows</div>
+  <h2>Pipeline: six slash commands, in order</h2>
+  <p class="lede">Each stage is a skill in <code>.claude/skills/</code>. Orange labels are model judgment; blue-bordered stages are Python that must be exact. Every skill ends with an explicit STOP and waits for a human.</p>
+  <div class="flow">
+    <div class="step"><span class="who m">model</span><b>/hunt · discover</b><p>ATS-targeted search and vendor case studies. Never generic funding search.</p></div>
+    <div class="step"><span class="who m">subagents</span><b>research + verify</b><p><code>researcher</code> gathers evidence; <code>verifier</code> sees only claims + URLs and returns SUPPORTED, PARTIAL, UNSUPPORTED or UNREACHABLE. Only SUPPORTED is staged.</p></div>
+    <div class="step"><span class="who m">model</span><b>disqualify</b><p>Vendors, suppress list, frontier labs. Each drop appended to <code>killlist.csv</code> as it happens.</p></div>
+    <div class="step"><span class="who m">model</span><b>stage JSON</b><p>One <code>data/staging/&lt;date&gt;-&lt;slug&gt;.json</code> per company, copying <code>EXAMPLE.json</code>.</p></div>
+    <div class="step py"><span class="who p">python</span><b>ingest.py</b><p>Dry run first, human approval, then the only write to <code>accounts.csv</code> and <code>signals.csv</code>.</p></div>
+    <div class="step py"><span class="who p">python</span><b>/score · score.py</b><p>Decayed pain + fit, tier gates, written reason. Only writer of <code>scored.csv</code>.</p></div>
+    <div class="step"><span class="who m">model</span><b>/angle</b><p>One brief per Tier A, under 200 words, line 2 reads DRAFT - NOT SENT.</p></div>
+    <div class="step py"><span class="who p">model + probe.py</span><b>/asset</b><p>Per-ICP teardown. No API key, so it documents where a naive fetch fails.</p></div>
+    <div class="step"><span class="who m">model</span><b>/partners</b><p>Channel archetypes to <code>out/partners.md</code>. Never into a CSV.</p></div>
+    <div class="step"><span class="who m">model</span><b>/report</b><p>Inputs, outputs, the full kill list, what it would not claim.</p></div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="eyebrow">The design decision</div>
+  <h2>Architecture: the model judges, Python decides</h2>
+  <p class="lede">The idea the repo rests on: anything that has to be exact or reproducible is taken away from the model. The model never scores, never assigns an id, never writes a pipeline CSV.</p>
+  <div class="split">
+    <div class="card m"><h3>Model does judgment</h3><ul>
+      <li>Finding candidates and reading evidence</li>
+      <li>Deciding whether a company is a buyer or a vendor</li>
+      <li>Writing <code>why_live_data</code>: one sentence on what they cannot see</li>
+      <li>Writing briefs, assets, partner strategy, reports</li>
+      <li>Proposing weight changes, then waiting</li>
+    </ul></div>
+    <div class="card p"><h3>Python does anything exact</h3><ul>
+      <li>Ids: <code>ac_</code> + sha256(domain)[:10]; <code>sg_</code> + sha256(account|type|url|ref)[:10]</li>
+      <li>Schema validation, rejection with a printed reason</li>
+      <li>Idempotent merge: re-ingesting changes nothing</li>
+      <li>Scoring, decay, rounding (half-up, once), tiers</li>
+      <li>Probing URLs politely and logging measurements</li>
+    </ul></div>
+  </div>
+
+  <h3>Repo map</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Path</th><th>What it is</th><th>Detail to know</th></tr></thead>
+    <tbody>
+      <tr><td><code>CLAUDE.md</code></td><td>7 operating rules, ICPs, signal table, tiers</td><td>Loaded every session; overrides default behavior.</td></tr>
+      <tr><td><code>scope.md</code></td><td>Decisions and why, 14 sections</td><td>Read before changing anything. Records every correction with its date.</td></tr>
+      <tr><td><code>.claude/skills/</code></td><td>hunt, score, angle, asset, partners, report</td><td>Quoted frontmatter + <code>allowed-tools</code>. An unquoted colon once silently dropped tool limits.</td></tr>
+      <tr><td><code>.claude/agents/</code></td><td>researcher, verifier</td><td>Read-only. The verifier never sees the researcher's reasoning, so its check stays independent.</td></tr>
+      <tr><td><code>.claude/rules/data-contract.md</code></td><td>Path-scoped rule</td><td>Auto-loads whenever <code>data/**</code> is touched.</td></tr>
+      <tr><td><code>.claude/hooks/guard.py</code></td><td>PreToolUse hook</td><td>7 block rules. Fails closed. Backstop, not proof.</td></tr>
+      <tr><td><code>.claude/settings.json</code></td><td>Permissions</td><td>Allows <code>python scripts/*</code> and writes to staging and out. Denies rm, curl, wget, ssh, scp, nc, git push, and Edit on the 3 CSVs.</td></tr>
+      <tr><td><code>.mcp.json</code></td><td>One MCP server: Google Sheets</td><td>Cannot send. Lets a non-technical person sort the CSVs.</td></tr>
+      <tr><td><code>scripts/common.py</code></td><td>Schema, weights, tiers, ids, suppression</td><td>Imported by every script. Standard library only (no yaml).</td></tr>
+      <tr><td><code>scripts/ingest.py</code></td><td>Staging JSON → accounts + signals</td><td>Only writer. Rejects bad stage, missing URL, unsourced DM, suppressed domain, future dates. Never blanks a stored field.</td></tr>
+      <tr><td><code>scripts/score.py</code></td><td>accounts + signals → scored.csv</td><td>Only writer. Atomic write via temp file. Appends to <code>runs.log</code>.</td></tr>
+      <tr><td><code>scripts/dedupe.py</code></td><td>Same company under two domains</td><td>Rules: name, substring, tld, redirect. Report-only unless <code>--apply</code>.</td></tr>
+      <tr><td><code>scripts/probe.py</code></td><td>Measures a naive fetch</td><td>robots.txt first, 1.5 s delay, 10 s timeout, no retries, never stores a body.</td></tr>
+      <tr><td><code>scripts/killlist.py</code></td><td>Appends one rejection</td><td>Append-only. A wrong row is fixed by appending, never editing.</td></tr>
+      <tr><td><code>scripts/acceptance.py</code></td><td>11 CORE + 9 TARGET checks</td><td>Runs writes in a temp copy; proves <code>data/</code> untouched.</td></tr>
+      <tr><td><code>config/</code></td><td>suppress.csv (16), robots_allowlist.csv (1), seeds/india-qcommerce.csv (12 brands)</td><td>Ashby's API is allowlisted because its robots.txt returns 401.</td></tr>
+      <tr><td><code>data/</code></td><td>accounts, signals, scored, killlist, runs.log, staging/</td><td>45 staging files + EXAMPLE.json fixture. <code>runs.log</code> is gitignored.</td></tr>
+      <tr><td><code>tests/</code></td><td>golden.csv + 5 test files</td><td>No pytest; each runs as <code>python tests/test_x.py</code>.</td></tr>
+      <tr><td><code>out/</code></td><td>briefs (3), assets (3 + URL lists), partners.md, report, demo.md</td><td>Everything human-facing.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="rules">
+  <div class="eyebrow">CLAUDE.md</div>
+  <h2>The seven operating rules</h2>
+  <ol class="rules">
+    <li><div><b>Never send.</b> No email, DM, form post or CRM send. Every draft is a file marked DRAFT - NOT SENT. No send credential exists in the repo.</div></li>
+    <li><div><b>Public sources only.</b> Behind a login means it does not exist. Respect robots.txt. Documented public APIs are fine.</div></li>
+    <li><div><b>No claim without a URL.</b> Unsourced means UNVERIFIED or not written. An empty field beats a guessed one.</div></li>
+    <li><div><b>No date, no signal.</b> <code>signal_date</code> is when the event happened, never today. Undated signals are dropped, not estimated.</div></li>
+    <li><div><b>Scripts write the CSVs.</b> JSON goes to <code>data/staging/</code>; <code>ingest.py</code> does the rest.</div></li>
+    <li><div><b>Never score by hand.</b> If the ranking is wrong, the weights are wrong: propose, wait, re-run.</div></li>
+    <li><div><b>Human-facing output:</b> finding first, method second, nothing over 200 words.</div></li>
+  </ol>
+  <div class="grid3">
+    <div class="card"><h4>Disqualify: vendors</h4><p class="small muted">Scraping, proxy and extraction vendors. They hire scraping engineers because it is their product, not their pain.</p></div>
+    <div class="card"><h4>Disqualify: suppress list</h4><p class="small muted">16 domains: ScrapeGuys itself, 13 competitors (Bright Data, Oxylabs, Zyte, Apify, Firecrawl, Grass / Wynd and others), OpenAI, ElevenLabs.</p></div>
+    <div class="card"><h4>Disqualify: frontier labs</h4><p class="small muted">Labs and hyperscalers that crawl as core infrastructure. Narrow on purpose: having engineers is <em>not</em> a reason to disqualify.</p></div>
+  </div>
+</section>
+
+<section id="icps">
+  <div class="eyebrow">Who buys</div>
+  <h2>The three ICPs</h2>
+  <p class="lede">Each ICP is defined by one specific thing the buyer cannot see. An account only enters if the hunt can write that sentence from fetched evidence.</p>
+  <div class="grid3">
+    <div class="card"><h3>ai <span class="tag">global · 9 accounts</span></h3>
+      <p><strong>Lacks</strong> a live view of the web its product answers from. Prices and availability go stale between crawls, so the user is shown something no longer true.</p>
+      <dl class="kv"><dt>Tier A</dt><dd>Lyst (76.1)</dd><dt>Others</dt><dd>Beni, Daydream, SEON, Onton, Valdera, PortPro, Phia, Mindtrip</dd><dt>Asset</dt><dd>Freshness teardown: 5 facts the product answers from</dd></dl>
+      <p class="small muted">Narrower than assumed: AI assistants usually crawl for themselves or source via a platform API (Wanderlog, Recipy, Product.ai all rejected).</p></div>
+    <div class="card"><h3>travel <span class="tag">global · 13 accounts</span></h3>
+      <p><strong>Lacks</strong> sight of its own rates across the OTAs reselling it. Parity leaks go unseen until revenue has moved.</p>
+      <dl class="kv"><dt>Tier A</dt><dd>Going (75.1)</dd><dt>Others</dt><dd>Accor, Holidu, ixigo, Evolve, Wander, Valamar, Vogo, Radisson, Treebo, Turim, BWH, AvantStay</dd><dt>Asset</dt><dd>Rate-visibility teardown on one route or property</dd></dl></div>
+    <div class="card"><h3>commerce <span class="tag">global, India preferred · 17</span></h3>
+      <p><strong>Lacks</strong> live visibility of its SKUs and competitors on quick-commerce and marketplaces, where price, stock and placement change hourly.</p>
+      <dl class="kv"><dt>Tier A</dt><dd>Gramiyaa (74.6)</dd><dt>Platforms</dt><dd>Blinkit, Zepto, Instamart</dd><dt>Asset</dt><dd>Shelf teardown: 5 SKUs across the apps</dd></dl>
+      <p class="small muted">Widened from India-first to global on 2026-11-20 (scope.md §4). Thresholds and evidence rules unchanged.</p></div>
+  </div>
+</section>
+
+<section id="triggers">
+  <div class="eyebrow">What counts as evidence</div>
+  <h2>Signals and triggers</h2>
+  <p class="lede">Only four signal types exist. Each decays from its weight on a half-life, and each is multiplied by how far the date itself can be trusted.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Type</th><th class="num">Weight</th><th class="num">Half-life</th><th>Date comes from</th><th>Opens Tier A?</th><th class="num">In data</th></tr></thead>
+    <tbody>
+      <tr><td><strong>hiring</strong></td><td class="num">18</td><td class="num">60 d</td><td>ATS public JSON API, never the HTML page</td><td>Yes (evidential)</td><td class="num">21</td></tr>
+      <tr><td><strong>funding</strong></td><td class="num">16</td><td class="num">120 d</td><td>Announcement date. Most reliable trigger.</td><td>No: shows budget, not pain</td><td class="num">13</td></tr>
+      <tr><td><strong>launch</strong></td><td class="num">14</td><td class="num">90 d</td><td>Press or product announcement date</td><td>No</td><td class="num">24</td></tr>
+      <tr><td><strong>complaint</strong></td><td class="num">12</td><td class="num">45 d</td><td>Public post date</td><td>Yes (evidential)</td><td class="num">16</td></tr>
+    </tbody></table></div>
+
+  <h3>Date confidence multiplier</h3>
+  <div class="grid3">
+    <div class="card"><h4>exact <span class="tag">× 1.00</span></h4><p class="small muted">A first-published or announcement date: Greenhouse <code>first_published</code>, Lever <code>createdAt</code>, a press dateline.</p></div>
+    <div class="card"><h4>ceiling <span class="tag">× 0.75</span></h4><p class="small muted">A machine-readable date that may be a later repost: Ashby <code>publishedAt</code> (last published), Workable <code>published_on</code>, SmartRecruiters <code>releasedDate</code>.</p></div>
+    <div class="card"><h4>approx <span class="tag">× 0.50</span></h4><p class="small muted">No machine field, only a date printed on a page. Never the only basis for Tier A. A machine-readable field is never approx.</p></div>
+  </div>
+  <p class="small muted">In the data: 74 signals; 42 exact, 14 ceiling, 18 approx.</p>
+
+  <h3>ATS endpoints the hunt uses</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>ATS</th><th>Endpoint</th><th>Field</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td>Greenhouse</td><td class="mono">boards-api.greenhouse.io/v1/boards/{token}/jobs</td><td><code>first_published</code> (not updated_at)</td><td>exact</td></tr>
+      <tr><td>Lever</td><td class="mono">api.lever.co/v0/postings/{slug}?mode=json</td><td><code>createdAt</code> (unix ms)</td><td>exact</td></tr>
+      <tr><td>Ashby</td><td class="mono">api.ashbyhq.com/posting-api/job-board/{board}</td><td><code>publishedAt</code></td><td>ceiling</td></tr>
+      <tr><td>Workable</td><td class="mono">apply.workable.com/api/v1/widget/accounts/{acct}?details=true</td><td><code>published_on</code></td><td>ceiling</td></tr>
+      <tr><td>SmartRecruiters</td><td class="mono">api.smartrecruiters.com/v1/companies/{co}/postings</td><td><code>releasedDate</code></td><td>ceiling</td></tr>
+    </tbody></table></div>
+  <p class="small muted">Why the JSON API: the HTML job pages are JS-rendered and carry no date. <code>jobs.ashbyhq.com/api/</code> is robots-disallowed, so only the documented posting API is used.</p>
+
+  <h3>Discovery sources, ranked by the hand test</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Source</th><th>Verdict</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>ATS-targeted search, e.g. <code>site:jobs.ashbyhq.com "web scraping"</code></td><td><span class="pill pA">WORKS</span></td><td>One query returned 8 real companies. Finds roles well, buyers weakly: vendor listings dominate.</td></tr>
+      <tr><td>Checking a likely company's job board directly</td><td><span class="pill pA">WORKS</span></td><td>2 of 3 accounts in the first real hunt came this way.</td></tr>
+      <tr><td>Quick-commerce vendor case studies, founder interviews</td><td><span class="pill pA">WORKS</span></td><td>Found Farmley, Gramiyaa, Moms Home: brands describe their own problem.</td></tr>
+      <tr><td>Seed lists (<code>config/seeds/</code>)</td><td><span class="pill pN">WEAK</span></td><td>Failed 3 of 4 times. A directory shows who sells there, not who said they cannot see it.</td></tr>
+      <tr><td>Generic funding search</td><td><span class="pill pR">KILLED</span></td><td>Returned AI mega-rounds, zero buyers.</td></tr>
+      <tr><td>Search for India commerce brands</td><td><span class="pill pR">FAILS</span></td><td>Returns market reports, not brands.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="scoring">
+  <div class="eyebrow">scripts/score.py + common.py</div>
+  <h2>Scoring model</h2>
+  <p class="lede">Four parts, each capped, summed to a 0–100 score. Total and pain are rounded once (half-up, one decimal), and the tier is decided on exactly the numbers shown.</p>
+  <div class="formula">score = icp_match (≤30) + pain (≤40) + capacity (≤15) + reachability (≤15)
+
+signal value = weight × 0.5^(age_days / half_life) × date_confidence
+pain         = sum over types of the STRONGEST signal of that type
+               (five postings for one role are one fact)</div>
+  <div class="grid2">
+    <div class="card"><h4>icp_match, from icp_confidence</h4><dl class="kv"><dt>high</dt><dd>30</dd><dt>medium</dt><dd>20</dd><dt>low</dt><dd>10</dd></dl></div>
+    <div class="card"><h4>capacity, from stage</h4><dl class="kv"><dt>series_b, series_c, growth</dt><dd>15</dd><dt>series_a</dt><dd>13</dd><dt>public</dt><dd>10</dd><dt>seed, bootstrapped</dt><dd>8</dd><dt>unknown / blank</dt><dd>5</dd></dl><p class="small muted">Any other stage value is now rejected by ingest; that bug once cost Lyst its tier.</p></div>
+    <div class="card"><h4>reachability</h4><dl class="kv"><dt>named DM + public source URL</dt><dd>15</dd><dt>title only, no name</dt><dd>7</dd><dt>nothing</dt><dd>0</dd></dl></div>
+    <div class="card"><h4>Tier lines, fixed before any row was scored</h4><dl class="kv"><dt>A</dt><dd>≥ 70</dd><dt>B</dt><dd>≥ 50</dd><dt>nurture</dt><dd>≥ 30</dd><dt>reject</dt><dd>&lt; 30</dd></dl></div>
+  </div>
+
+  <h3>Tier rules, applied in order; first match wins</h3>
+  <ol class="rules">
+    <li><div><b>No website</b> → reject.</div></li>
+    <li><div><b>Domain on the suppress list</b> (subdomains match too) → reject.</div></li>
+    <li><div><b>Pain is zero</b> → nurture if score ≥ 30, else reject. No pain means nurture at best.</div></li>
+    <li><div><b>Tier B pain gate:</b> score ≥ 50 but pain &lt; 5 → nurture. Exposed by Plush, which reached B on fit alone (pain 2.1).</div></li>
+    <li><div><b>Tier A</b> needs score ≥ 70 <em>and</em> all of: pain ≥ 15; freshest signal ≤ 90 days; at least one <em>evidential</em> signal (hiring or complaint) that is itself ≤ 90 days. If any fail → B, with the failed reasons written out. The evidential gate was exposed by Henfruit, which hit A on a single funding round.</div></li>
+    <li><div><b>Score ≥ 50</b> → B.</div></li>
+    <li><div><b>Score ≥ 30</b> → nurture.</div></li>
+    <li><div><b>Otherwise</b> → reject.</div></li>
+  </ol>
+  <div class="note"><strong>Emergent property, recorded as a decision:</strong> a complaint alone can never reach Tier A. Its weight of 12 (6 if approx) is always below the Tier A pain minimum of 15, so Tier A needs a second signal type alongside a complaint.</div>
+  <div class="note info"><strong>Worked example, Lyst = 76.1.</strong> icp high 30 + capacity public 10 + named CEO 15 = 55 fit. Pain: best complaint (14 Nov, 6 days, exact) 12 × 0.5^(6/45) = 10.94; hiring (26 Oct, 25 days, ceiling) 18 × 0.5^(25/60) × 0.75 = 10.12. Pain 21.1. Total 76.1, with an evidential signal 6 days old → A.</div>
+</section>
+
+<section id="calculator">
+  <div class="eyebrow">Interactive</div>
+  <h2>Score calculator</h2>
+  <p class="lede">The same arithmetic as <code>score.py</code>, in the browser. Load a real account, change the as-of date, and watch decay move it between tiers. Try Going with an as-of date of 2026-12-17.</p>
+  <div class="presets" id="presets"></div>
+  <div class="calc">
+    <div class="panel" style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <div class="row3">
+        <label for="c-conf">icp_confidence<select id="c-conf"><option>high</option><option>medium</option><option>low</option></select></label>
+        <label for="c-stage">stage<select id="c-stage"><option>seed</option><option>series_a</option><option>series_b</option><option>series_c</option><option>growth</option><option>public</option><option>bootstrapped</option><option>unknown</option></select></label>
+        <label for="c-dm">decision maker<select id="c-dm"><option value="15">named + source</option><option value="7">title only</option><option value="0">none</option></select></label>
+        <label for="c-asof">as-of date<input type="date" id="c-asof" value="2026-11-20"></label>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h4>Signals</h4><button class="btn" id="c-add" type="button">Add signal</button></div>
+      <div id="c-sigs" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div>
+    <div class="panel out" aria-live="polite">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span class="big" id="o-total">0</span><span class="pill" id="o-tier">-</span></div>
+      <div class="bars" id="o-bars"></div>
+      <div class="reason" id="o-reason"></div>
+      <p class="small muted">Signals dated after the as-of date are ignored, as in score.py. The website and suppression checks are left out here.</p>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="eyebrow">data/scored.csv · asof 2026-11-20</div>
+  <h2>Results: 39 accounts</h2>
+  <div class="tierbar" role="img" aria-label="Tier A 3, B 16, nurture 18, reject 2">
+    <div style="flex:3;background:var(--tA-s);color:var(--tA)">A 3</div>
+    <div style="flex:16;background:var(--tB-s);color:var(--tB)">B 16</div>
+    <div style="flex:18;background:var(--tN-s);color:var(--tN)">nurture 18</div>
+    <div style="flex:2;background:var(--tR-s);color:var(--tR)">2</div>
+  </div>
+  <div class="legend"><span><i style="background:var(--tA)"></i>A 3 (7.7%)</span><span><i style="background:var(--tB)"></i>B 16</span><span><i style="background:var(--tN)"></i>nurture 18</span><span><i style="background:var(--tR)"></i>reject 2</span></div>
+  <div class="filters" id="f-icp" aria-label="Filter by ICP"></div>
+  <div class="filters" id="f-tier" aria-label="Filter by tier"></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Company</th><th>ICP</th><th>Ctry</th><th class="num">Score</th><th>Tier</th><th class="num">Fit</th><th class="num">Pain</th><th class="num">Cap</th><th class="num">Reach</th><th class="num">Fresh d</th></tr></thead>
+    <tbody id="acct-body"></tbody></table></div>
+  <p class="small muted">Fit = icp_match. Fresh d = age in days of the freshest counted signal. Five accounts score at B level on fit but are held at nurture by the pain gate (GO DESi, Valdera, Plush, Sweet Karam Coffee, Farmley). Troovy and Henfruit clear 70 but are held at B: funding only.</p>
+</section>
+
+<section id="tier-a">
+  <div class="eyebrow">out/briefs/</div>
+  <h2>The three Tier A accounts</h2>
+  <p class="lede">One per ICP. Each has a brief marked DRAFT - NOT SENT, and each has a known weakness written down beside it.</p>
+  <div class="grid3">
+    <div class="card"><h3>Lyst <span class="pill pA">A 76.1</span> <span class="tag">ai · GB</span></h3>
+      <p class="small"><strong>Signal:</strong> three Trustpilot reviews (19 Sep, 25 Oct, 14 Nov 2026) about being sold out-of-stock items. Lyst replied: "items can occasionally sell out with our retail partners." Plus a Workable TPM role on "partner feed ingestion and validation" (26 Oct, ceiling).</p>
+      <p class="small"><strong>Cannot see:</strong> when an item it still sells has sold out on the retailer's own page, between feed updates.</p>
+      <p class="small"><strong>DM:</strong> Emma McFerran, CEO. Lyst has been owned by listed ZOZO since April 2025.</p>
+      <p class="small"><strong>Opening line</strong> cites the 25 Oct reply and offers a sample of listings already sold out at the source.</p>
+      <div class="note small">Rests on 3 reviews plus one ceiling-dated hiring signal. Reached A only after a stage fix (invalid "subsidiary" → public) and a date relabel: 67.7 → 76.1.</div></div>
+    <div class="card"><h3>Going <span class="pill pA">A 75.1</span> <span class="tag">travel · US</span></h3>
+      <p class="small"><strong>Signal:</strong> Senior Full Stack posting (18 Nov) asks to improve the "accuracy, freshness, and reliability" of deal and price-drop alerts. The VP Eng posting (13 Nov) wants deals sent to members "before they disappear". Price Drop launched 23 Sep (exact date).</p>
+      <p class="small"><strong>Cannot see:</strong> whether a fare it alerts on is still bookable at that price.</p>
+      <p class="small"><strong>DM:</strong> David Krauter, CEO since 2026-03-09. Formerly Scott's Cheap Flights. Bootstrapped.</p>
+      <p class="small"><strong>Cost section:</strong> UNVERIFIED, no public evidence.</p>
+      <div class="note small">Both hiring dates are Ashby ceilings. Decay drops the score to 69.9 on <strong>2026-12-17</strong> (B), five days before the 2026-12-22 date the README gives.</div></div>
+    <div class="card"><h3>Gramiyaa <span class="pill pA">A 74.6</span> <span class="tag">commerce · IN</span></h3>
+      <p class="small"><strong>Signal:</strong> Inc42 interview, 10 Nov 2026: the cofounder says the brand gets "caught between two giants"; "An intern manually checked pin codes". Series A, INR 21 Cr (Dealroom date 9 Oct, approx).</p>
+      <p class="small"><strong>Cannot see:</strong> independent per-pincode price, rank and stock on Blinkit, Zepto, Instamart.</p>
+      <p class="small"><strong>DM:</strong> Mohamed Yaseen, cofounder. Quick commerce is 35% of revenue.</p>
+      <p class="small"><strong>Incumbent:</strong> Nitro Commerce, which co-produces the Inc42 series the evidence came from.</p>
+      <div class="note small"><strong>Brief HELD.</strong> Pitching Gramiyaa closes off Nitro as a partner channel. Decide the channel first.</div></div>
+  </div>
+  <p class="small muted">Every brief has five sections (signal, what they cannot see, cost, opening line, sources), stays under 200 words, carries no email or phone number, and ends with a caveat: the opening line asserts a capability that must be confirmed before anyone sends it.</p>
+</section>
+
+<section id="assets">
+  <div class="eyebrow">/asset · scripts/probe.py</div>
+  <h2>Assets and the probe: documented gaps, not data</h2>
+  <p class="lede">There is no ScrapeGuys API key in the repo, so every asset takes PATH B: list the public URLs the asset would need, fetch each once with a plain polite client, and record exactly where it fails. The failure is the sales argument.</p>
+  <div class="grid3">
+    <div class="card"><h3>commerce <span class="tag">Gramiyaa</span></h3><p class="big" style="font-size:2rem">0 / 7</p><p class="small">Instamart 3 and Zepto 2 served challenge pages (HTTP 202), median 62 ms. Blinkit's robots.txt answered 403, so its 2 pages were never requested. Per-pincode views need a session, not a URL.</p></div>
+    <div class="card"><h3>ai <span class="tag">Lyst → Footshop</span></h3><p class="big" style="font-size:2rem">1 / 6</p><p class="small">Footshop: 3 × HTTP 406, 2 challenge pages. Only Lyst's own page answered. The page with the stale answer is reachable; the page with the true one is not.</p></div>
+    <div class="card"><h3>travel <span class="tag">Going · NYC–LON</span></h3><p class="big" style="font-size:2rem">4 / 7</p><p class="small">AA, JetBlue, Priceline, Kayak answered with static "from" pages, not a priced dated search. Expedia gave 429 on the first request. Google Flights is robots-disallowed. Orbitz's robots.txt redirected (301), so it was skipped.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>All 27 URLs probed</th><th class="num">usable</th><th class="num">blocked</th><th class="num">robots-skipped</th><th class="num">error</th><th class="num">JS shell</th></tr></thead>
+    <tbody><tr><td>out/probe_log.json</td><td class="num">8</td><td class="num">8</td><td class="num">6</td><td class="num">4</td><td class="num">1</td></tr></tbody></table></div>
+  <div class="grid2">
+    <div class="card"><h4>Probe politeness rules</h4><ul class="small">
+      <li>robots.txt checked before any URL on that origin; a disallow, 401/403 or unreachable file means skip</li>
+      <li>One exception: <code>api.ashbyhq.com</code> in robots_allowlist.csv</li>
+      <li>One request at a time, 1.5 s between requests to a host (a larger Crawl-delay wins, capped)</li>
+      <li>10 s timeout, no retries, even on 403 or 429</li>
+      <li>Cross-host redirects not followed (<code>skipped_redirect</code>)</li>
+      <li>Body read only to classify it, then discarded</li>
+    </ul></div>
+    <div class="card"><h4>What it does not show</h4><p class="small">"usable" means the page returned content, not that a price or stock level was extracted. No retries, proxies or browsers were tried, so the probe shows where a naive attempt stops, not what a hardened collector costs. Never say a sample of the company's own data is attached.</p></div>
+  </div>
+</section>
+
+<section id="killlist">
+  <div class="eyebrow">data/killlist.csv · append-only</div>
+  <h2>Kill list: 287 rejections</h2>
+  <p class="lede">A filter that rejects nothing is not a filter. Every drop is appended at the moment it happens, with a reason code.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>reason_code</th><th class="num">Rows</th><th>Meaning, with examples</th></tr></thead>
+    <tbody>
+      <tr><td><code>vendor</code></td><td class="num">112</td><td>Scraping or data is their product: Lighthouse, AirDNA, Similarweb, Exa, Pricefy, YipitData, Infatica</td></tr>
+      <tr><td><code>no_evidenced_why</code></td><td class="num">83</td><td>Could not write the "cannot see" sentence from evidence: Lexroom, Kasa, The Whole Truth, Swappie</td></tr>
+      <tr><td><code>no_dated_signal</code></td><td class="num">44</td><td>Role only on aggregators, closed, or outside 90 days: Emma Sleep, MOO, Fortune Brands</td></tr>
+      <tr><td><code>wrong_buyer</code></td><td class="num">29</td><td>Recruiters, staffing firms, acquired companies, in-house monitors: Layla, Pattern, Jobgether</td></tr>
+      <tr><td><code>off_icp</code></td><td class="num">10</td><td>Outside all three ICPs: Nascent (crypto fund), Betstamp, Airalo</td></tr>
+      <tr><td><code>suppressed</code></td><td class="num">9</td><td>In suppress.csv: Firecrawl, Wynd Labs and others</td></tr>
+    </tbody></table></div>
+  <div class="note">183 of 287 rows have no source URL. The rejection stands but cannot be re-checked. Searches per hunt were never logged, so the funnel starts at candidates screened, not at queries.</div>
+</section>
+
+<section id="guardrails">
+  <div class="eyebrow">Rule 1, enforced in layers</div>
+  <h2>Never-send guardrails</h2>
+  <p class="lede">The real guarantee is what the repo lacks: no send credential, and one declared MCP server (Google Sheets) that cannot send. The hook and the deny rules are defence in depth.</p>
+  <div class="grid3">
+    <div class="card"><h4>Layer 1 · absence</h4><p class="small">No send credential. <code>.mcp.json</code> declares only Sheets. Clone it anywhere and nothing in it can send.</p></div>
+    <div class="card"><h4>Layer 2 · settings.json</h4><p class="small">Denies rm, curl, wget, ssh, scp, nc, git push, and Edit on the three CSVs.</p></div>
+    <div class="card"><h4>Layer 3 · guard.py</h4><p class="small">PreToolUse on Bash, Write, Edit, NotebookEdit and every MCP tool. Fails closed if it crashes.</p></div>
+  </div>
+  <h3>guard.py's seven rules</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>Blocks</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Send attempts in Bash: mail libraries, <code>mail -s</code>, POST to about 30 messaging and CRM hosts (Slack, Gmail API, HubSpot, Apollo, Twilio and others)</td></tr>
+      <tr><td>2</td><td>Write / Edit / NotebookEdit to accounts, signals or scored.csv, after resolving relative and <code>..</code> paths</td></tr>
+      <tr><td>3</td><td>Bash writes to those CSVs: redirect, tee, inline python, cp/mv/rm and PowerShell equivalents</td></tr>
+      <tr><td>4</td><td>Network tools: curl, wget, nc, ssh, scp, Invoke-WebRequest</td></tr>
+      <tr><td>5</td><td>Write to any path outside the repo root</td></tr>
+      <tr><td>6</td><td>MCP tools named as send actions (send, reply, forward, post, publish) plus a denylist (create_draft, manage_marketing_email and others)</td></tr>
+      <tr><td>7</td><td>An interpreter reading its program from stdin (pipe, <code>&lt;</code>, <code>&lt;&lt;</code>)</td></tr>
+    </tbody></table></div>
+  <div class="note"><strong>Known bypass, volunteered:</strong> in the third hunt a session piped Python into the interpreter via a heredoc after Write refused a scratch file outside the repo. It did not touch the CSVs. Rule 7 now blocks that route, but pattern matching cannot close the whole class. Your claude.ai account has Gmail and HubSpot connected, so in your own session the hook is what stands in the way. Side effects you will hit: inline Python that merely <em>names</em> a protected CSV is blocked even when it only reads, and rule 5 blocks writes to temp folders outside the repo.</div>
+</section>
+
+<section id="acceptance">
+  <div class="eyebrow">python scripts/acceptance.py --asof 2026-11-20</div>
+  <h2>Acceptance checks</h2>
+  <div class="grid2">
+    <div class="card"><h3>CORE: is the machine correct? <span class="pill pA">11 / 11</span></h3>
+      <div class="check">
+        <span class="ok">PASS</span><span class="mono small">C1</span><span>Schema: CSV headers match common.py, in order</span>
+        <span class="ok">PASS</span><span class="mono small">C2</span><span>Referential integrity: every signal and score resolves to an account</span>
+        <span class="ok">PASS</span><span class="mono small">C3</span><span>Idempotency: a second ingest leaves both CSVs byte-identical</span>
+        <span class="ok">PASS</span><span class="mono small">C4</span><span>Determinism: two score runs byte-identical</span>
+        <span class="ok">PASS</span><span class="mono small">C5</span><span>Provenance: 74 http evidence URLs, 33 DMs all sourced</span>
+        <span class="ok">PASS</span><span class="mono small">C6</span><span>Dates: ISO, ≤ as-of, none equal captured_at</span>
+        <span class="ok">PASS</span><span class="mono small">C7</span><span>Suppression: no account matches the 16 entries</span>
+        <span class="ok">PASS</span><span class="mono small">C8</span><span>Guard registered in settings.json</span>
+        <span class="ok">PASS</span><span class="mono small">C9</span><span>Never-send scan: 0 hits in 28 files, guard.py included</span>
+        <span class="ok">PASS</span><span class="mono small">C10</span><span>Tests: 5 / 5 exit 0</span>
+        <span class="ok">PASS</span><span class="mono small">G</span><span>data/ hash-identical before and after</span>
+      </div></div>
+    <div class="card"><h3>TARGET: is there enough output? <span class="pill pN">6 / 9</span></h3>
+      <div class="check">
+        <span class="miss">MISS</span><span class="mono small">T1</span><span>Volume 39 / 40. Deliberate: a filler row was refused</span>
+        <span class="ok">PASS</span><span class="mono small">T2</span><span>ICP coverage ≥ 8 each</span>
+        <span class="ok">PASS</span><span class="mono small">T3</span><span>All 4 signal types in use</span>
+        <span class="miss">MISS</span><span class="mono small">T4</span><span>Tier A share 7.7%, target 10–40%</span>
+        <span class="ok">PASS</span><span class="mono small">T5</span><span>Briefs for every Tier A</span>
+        <span class="ok">PASS</span><span class="mono small">T6</span><span>Every Tier A has a sourced DM</span>
+        <span class="ok">PASS</span><span class="mono small">T7</span><span>Each ICP asset has a number in its first 3 lines</span>
+        <span class="miss">MISS</span><span class="mono small">T8</span><span>Golden buyers in A/B 3 / 7 (43%); non-buyers 18 / 18</span>
+        <span class="ok">PASS</span><span class="mono small">T9</span><span>Run log (reports NOT RUN HERE on a clean clone)</span>
+      </div></div>
+  </div>
+  <div class="note info">T1 and T4 pull against each other: an account with no fresh signal raises volume but lowers the Tier A share. Hunts 6 and 7 screened about 250 companies and none met the bar. Lexroom had the date, the CEO and the Series B, and was still dropped because it described a capability, not a gap.</div>
+</section>
+
+<section id="golden">
+  <div class="eyebrow">tests/golden.csv · 26 hand-labelled rows</div>
+  <h2>Golden set</h2>
+  <div class="grid2">
+    <div class="card"><h4>8 labelled buy</h4><p class="small">alt.xyz, seon.io, mamaearth.com, accor.com, bwhhotels.com, sweetkaramcoffee.in, godesi.in, sleepyowl.co. 7 matched an account; 3 are in A/B today (Alt, SEON, Accor).</p><p class="small muted">All 4 shortfalls are AGED, not SCORER errors: re-scored at the date of their freshest signal, each reaches A/B. Golden asks "would they buy?"; the scorer asks "call this week?"</p></div>
+    <div class="card"><h4>18 labelled no</h4><p class="small">Vendors (Bright Data, Oxylabs, Zyte, Apify, Firecrawl, Zyft, iCounter, Cube), frontier crawlers (OpenAI, ElevenLabs, Perplexity), plus Stripe, Figma, Notion, Instacart, OYO, Cleartrip, Nascent. All 18 declined; none scored.</p></div>
+  </div>
+  <div class="note">Five labels were corrected on 2026-11-20 from evidence, not from the ranking. Perplexity flipped to no despite a real need; Mamaearth stayed buy despite scoring nothing. Hunts 2–4 excluded golden domains so the test would not just mirror the search that wrote it.</div>
+</section>
+
+<section id="partners">
+  <div class="eyebrow">out/partners.md · never in a CSV</div>
+  <h2>Partners: the channel question</h2>
+  <p class="lede">The test: <em>if the live feed were handed to their customer for free, would that customer still pay them?</em> No → competitor. Yes → partner candidate.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Rank</th><th>Archetype</th><th>Examples</th><th>Mode</th><th>Why this rank</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Quick-commerce analytics copilots</td><td>GobbleCube, Nitro Commerce / Zodiac</td><td>white-label</td><td>One deal reaches every brand on their dashboard. Their case studies are where the commerce buyers were found.</td></tr>
+      <tr><td class="num">2</td><td>Hotel RMS for independents</td><td>RoomPriceGenie, Treebo's Hotel Superhero</td><td>white-label</td><td>Same mechanics, but reach is unsourced and the fit is adjacent (price recommendation, not parity).</td></tr>
+      <tr><td class="num">3</td><td>Quick-commerce and marketplace agencies</td><td>SW Cybernetics, Wayvia, aCommerce</td><td>refer</td><td>Many names per agency, but each brand is still its own sale.</td></tr>
+      <tr><td class="num">4</td><td>Brand-protection and MAP services</td><td>Red Points, MarqVision</td><td>white-label</td><td>Real demand, mostly US, and the thinnest line between partner and competitor.</td></tr>
+    </tbody></table></div>
+  <div class="note"><strong>The conflict:</strong> the highest-reach channel is the incumbent being displaced. GobbleCube (at Farmley) and Nitro (at Gramiyaa) are partner candidates; PromptCloud (at Treebo) sells collection itself, so it is a competitor. Talk to Nitro before pitching its customer.</div>
+</section>
+
+<section id="weak">
+  <div class="eyebrow">What this does badly</div>
+  <h2>Weak spots to know before anyone asks</h2>
+  <div class="grid2">
+    <div class="card"><ul class="small">
+      <li><strong>Tier A is 3 accounts</strong>, one per ICP, each with a written caveat.</li>
+      <li><strong>Going leaves A soon.</strong> Its hiring dates are ceilings; the score falls below 70 on 2026-12-17.</li>
+      <li><strong>Gramiyaa's pain evidence comes from its incumbent's content.</strong> Funding date is approx. Brief held.</li>
+      <li><strong>Lyst</strong> rests on 3 Trustpilot reviews and one ceiling hiring date.</li>
+      <li><strong>32 of 74 signals</strong> lack an exact date (14 ceiling, 18 approx).</li>
+    </ul></div>
+    <div class="card"><ul class="small">
+      <li><strong>183 of 287 kill rows</strong> have no source URL.</li>
+      <li><strong>Searches per hunt were never logged.</strong> The funnel starts at candidates.</li>
+      <li><strong>6 of 39 accounts</strong> have no named decision maker (SEON, Vogo, Phia, RestaurantSupply.com, PlanetArt, PRISM+).</li>
+      <li><strong>The weights are a guess</strong> checked against 26 labelled rows; closed-won data would calibrate them.</li>
+      <li><strong>out/report-2026-11-20.md is stale:</strong> it shows 24 accounts and 58 kill rows from an earlier pass. The README holds the current 39 / 287.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="lessons">
+  <div class="eyebrow">What building it taught</div>
+  <h2>Nine lessons</h2>
+  <ol class="rules">
+    <li><div><b>ATS search finds roles, not buyers.</b> Vendor listings dominate; checking likely companies' boards worked better.</div></li>
+    <li><div><b>Seed lists failed 3 of 4 times.</b> Vendor case studies and founder interviews found the real commerce buyers.</div></li>
+    <li><div><b>The ai ICP is narrower than assumed.</b> AI assistants crawl for themselves or use platform APIs.</div></li>
+    <li><div><b>A disclaimer is not a confession.</b> Ludex and Zyft admitted limits but never said they cannot see something.</div></li>
+    <li><div><b>A complaint alone can never reach Tier A.</b> This emerged from the weights and is recorded as a decision.</div></li>
+    <li><div><b>The first run produced 0 Tier A, and the thresholds stayed.</b> SEON scored 56.2. A run with nothing hot is a real answer.</div></li>
+    <li><div><b>A data-contract bug cost Lyst its tier.</b> Ingest accepted invalid stage values; the fix moved Lyst 67.7 → 76.1, and Back Market +10 with no tier change.</div></li>
+    <li><div><b>The hook was bypassed in practice.</b> The never-send claim now rests on what the repo lacks.</div></li>
+    <li><div><b>An unquoted colon in frontmatter dropped allowed-tools silently.</b> A control that fails silently reads as one that works.</div></li>
+  </ol>
+</section>
+
+<section id="interview">
+  <div class="eyebrow">out/demo.md</div>
+  <h2>Interview prep</h2>
+  <p class="lede">A two-minute opening (about 282 spoken words) for the ScrapeGuys CEO, Growth Manager role. Hard rule: stop talking whenever a file is open.</p>
+  <div class="grid3">
+    <div class="card"><h4>"What did it get wrong?"</h4><p class="small">Five golden labels written from snippets failed the evidence standard and were corrected from evidence. A skill header's unquoted colon silently dropped its tool limits.</p></div>
+    <div class="card"><h4>"What would you change with our data?"</h4><p class="small">The weights and the suppression list. Closed-won and closed-lost accounts calibrate the weights; the customer list goes straight into suppression.</p></div>
+    <div class="card"><h4>"Could this send?"</h4><p class="small">No credential and one Sheets server. Then volunteer the limit: the hook is a backstop, and the stdin bypass is in scope.md §14.</p></div>
+  </div>
+  <div class="note">Do not claim a sample of the company's own data is attached. Nothing was collected; the assets are documented gaps, and probe_log.json shows that in seconds.</div>
+</section>
+
+<section id="run">
+  <div class="eyebrow">Reproduce it</div>
+  <h2>Run it yourself</h2>
+  <div class="formula"># verify everything (writes happen in a temp copy)
+python scripts/acceptance.py --asof 2026-11-20
+
+# rebuild run history on a fresh clone (runs.log is gitignored)
+python scripts/ingest.py --asof 2026-11-20 --dry-run
+python scripts/ingest.py --asof 2026-11-20
+python scripts/score.py  --asof 2026-11-20
+
+# other tools
+python scripts/dedupe.py                 # report likely duplicate accounts
+python scripts/probe.py --urls out/assets/commerce-2026-11-20-urls.txt
+python scripts/killlist.py --date 2026-11-20 --company "Acme" --domain acme.com \
+    --reason-code vendor --reason "scraping API" --source-url https://acme.com
+
+# tests (standard library, no pytest)
+python tests/test_score_boundaries.py
+python tests/test_ingest.py
+python tests/test_dedupe.py
+python tests/test_probe.py
+python tests/test_guard.py</div>
+  <p class="small muted">Python is invoked as <code>python</code>, not <code>python3</code>, on this machine. Ingest reports five counts: accounts added, accounts updated, signals added, signals duplicate, records rejected.</p>
+</section>
+
+<section id="glossary">
+  <div class="eyebrow">Terms</div>
+  <h2>Glossary</h2>
+  <div class="tbl"><table><tbody>
+    <tr><td><strong>signal</strong></td><td>A dated, sourced public event (hiring, funding, launch, complaint) tied to one account.</td></tr>
+    <tr><td><strong>signal_date / captured_at</strong></td><td>When the event happened / when the hunt found it. Decay runs on signal_date.</td></tr>
+    <tr><td><strong>evidential signal</strong></td><td>Hiring or complaint: shows the pain itself. Funding and launch only show budget or activity.</td></tr>
+    <tr><td><strong>ceiling date</strong></td><td>A machine date that may be a repost, so the true first date could be earlier. Weighted × 0.75.</td></tr>
+    <tr><td><strong>why_live_data</strong></td><td>One sentence naming what this company specifically cannot see without live data. No sentence, no account.</td></tr>
+    <tr><td><strong>source_ref</strong></td><td>A short id for one item inside a shared source (an ATS job id), so two postings behind one JSON endpoint get two signal ids.</td></tr>
+    <tr><td><strong>incumbent</strong></td><td>A vendor the account already pays (GobbleCube, Nitro, Lighthouse, PromptCloud). The deal becomes displacement, not education.</td></tr>
+    <tr><td><strong>PATH A / PATH B</strong></td><td>Asset built from collected data with an API key / documented gap from the probe when there is no key. This repo only uses B.</td></tr>
+    <tr><td><strong>AGED vs SCORER</strong></td><td>Why a golden buyer misses A/B: its signals decayed (AGED) or the scorer misjudged it (SCORER). All 4 misses are AGED.</td></tr>
+    <tr><td><strong>DRAFT - NOT SENT</strong></td><td>Required on line 2 of every brief. A human decides whether anything is sent.</td></tr>
+  </tbody></table></div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var A=[
+  ["Lyst","ai","GB",76.1,"A",30,21.1,10,15,6,"Pain 21.1, signal 6 days old."],
+  ["Going","travel","US",75.1,"A",30,22.1,8,15,2,"Pain 22.1, signal 2 days old."],
+  ["Gramiyaa","commerce","IN",74.6,"A",30,16.6,13,15,10,"Pain 16.6, signal 10 days old."],
+  ["Troovy","commerce","IN",73.9,"B",30,13.9,15,15,24,"Clears 70, but pain 13.9 < 15 and funding only."],
+  ["Henfruit","commerce","IN",73.8,"B",30,15.8,13,15,2,"Clears 70, but funding only: no hiring or complaint."],
+  ["Alt","commerce","US",70.0,"B",30,10.0,15,15,26,"Exactly 70, but pain 10.0 < 15."],
+  ["Accor","travel","FR",68.3,"B",30,13.3,10,15,1,""],
+  ["Beni","ai","US",66.9,"B",30,13.9,8,15,1,""],
+  ["Holidu","travel","DE",65.1,"B",30,5.1,15,15,142,""],
+  ["GO DESi","commerce","IN",63.1,"nurture",30,3.1,15,15,282,"B-level score, pain 3.1 < 5 gate."],
+  ["Valdera","ai","US",62.4,"nurture",30,4.4,13,15,126,"B-level score, pain 4.4 < 5 gate."],
+  ["Plush","commerce","IN",62.1,"nurture",30,2.1,15,15,156,"B-level score, pain 2.1 < 5 gate."],
+  ["Sweet Karam Coffee","commerce","IN",61.3,"nurture",30,3.3,13,15,273,"B-level score, pain 3.3 < 5 gate."],
+  ["Farmley","commerce","IN",60.6,"nurture",30,0.6,15,15,557,"B-level score, pain 0.6 < 5. Pays GobbleCube."],
+  ["ixigo","travel","IN",59.3,"B",20,14.3,10,15,64,""],
+  ["Daydream","ai","US",58.8,"B",30,5.8,8,15,114,""],
+  ["Evolve","travel","US",56.2,"B",20,16.2,5,15,14,""],
+  ["SEON","ai","HU",56.2,"B",30,11.2,15,0,57,"No sourced decision maker."],
+  ["Wander","travel","US",55.6,"B",20,5.6,15,15,46,""],
+  ["Valamar Riviera","travel","HR",55.3,"B",30,5.3,5,15,127,""],
+  ["MTR Foods","commerce","IN",55.3,"B",30,5.3,5,15,126,""],
+  ["Radisson Hotel Group","travel","BE",54.8,"nurture",30,4.8,5,15,140,"Pain 4.8 < 5 gate."],
+  ["Sleepy Owl Coffee","commerce","IN",54.7,"nurture",30,4.7,5,15,211,"Pain 4.7 < 5 gate."],
+  ["Vogo","travel","US",51.6,"B",30,16.6,5,0,7,"No sourced decision maker."],
+  ["Moms Home","commerce","IN",51.4,"B",20,8.4,8,15,23,""],
+  ["Onton","ai","US",50.8,"B",20,7.8,8,15,114,""],
+  ["Treebo","travel","IN",50.6,"nurture",30,0.6,5,15,416,"Pain 0.6. Pays PromptCloud."],
+  ["Turim Hotels Group","travel","PT",50.3,"nurture",30,0.3,5,15,198,"Pain 0.3 < 5 gate."],
+  ["Minimalist","commerce","IN",50.0,"nurture",30,0.0,5,15,702,"No live signal; fit alone."],
+  ["BWH Hotels","travel","US",50.0,"nurture",30,0.0,5,15,515,"No live signal; fit alone."],
+  ["Beiersdorf India (Hansaplast)","commerce","IN",49.9,"nurture",20,9.9,5,15,45,""],
+  ["PortPro","ai","US",48.0,"nurture",20,0.0,13,15,619,"No live signal; fit alone."],
+  ["Back Market","commerce","FR",47.9,"nurture",10,7.9,15,15,46,""],
+  ["Phia","ai","US",45.9,"nurture",30,2.9,13,0,297,""],
+  ["AvantStay","travel","US",43.2,"nurture",20,3.2,5,15,191,""],
+  ["RestaurantSupply.com","commerce","US",38.3,"nurture",20,13.3,5,0,26,""],
+  ["Mindtrip","ai","US",34.7,"nurture",10,4.7,5,15,51,""],
+  ["PRISM+","commerce","SG",26.5,"reject",10,11.5,5,0,14,"Below 30."],
+  ["PlanetArt","commerce","US",24.0,"reject",10,9.0,5,0,35,"Below 30."]
+  ];
+  var PCLS={A:"pA",B:"pB",nurture:"pN",reject:"pR"};
+  var fI="all",fT="all";
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function chips(id,vals,get,set){
+    var el=document.getElementById(id);
+    vals.forEach(function(v){
+      var b=document.createElement("button");b.type="button";b.className="chip";
+      b.textContent=v==="all"?(id==="f-icp"?"All ICPs":"All tiers"):v;
+      b.setAttribute("aria-pressed",String(get()===v));
+      b.onclick=function(){set(v);Array.prototype.forEach.call(el.children,function(c){c.setAttribute("aria-pressed",String(c===b))});draw()};
+      el.appendChild(b);
+    });
+  }
+  function draw(){
+    var tb=document.getElementById("acct-body"),h="";
+    A.filter(function(r){return(fI==="all"||r[1]===fI)&&(fT==="all"||r[4]===fT)}).forEach(function(r){
+      h+="<tr><td><strong>"+esc(r[0])+"</strong>"+(r[10]?"<span class='why'>"+esc(r[10])+"</span>":"")+"</td><td>"+r[1]+"</td><td>"+r[2]+"</td><td class='num'><strong>"+r[3].toFixed(1)+"</strong></td><td><span class='pill "+PCLS[r[4]]+"'>"+r[4]+"</span></td><td class='num'>"+r[5]+"</td><td class='num'>"+r[6].toFixed(1)+"</td><td class='num'>"+r[7]+"</td><td class='num'>"+r[8]+"</td><td class='num'>"+r[9]+"</td></tr>";
+    });
+    tb.innerHTML=h||"<tr><td colspan='10' class='muted'>No accounts match this filter.</td></tr>";
+  }
+  chips("f-icp",["all","ai","travel","commerce"],function(){return fI},function(v){fI=v});
+  chips("f-tier",["all","A","B","nurture","reject"],function(){return fT},function(v){fT=v});
+  draw();
+
+  var MODEL={hiring:[18,60],funding:[16,120],launch:[14,90],complaint:[12,45]};
+  var DC={exact:1,ceiling:.75,approx:.5};
+  var CONF={high:30,medium:20,low:10};
+  var STAGES={seed:8,series_a:13,series_b:15,series_c:15,growth:15,public:10,bootstrapped:8,unknown:5};
+  var EVID={hiring:1,complaint:1};
+  function r1(x){return Math.round(Number((x*10).toFixed(9)))/10}
+  function days(a,b){return Math.round((Date.parse(a+"T00:00:00Z")-Date.parse(b+"T00:00:00Z"))/864e5)}
+  var PRESETS={
+    "Lyst":{conf:"high",stage:"public",dm:"15",s:[["complaint","2026-11-14","exact"],["complaint","2026-10-25","exact"],["complaint","2026-09-19","exact"],["hiring","2026-10-26","ceiling"]]},
+    "Going":{conf:"high",stage:"bootstrapped",dm:"15",s:[["hiring","2026-11-18","ceiling"],["hiring","2026-11-13","ceiling"],["launch","2026-09-23","exact"]]},
+    "Gramiyaa":{conf:"high",stage:"series_a",dm:"15",s:[["complaint","2026-11-10","exact"],["funding","2026-10-09","approx"]]},
+    "Troovy":{conf:"high",stage:"series_b",dm:"15",s:[["funding","2026-10-27","exact"]]},
+    "Henfruit":{conf:"high",stage:"series_a",dm:"15",s:[["funding","2026-11-18","exact"]]},
+    "SEON":{conf:"high",stage:"series_c",dm:"0",s:[["hiring","2026-09-24","ceiling"],["launch","2026-09-16","approx"]]}
+  };
+  var sigs=[];
+  function $(id){return document.getElementById(id)}
+  function opt(list,sel){return list.map(function(v){return"<option"+(v===sel?" selected":"")+">"+v+"</option>"}).join("")}
+  function renderSigs(){
+    var box=$("c-sigs");box.innerHTML="";
+    if(!sigs.length){box.innerHTML="<p class='small muted'>No signals yet. Pain is zero, so nurture is the best possible tier. Add a signal to see it decay.</p>"}
+    sigs.forEach(function(s,i){
+      var d=document.createElement("div");d.className="sigrow";
+      d.innerHTML="<label for='st"+i+"'>type<select id='st"+i+"'>"+opt(["hiring","funding","launch","complaint"],s[0])+"</select></label>"+
+        "<label for='sd"+i+"'>signal_date<input type='date' id='sd"+i+"' value='"+s[1]+"'></label>"+
+        "<label for='sc"+i+"'>confidence<select id='sc"+i+"'>"+opt(["exact","ceiling","approx"],s[2])+"</select></label>"+
+        "<button class='btn' type='button' aria-label='Remove signal "+(i+1)+"'>Remove</button><div class='val' id='sv"+i+"'></div>";
+      d.querySelector("#st"+i).onchange=function(e){s[0]=e.target.value;calc()};
+      d.querySelector("#sd"+i).onchange=function(e){s[1]=e.target.value;calc()};
+      d.querySelector("#sc"+i).onchange=function(e){s[2]=e.target.value;calc()};
+      d.querySelector(".btn").onclick=function(){sigs.splice(i,1);renderSigs();calc()};
+      box.appendChild(d);
+    });
+  }
+  function calc(){
+    var asof=$("c-asof").value||"2026-11-20";
+    var best={},fresh=null,ages={};
+    sigs.forEach(function(s,i){
+      var el=$("sv"+i),m=MODEL[s[0]];
+      if(!s[1]){if(el)el.textContent="no date: dropped";return}
+      var age=days(asof,s[1]);
+      if(age<0){if(el)el.textContent="dated after the as-of date: ignored";return}
+      var v=m[0]*Math.pow(.5,age/m[1])*DC[s[2]];
+      if(el)el.textContent="age "+age+" d → "+m[0]+" × 0.5^("+age+"/"+m[1]+") × "+DC[s[2]]+" = "+v.toFixed(2);
+      if(!(s[0] in best)||v>best[s[0]])best[s[0]]=v;
+      if(fresh===null||age<fresh)fresh=age;
+      if(!(s[0] in ages)||age<ages[s[0]])ages[s[0]]=age;
+    });
+    var painRaw=Math.min(40,Object.keys(best).reduce(function(a,k){return a+best[k]},0));
+    var icp=CONF[$("c-conf").value],cap=STAGES[$("c-stage").value],reach=+$("c-dm").value;
+    var total=r1(icp+painRaw+cap+reach),pain=r1(painRaw),tier,reason;
+    if(pain<=1e-9){
+      if(total>=30){tier="nurture";reason="Nurture: scores "+total.toFixed(1)+" on fit alone but has no live, dated signal, so it cannot rank above nurture."}
+      else{tier="reject";reason="Rejected: no live, dated signal and a fit score of "+total.toFixed(1)+", below the nurture line of 30."}
+    }else if(total>=50&&pain<5){tier="nurture";reason="Nurture: scores "+total.toFixed(1)+", enough for B, but pain is "+pain.toFixed(1)+", below the Tier B minimum of 5."}
+    else if(total>=70){
+      var f=[];
+      if(pain<15)f.push("pain is "+pain.toFixed(1)+", below the Tier A minimum of 15");
+      if(fresh===null||fresh>90)f.push("the freshest signal is "+(fresh===null?"unknown":fresh+" days old")+", past the 90-day Tier A window");
+      var ev=Object.keys(ages).filter(function(k){return EVID[k]});
+      if(!ev.length)f.push("its signals are "+(Object.keys(ages).sort().join(", ")||"none")+" only, and Tier A needs a complaint or hiring signal");
+      else{var e=ev.reduce(function(a,k){return ages[k]<ages[a]?k:a},ev[0]);if(ages[e]>90)f.push("its freshest evidential signal ("+e+") is "+ages[e]+" days old")}
+      if(!f.length){tier="A";reason="Tier A: scores "+total.toFixed(1)+" with pain "+pain.toFixed(1)+" and a signal "+fresh+" days old."}
+      else{tier="B";reason="Tier B: scores "+total.toFixed(1)+", enough for A, but "+f.join(" and ")+"."}
+    }else if(total>=50){tier="B";reason="Tier B: scores "+total.toFixed(1)+", between 50 and 70; freshest signal "+fresh+" days old."}
+    else if(total>=30){tier="nurture";reason="Nurture: scores "+total.toFixed(1)+", below the Tier B line of 50."}
+    else{tier="reject";reason="Rejected: scores "+total.toFixed(1)+", below the nurture line of 30."}
+    $("o-total").textContent=total.toFixed(1);
+    var t=$("o-tier");t.textContent="Tier "+tier;t.className="pill "+PCLS[tier];
+    $("o-reason").textContent=reason;
+    var parts=[["icp_match",icp,30],["pain",painRaw,40],["capacity",cap,15],["reachability",reach,15]];
+    $("o-bars").innerHTML=parts.map(function(p){return"<div class='bar'><span>"+p[0]+"</span><div class='track'><div class='fill' style='width:"+(p[1]/p[2]*100).toFixed(1)+"%'></div></div><span class='n'>"+r1(p[1]).toFixed(1)+" / "+p[2]+"</span></div>"}).join("");
+  }
+  function load(name){
+    var p=PRESETS[name];$("c-conf").value=p.conf;$("c-stage").value=p.stage;$("c-dm").value=p.dm;$("c-asof").value="2026-11-20";
+    sigs=p.s.map(function(s){return s.slice()});renderSigs();calc();
+  }
+  var pr=$("presets");
+  Object.keys(PRESETS).forEach(function(n){var b=document.createElement("button");b.type="button";b.className="btn";b.textContent="Load "+n;b.onclick=function(){load(n)};pr.appendChild(b)});
+  ["c-conf","c-stage","c-dm","c-asof"].forEach(function(id){$(id).addEventListener("change",calc);$(id).addEventListener("input",calc)});
+  $("c-add").onclick=function(){sigs.push(["hiring",$("c-asof").value||"2026-11-20","exact"]);renderSigs();calc()};
+  load("Lyst");
+
+  var links=Array.prototype.slice.call(document.querySelectorAll("nav.toc a"));
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id)})}})},{rootMargin:"-20% 0px -70% 0px"});
+    document.querySelectorAll("main section").forEach(function(s){io.observe(s)});
+  }
+})();
+</script>

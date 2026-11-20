@@ -12,7 +12,7 @@ Independent per-pincode prices, rank and stock on Blinkit, Zepto and Instamart, 
 The article reports that platforms re-priced Gramiyaa's SKUs to match each other and "also asked Gramiyaa to cover the price difference", and that "These price fluctuations caused significant losses for Gramiyaa in its early months on quick commerce." Whether Nitro's dashboard now misses anything is UNVERIFIED.
 
 ## The opening line
-Your 10 November Quick Commerce Code interview says you already track pin-code rank and stock on Nitro Commerce — would a side-by-side on five SKUs, against an independent live feed of Blinkit, Zepto and Instamart, show whether it catches the re-pricing you described?
+Your 10 November Quick Commerce Code interview describes an intern checking pin codes by hand for search placement and stock, and says you now use "tools such as Nitro Commerce to track these metrics" — would a side-by-side on five SKUs, against an independent live feed of Blinkit, Zepto and Instamart, show whether it catches the re-pricing you described?
 
 ## Sources
 - https://inc42.com/startups/why-gramiyaa-had-to-think-like-a-supermarket-to-win-on-quick-commerce/
