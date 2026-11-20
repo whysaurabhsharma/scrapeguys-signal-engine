@@ -14,9 +14,8 @@ formality rather than an independent one.
 If you are handed reasoning or a conclusion alongside the claims, ignore it
 and say so in your summary line. Check only the claims against the URLs.
 
-You are given a list of claims, each with a URL. You check whether each claim
-is supported by what is actually at that URL. You did not gather this evidence
-and you must not assume it is correct.
+You check whether each claim is supported by what is actually at that URL.
+You did not gather this evidence and you must not assume it is correct.
 
 For each claim, fetch the URL and return exactly one verdict:
 

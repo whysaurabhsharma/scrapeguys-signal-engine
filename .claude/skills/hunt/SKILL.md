@@ -51,6 +51,14 @@ scope.md section 8 and set `date_confidence`:
 If no machine-readable date exists, the signal is `approx` and must not be
 the only basis for a Tier A claim. No date at all: drop the signal.
 
+Gather evidence with the `researcher` subagent, one company at a time, then
+check it with the `verifier` subagent. Pass the verifier ONLY a flat list of
+claims with their URLs: never the researcher's reasoning, its conclusion
+about fit, or its one-sentence why. The check is only independent if the
+verifier has not read the argument.
+Stage a signal only if the verifier returns SUPPORTED for its date AND its
+evidence URL. PARTIAL, UNSUPPORTED or UNREACHABLE: not staged, reason in STEP 7.
+
 ## STEP 4 - Disqualify before researching further
 
 Drop, and print one line per drop with its reason:
@@ -87,8 +95,8 @@ Show a table of what you staged:
 | company | icp | signal type | signal date | date confidence | why_live_data |
 |---|---|---|---|---|---|
 
-List the disqualified and dropped companies under it. Then wait for the
-user's go-ahead. Do not run ingest without it.
+Under it, list disqualified and dropped companies, and unstaged signals with
+the verifier's verdict. Then wait for the user's go-ahead. Do not run ingest without it.
 
 ## STEP 8 - Ingest, only after approval
 
@@ -107,6 +115,5 @@ Only then run the real ingest:
 
     python scripts/ingest.py --asof <today>
 
-Then report the five ingest counts:
-accounts added, accounts updated, signals added, signals duplicate,
-records rejected.
+Report the five ingest counts: accounts added, accounts updated,
+signals added, signals duplicate, records rejected.
