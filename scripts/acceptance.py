@@ -7,7 +7,9 @@ the machine is broken. Exits 1 if any CORE check FAILs.
 
 TARGET (T1-T9): PASS or MISS, always with the actual number. A TARGET miss
 means there is not yet enough output, not that anything is broken. It does
-not change the exit code unless --strict is given.
+not change the exit code unless --strict is given. T9 alone can also report
+NOT RUN HERE: data/runs.log is gitignored, so a fresh clone has no run
+history. NOT RUN HERE is never counted as a pass.
 
 Verdict: NOT WORKING if any CORE fails, WORKING if all CORE and TARGET
 checks pass, CORRECT BUT THIN otherwise.
@@ -55,6 +57,7 @@ PY = sys.executable or "python"
 SUBPROCESS_TIMEOUT = 300
 
 PASS, FAIL, WARN, NYB, MISS = "PASS", "FAIL", "WARN", "NOT YET BUILT", "MISS"
+NRH = "NOT RUN HERE"
 
 
 class Result:
@@ -595,6 +598,11 @@ def _t8_classify_misses(missed, details):
 def t9_run_log(asof):
     log = DATA / "runs.log"
     lines = log.read_text(encoding="utf-8", errors="replace").splitlines() if log.exists() else []
+    if not any(l.strip() for l in lines):
+        return Result("T9", "Run log", NRH,
+                      "data/runs.log absent or empty. It is gitignored because it changes on "
+                      "every run, so a fresh clone has no history until the pipeline is run "
+                      "locally (see README, Verify it yourself)")
     names = [l.split("\t")[1] for l in lines if l.count("\t") >= 1]
     ingests, scores = names.count("ingest.py"), names.count("score.py")
     return Result("T9", "Run log", PASS if ingests >= 2 and scores >= 1 else MISS,
@@ -670,6 +678,7 @@ def main(argv=None) -> int:
     counts = {s: sum(1 for r in results if r.status == s) for s in (PASS, FAIL, WARN, NYB)}
     core_ok = counts[FAIL] == 0
     t_pass = sum(1 for t in targets if t.status == PASS)
+    t_nrh = sum(1 for t in targets if t.status == NRH)
     if not core_ok:
         verdict = "NOT WORKING"
     elif counts[PASS] == len(results) and t_pass == len(targets):
@@ -699,7 +708,8 @@ def main(argv=None) -> int:
     if args.sample > 0:
         print("\n".join(sample_lines(args.sample)))
     print(f"\nasof {asof}. CORE: {counts[PASS]} pass, {counts[FAIL]} fail, {counts[WARN]} warn, "
-          f"{counts[NYB]} not yet built. TARGET: {t_pass} pass, {len(targets) - t_pass} miss"
+          f"{counts[NYB]} not yet built. TARGET: {t_pass} pass, {len(targets) - t_pass - t_nrh} miss"
+          f"{f', {t_nrh} not run here' if t_nrh else ''}"
           f"{' (--strict: misses exit 1)' if args.strict else ''}.")
     print(f"CORE {counts[PASS]}/{len(results)}   TARGET {t_pass}/{len(targets)}")
     print(f"VERDICT: {verdict}")

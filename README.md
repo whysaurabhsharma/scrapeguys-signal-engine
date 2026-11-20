@@ -48,6 +48,11 @@ Deny rules in settings.json and a PreToolUse hook (guard.py) block the obvious p
 
 CORE asks whether the machine is correct: 11 checks (schema, referential integrity, idempotency, determinism, provenance, dates, suppression, guard registered, never-send, the 5 test files, data/ untouched). Any CORE failure exits 1. TARGET asks whether there is enough output: 9 checks against fixed targets. Writes run inside a temp copy, so data/ is not touched.
 
+On a clean clone T9 reports NOT RUN HERE, not MISS. data/runs.log is gitignored because it changes on every run, so a fresh clone has no history until the pipeline runs locally. NOT RUN HERE is not counted as a pass. Reproduce the run history with:
+
+    python scripts/ingest.py --asof 2026-11-20
+    python scripts/score.py --asof 2026-11-20
+
 Three TARGET misses:
 - **T1, 39 of 40 accounts, deliberately.** Hunts 6 and 7 screened about 250 companies and none met the bar. A filler row was refused: T1 and T4 pull against each other. Reason recorded in scope.md.
 - **T4, Tier A 7.7%, under the 10% floor.** The evidence is thin, not the thresholds. The thresholds were fixed before any row was scored.
