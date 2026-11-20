@@ -1,0 +1,33 @@
+[
+  {
+    "company": "RestaurantSupply.com",
+    "website": "https://www.restaurantsupply.com",
+    "country": "US",
+    "icp": "commerce",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "RestaurantSupply.com builds its catalogue by crawling manufacturer sites 'behind proxies' for specifications, descriptions and images, and without reliable live collection it cannot see when those records go 'incomplete or inconsistent' or when ingestion fails across a catalogue it expects to reach a million records.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://job-boards.greenhouse.io/restaurantsupply/jobs/4466816009",
+    "notes": "US online store for commercial kitchen equipment, run with Johnson-Lancaster (Clearwater FL; parent 2025 sales $519.79M per https://fesmag.com/research/distribution-giants/23501-2026-distribution-giants). Pain is manufacturer catalogue data, not marketplace competitor pricing, so icp_confidence is medium. No named decision maker found; COO referenced in posting 4458335009 but unnamed. Employees and stage UNVERIFIED. Operator 'Restaurant Supply, LLC' UNVERIFIED (search snippet only). Verifier: 6/6 SUPPORTED (claim 4 self-revised from PARTIAL; doubt was board name only, fixed by URL).",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-25",
+        "evidence_url": "https://job-boards.greenhouse.io/restaurantsupply/jobs/4466816009",
+        "evidence_note": "Senior Full Stack PHP Developer, Product Catalogue and Quoting: 'Build reliable web crawling and scraping systems to gather product specifications, descriptions, images, and other relevant data.' and 'Design mechanisms to identify incomplete or inconsistent records, handle ingestion failures...'. Greenhouse first_published 2026-10-25T22:28:36-04:00 via https://boards-api.greenhouse.io/v1/boards/restaurantsupply/jobs/4466816009",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-25",
+        "evidence_url": "https://job-boards.greenhouse.io/restaurantsupply/jobs/4466808009",
+        "evidence_note": "Senior PHP/Symfony Engineer, Integrations & Automation: 'Build resilient browser automation with headless browsers in Node.js for workflows that have no API, and web scraping behind proxies.' Greenhouse first_published 2026-10-25T20:46:12-04:00 via https://boards-api.greenhouse.io/v1/boards/restaurantsupply/jobs/4466808009",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

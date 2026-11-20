@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Gramiyaa",
+    "website": "https://gramiyaa.com",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_a",
+    "why_live_data": "Quick commerce is Gramiyaa's largest channel at 35% of revenue, yet it gets 'caught between two giants' as platforms re-price against each other, and it first tracked search placement and stock by having 'An intern manually' check pin codes, so without live data it cannot see per-pincode rank, stock and platform-driven price changes as they happen.",
+    "decision_maker": "Mohamed Yaseen",
+    "dm_title": "Cofounder",
+    "dm_source": "https://inc42.com/startups/why-gramiyaa-had-to-think-like-a-supermarket-to-win-on-quick-commerce/",
+    "source_url": "https://inc42.com/startups/why-gramiyaa-had-to-think-like-a-supermarket-to-win-on-quick-commerce/",
+    "notes": "INCUMBENT: Nitro Commerce. The category is already bought; the conversation is displacement, not education. Bengaluru cold-pressed cooking oil brand; quick commerce is 35% of its INR 5 Cr MRR (Inc42 2026-11-10). Co-founder Sibi Manivannan (Outlook Business 2025-03-25). INCUMBENT: 'uses tools such as Nitro Commerce to track these metrics'; the Inc42 Quick Commerce Code series is co-produced by Nitro Commerce, so the source is vendor-adjacent. Found via quick-commerce analytics case studies after seed-list brands failed STEP 5. Series A amount conflicts (Inc42 INR 21 Cr; Dealroom headline $1.93M vs body $2.53M): use Inc42's figure; date from Dealroom aggregator, approx. No public ATS. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-11-10",
+        "evidence_url": "https://inc42.com/startups/why-gramiyaa-had-to-think-like-a-supermarket-to-win-on-quick-commerce/",
+        "evidence_note": "Cofounder Mohamed Yaseen: 'We get caught between two giants fighting to acquire customers.' Article: 'An intern manually checked pin codes to see where its products appeared in search results and whether they were in stock.' Inc42 dated 10 Nov 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-10-09",
+        "evidence_url": "https://dealroom.co/news/161075-gramiyaa-raises-1-93m-series-a-for-cold-pressed-oils/",
+        "evidence_note": "'Gramiyaa raises $1.93M Series A for cold-pressed oils', led by Optiscape Network Holdings. Inc42 (2026-11-10) confirms 'raised INR 21 Cr as part of its ongoing Series A fundraise'. Dealroom page dated Oct 9, 2026; original announcement not found.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

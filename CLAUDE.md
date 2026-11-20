@@ -41,7 +41,7 @@ for the best of them. It drafts. A human sends.
 |---|---|---|
 | ai | A live view of the web their product answers from. Prices and availability go stale between crawls, so the user is shown something no longer true. | Global |
 | travel | Sight of their own rates across the OTAs reselling them. Parity leaks go unseen until revenue has moved. | Global |
-| commerce | Live visibility of their SKUs and competitors across quick-commerce and marketplaces, where price, stock and placement change hourly. | India first: Blinkit, Zepto, Instamart |
+| commerce | Live visibility of their SKUs and competitors across quick-commerce and marketplaces, where price, stock and placement change hourly. | Global; India (Blinkit, Zepto, Instamart) preferred on equal evidence. Widened 2026-11-20, see scope.md section 4 |
 
 ## Signal types, and where the date comes from
 

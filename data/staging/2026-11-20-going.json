@@ -1,0 +1,40 @@
+[
+  {
+    "company": "Going",
+    "website": "https://www.going.com",
+    "country": "US",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "bootstrapped",
+    "why_live_data": "Going sends members mistake fares and deals it must 'get them to members before they disappear', and is hiring to 'improve the accuracy, freshness, and reliability' of its deal, alert and price-drop systems, so without live fare data it cannot see whether a fare it alerted on is still bookable at that price.",
+    "decision_maker": "David Krauter",
+    "dm_title": "CEO",
+    "dm_source": "https://www.going.com/newsroom/releases/press-release-7",
+    "source_url": "https://api.ashbyhq.com/posting-api/job-board/going",
+    "notes": "Flight-deal alert subscription (formerly Scott's Cheap Flights), US, bootstrapped; 'sophisticated software and human flight experts' (press release 2026-09-23). Krauter CEO effective 2026-03-09, succeeding Brian Kidwell (stays on board). VP of Engineering role open, so no engineering head appears to be in place. Neither posting says scraping or crawling; fare sources named only as 'airfare data, GDSs, NDC, metasearch, OTAs, or airline retailing'. Hunt 3's own regex sweep checked this board and missed the pain because 'freshness' was not a keyword. No dated complaint about expired deals verified. Verifier: 4/4 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-11-18",
+        "evidence_url": "https://jobs.ashbyhq.com/going/89fceab0-c9b7-4736-ae41-3fd5f2aa4ddc",
+        "evidence_note": "Senior Full Stack Software Engineer: 'Help improve the accuracy, freshness, and reliability of the systems behind our deal, alert, and price drop experiences.'; 'Experience with real-time pricing, alerting, or data pipelines.' Ashby publishedAt 2026-11-18 via https://api.ashbyhq.com/posting-api/job-board/going",
+        "date_confidence": "ceiling"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-11-13",
+        "evidence_url": "https://jobs.ashbyhq.com/going/4c737710-bb8a-4aa3-9b85-361c019a5a46",
+        "evidence_note": "VP of Engineering: '...from mistake fares to deep discounts, and get them to members before they disappear.'; 'Experience in flights or travel: airfare data, GDSs, NDC, metasearch, OTAs, or airline retailing'. Ashby publishedAt 2026-11-13 via https://api.ashbyhq.com/posting-api/job-board/going",
+        "date_confidence": "ceiling"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-09-23",
+        "evidence_url": "https://www.going.com/newsroom/releases/press-release-pricedrop",
+        "evidence_note": "'Going introduces Price Drop tracking for members, saving $150 when a lower fare is found'. Dateline 'NEW YORK (Sept. 23, 2026)'.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

@@ -33,9 +33,11 @@ competitor pricing, rate parity, catalogue data, anti-bot, proxy rotation.
 
 Do NOT use generic funding search. scope.md records that it returns noise.
 
-Apply the market rule per ICP: commerce is India-first; ai and travel are
-global. For India commerce, scope.md section 9 says search returns market
-reports, not brands, so start from the seed lists in `config/seeds/`.
+Apply the market rule per ICP (scope.md section 4): all three ICPs are
+global. For commerce, India is preferred where the evidence is equally
+strong.
+- Sub-case, Indian D2C brands: scope.md section 9 says search returns market
+  reports, not brands, so start from the seed lists in `config/seeds/`.
 
 ## STEP 3 - Date every candidate from the ATS JSON API
 

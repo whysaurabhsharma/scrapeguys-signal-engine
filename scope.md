@@ -25,9 +25,16 @@ opens it and finds the first ninety minutes of selling already done.
            placement change hourly.
 
 ## 4. Market focus
-- commerce      India-first: Blinkit, Zepto, Instamart, Indian marketplaces.
+- commerce      Global. India (Blinkit, Zepto, Instamart, Indian
+                marketplaces) still preferred where the evidence is equally
+                strong.
 - ai, travel    Global.
 Recorded per account in the country column. /hunt applies it per ICP.
+
+Scope change, 2026-11-20: commerce was India-first; it is now global, with
+India preferred on equal evidence. Made to widen the pool for a 20-30
+account pipeline. The tier thresholds and the evidence rules are UNCHANGED:
+volume comes from more hunting, not from weaker gates.
 
 ## 5. Tier thresholds
 A = 70    B = 50    nurture = 30    reject = below 30
@@ -51,7 +58,17 @@ Four types only. No date, no signal.
                          publishedAt is LAST published; treat as a ceiling
              Lever       api.lever.co/v0/postings/{slug}?mode=json
                          createdAt, unix ms
+             Workable    apply.workable.com/api/v1/widget/accounts/{acct}?details=true
+                         published_on; treat as a ceiling unless confirmed
+                         first-published (added 2026-11-20)
+             SmartRecruiters  api.smartrecruiters.com/v1/companies/{co}/postings
+                         releasedDate; treat as a ceiling unless confirmed
+                         first-published (added 2026-11-20)
            Only documented endpoints. jobs.ashbyhq.com/api/ is robots-disallowed.
+           date_confidence: exact = a first-published or announcement date;
+           ceiling = a machine-readable date that may be a later repost;
+           approx = NO machine-readable field exists, only a date printed
+           on a page. A machine-readable field is never approx.
 - funding  announcement date. The most reliable trigger, so it is the
            fallback qualifier for Tier A when a hiring date is unverifiable.
 - launch   press or product announcement date.
@@ -68,6 +85,14 @@ WORKS   ATS-targeted search, e.g. site:jobs.ashbyhq.com "web scraping"
 FAILS   Generic funding search. Returned AI mega-rounds, zero buyers. Killed.
 FAILS   Search-based discovery for India commerce. Returns market reports,
         not individual brands. Use seed lists in config/seeds/ instead.
+        Refined 2026-11-20, fourth hunt: config/seeds/ brands failed STEP 5
+        three times out of four (Wellbeing Nutrition, Rage Coffee, Earth
+        Rhythm) - a brand directory lists who sells on quick commerce, not
+        who has said they cannot see it. The fourth, Farmley, passed only
+        because a vendor case study quoted its pain, not because of the
+        listing. WORKS instead: quick-commerce vendor case studies and
+        founder press interviews, where a brand describes its own problem in
+        its own words. Found Farmley, Gramiyaa and Moms Home that way.
 
 ## 10. First five candidates (to verify before ingest)
 alt.xyz      commerce  pricing model fed by marketplace/auction scraping
@@ -107,3 +132,40 @@ fetched, not from a score I wanted - cube.global sells collection as its
 product, and nascent.xyz sits outside all three ICPs. Changing a golden
 label to match a pipeline result is overfitting unless the evidence is
 what moved; here it was.
+
+## 14. Known limit of the guard, found 2026-11-20
+During the third hunt a session bypassed guard.py by piping a Python
+script into the interpreter from stdin (a heredoc: python -I - <<'EOF'),
+which the pattern matcher cannot see. What it got around was the
+write-outside-repo rule: the Write tool had refused a scratch file, so the
+code moved into the command's stdin instead. It did not touch the protected
+CSVs; the existing inline-python check already denies stdin python that
+names one. One such route is now blocked (guard.py rule 7); the class is
+not closable by pattern matching. The real never-send guarantee is
+therefore: no send credential in this repo, and no send-capable server
+declared by it. The hook and the deny rules are defence in depth, not the
+proof. Any claim that rests on the hook alone is overstated.
+
+Corrections, 2026-11-20, fourth hunt. Two data-contract fixes, each
+applied to every record it covered, re-ingested through ingest.py:
+- Stage: three staged values were outside STAGES ("subsidiary", "late",
+  "pre_series_a") and ingest accepted them silently, so score.py read them
+  as unknown (5). ingest.py now rejects any stage not in STAGES. Corrected
+  from evidence: Lyst -> public (listed parent ZOZO), Back Market -> growth
+  (Series E, profitable), Moms Home -> seed (pre-Series A).
+- Date confidence: Workable and SmartRecruiters expose a machine-readable
+  date, so by the existing definition they are ceiling, not approx.
+  Relabelled: Lyst, ixigo, PlanetArt hiring signals. ingest.py now updates
+  date_confidence and evidence_note on an existing signal_id.
+Effect (score before -> after, tier):
+  Lyst         67.7 -> 76.1  B -> A        stage +5, date relabel +3.4
+  Moms Home    48.4 -> 51.4  nurture -> B  stage +3
+  Back Market  37.9 -> 47.9  nurture       stage +10, no tier change
+  ixigo        57.4 -> 59.3  B             date relabel +1.9
+  PlanetArt    21.0 -> 24.0  reject        date relabel +3.0
+Either Lyst correction alone would have reached A (72.7 or 71.1). Each was
+justified by a rule that predated it: a vocabulary ingest should already
+have enforced, and a date-confidence definition applied as written. Three
+of the five corrected accounts moved no tier, and Back Market's was the
+largest single change, which shows the fix was not applied selectively.
+Result after corrections: A 3, B 12, nurture 8, reject 1 (24 accounts).

@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Farmley",
+    "website": "https://farmley.com",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_c",
+    "why_live_data": "Farmley sells on 'Amazon, Flipkart, Blinkit, Zepto, Instamart and Big Basket' and says it needs 'pincode level pricing' and stock-on-hand data it could not get because 'Crawler-based data was disorganised and unsystematic', so without reliable live data it cannot see per-pincode price, stock and competitor placement on those platforms.",
+    "decision_maker": "Akash Sharma",
+    "dm_title": "CEO and co-founder",
+    "dm_source": "https://millingmea.com/?p=2033795",
+    "source_url": "https://inc42.com/buzz/farmley-fy25-loss-narrows-revenue-soars-71-to-inr-394-cr",
+    "notes": "INCUMBENT: GobbleCube. The category is already bought; the conversation is displacement, not education. Indian dry-fruit and snacks brand, Noida; FY25 operating revenue INR 394.2 Cr (inc42 2025-12-31). Seed list: config/seeds/india-qcommerce.csv. INCUMBENT: Farmley is a published GobbleCube (quick-commerce analytics) customer; the complaint quote comes from GobbleCube's own case study, so the angle is data quality, not need. Pankaj Goyal (strategy and growth) is the closest data contact, title on vendor page only. Oct 2026 stake-sale reports (Emami, ITC, Britannia) NOT staged: Farmley denied them. Headcount conflicting (146 vs 380), left empty. No public ATS. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "funding",
+        "signal_date": "2025-05-12",
+        "evidence_url": "https://inc42.com/buzz/d2c-snacking-brand-farmley-bags-40-mn/",
+        "evidence_note": "'has secured $40 Mn (around INR 338.8 Cr) in a Series C funding round led by L Catterton'; funds for 'doubling down on quick commerce expansion'. Page dated 12 May 2025.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "complaint",
+        "signal_date": "2025-03-11",
+        "evidence_url": "https://gobblecube.ai/blog/stocking-smart-scaling-fast-behind-farmleys-insights-driven-growth-story",
+        "evidence_note": "Farmley's Pankaj Goyal: 'Crawler-based data was disorganised and unsystematic.' and 'The challenge with demand projection was due to the unavailability of data and insights on SOH (Stock On-Hand) or the DOI (Days of Inventory).' Page dated Mar 11, 2025.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "company": "Lyst",
+    "website": "https://www.lyst.com",
+    "country": "GB",
+    "icp": "ai",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "public",
+    "why_live_data": "Lyst lists stock from 27,000 retailers but admits 'items can occasionally sell out with our retail partners', so without a live view of those retailers' pages it cannot see when an item it is still selling is 'actually out of stock'.",
+    "decision_maker": "Emma McFerran",
+    "dm_title": "CEO",
+    "dm_source": "https://corp.zozo.com/en/news/20250409-zozo-lyst-acquisition/",
+    "source_url": "https://uk.trustpilot.com/reviews/6ade03ce563f0e0dd1f6a852",
+    "notes": "Stage: wholly owned by ZOZO, publicly listed. No exact STAGES match for a subsidiary; capacity asks whether they can fund this, and a listed parent can. Corrected 2026-11-20 from an invalid value that ingest should have rejected. London fashion shopping platform with AI search; '27,000 of the world's best premium and luxury brands and retailers' (https://www.lyst.co.uk/news/lyst-zozo/, 2025-04-09). Wholly owned by ZOZO, Inc. since April 2025 ($154m); McFerran named to continue as CEO, 2026 role UNVERIFIED. Runs on retailer feeds; no Lyst source on crawling found (engineering blog 403). ATS is Workable; published_on is outside the skill's date table and may reflect a repost, so hiring is approx; HTML posting page is JS-rendered, evidence is the JSON. Employees ~234-250, estimates only, left empty. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-11-14",
+        "evidence_url": "https://uk.trustpilot.com/reviews/6af817330fddefa7d0c0095f",
+        "evidence_note": "'For me it was obvious that the article is not available anymore but Lust anyways sold it.' Lyst reply: order 'couldn't be placed with Footshop because the item is out of stock'. Review dated 14 November 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-10-25",
+        "evidence_url": "https://uk.trustpilot.com/reviews/6ade03ce563f0e0dd1f6a852",
+        "evidence_note": "'Ordered an item on lyst that wasn't actually in stock with the supplier'. Lyst reply: 'We regularly update our stock, but items can occasionally sell out with our retail partners.' Review dated Oct 25, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-09-19",
+        "evidence_url": "https://uk.trustpilot.com/reviews/6aae9b5ba343047356524bd2",
+        "evidence_note": "'The same item is still on sale on Lyst website-when it's actually out of stock.' Review dated September 19, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-26",
+        "evidence_url": "https://apply.workable.com/api/v1/widget/accounts/lyst?details=true",
+        "evidence_note": "Technical Product Manager, Product Data & Revenue Platforms (shortcode A0F88A2C65): 'partner feed ingestion and validation'; 'improving the quality, reliability and discoverability of Lyst's product catalogue.' Workable published_on 2026-10-26.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

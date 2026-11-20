@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Beni",
+    "website": "https://www.joinbeni.com",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "seed",
+    "why_live_data": "Beni searches about '300 million secondhand listings' that are 'changing over millions every week — things are listed, things are sold', and its new platform promises alerts 'as inventory changes', so without live data across Poshmark, eBay, ThredUp, The RealReal and Depop it cannot see which listings it shows are already sold or repriced.",
+    "decision_maker": "Kate Sanner",
+    "dm_title": "Founder & CEO",
+    "dm_source": "https://outwiththenew.joinbeni.com/p/shopping-became-a-job-it-should-be",
+    "source_url": "https://outwiththenew.joinbeni.com/p/shopping-became-a-job-it-should-be",
+    "notes": "AI resale search (Santa Barbara, CA). joinbeni.com now 301-redirects to shopbeni.com (403 to fetch). Technical contact: Celine Lightfoot, Co-Founder & CTO (Beni Lens post 2025-12-10). Collection today: resale 'partner feeds' plus per-site 'recipes' to read 1500+ merchant sites, with alerts when a recipe is 'broken' (own post 2023-08-18, https://outwiththenew.joinbeni.com/p/3-ways-beni-is-using-ai-to-change); context only, too old to stage. RISK: company 'went dark' May 2025 before relaunching (https://prelovedpod.substack.com/p/breaking-ouradd-to-cart-mentality). Seed $4M Dec 2022 (TechCrunch), headcount 6 then; both stale. No public ATS. Verifier: 4/4 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-11-19",
+        "evidence_url": "https://outwiththenew.joinbeni.com/p/shopping-became-a-job-it-should-be",
+        "evidence_note": "'TLDR; we're launching a totally new platform experience'; 'Search alerts let us keep looking as inventory changes, without requiring you to repeat the search.' Signed Kate, Founder & CEO of Beni. Post dated Nov 19, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2025-12-10",
+        "evidence_url": "https://outwiththenew.joinbeni.com/p/beni-unveils-beni-lens-the-first",
+        "evidence_note": "Beni Lens visual search launch, 'surfacing real-time listings from Poshmark, ThredUp, The RealReal, eBay, Depop, and more.' Post dated December 10, 2025.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Onton",
+    "website": "https://onton.com",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "seed",
+    "why_live_data": "Onton 'aggregates information from across the web into a single product listing' and sells that listing on accuracy against Google Shopping and Amazon, yet without live collection it cannot see when the retailer pages behind a merged listing change underneath it.",
+    "decision_maker": "Zach Hudson",
+    "dm_title": "CEO and Co-Founder",
+    "dm_source": "https://markets.financialcontent.com/wedbush/article/gnwcq-2025-11-26-ai-startup-onton-raises-75m-to-reinvent-the-way-the-world-discovers-and-decides-what-to-buy",
+    "source_url": "https://markets.financialcontent.com/wedbush/article/gnwcq-2025-11-26-ai-startup-onton-raises-75m-to-reinvent-the-way-the-world-discovers-and-decides-what-to-buy",
+    "notes": "AI product search and discovery engine (home and furniture, expanding to apparel and electronics per 2025-11-26 release). Onton never states live prices or stock or how it ingests products, so icp_confidence is medium. Headcount 'ten' as of 2025-11-26 only; left empty as stale. Ashby hiring (Staff Research Engineer, publishedAt 2026-07-29 ceiling) names no collection pain; not staged. Former name Deft UNVERIFIED. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-29",
+        "evidence_url": "https://agilebrandguide.com/onton-debuts-groundbreaking-ai-model-for-trustworthy-product-discovery/",
+        "evidence_note": "Launch of Ontology 1, 'a trust and authenticity model for the emerging agentic web', benchmarked 'against the most dominant players in product discovery, including Google Shopping and Amazon.' Dateline 'SAN FRANCISCO, Calif. - July 29, 2026'.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2025-11-26",
+        "evidence_url": "https://markets.financialcontent.com/wedbush/article/gnwcq-2025-11-26-ai-startup-onton-raises-75m-to-reinvent-the-way-the-world-discovers-and-decides-what-to-buy",
+        "evidence_note": "'raised $7.5 million in seed funding led by Footwork'. Dateline 'San Francisco, Nov. 26, 2025'.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

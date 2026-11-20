@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Daydream",
+    "website": "https://daydream.ing",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "seed",
+    "why_live_data": "Daydream promises to compare 'each store's total, promo codes included, to find you the best price' across a catalogue of '325 retailers, more than 10,000 brands and 3 million products', so without live data it cannot see when a retailer's price, promo or size stock changes and the 'best price' it checks out at is no longer true.",
+    "decision_maker": "Pavel Fux",
+    "dm_title": "CTO",
+    "dm_source": "https://daydream.ing/about",
+    "source_url": "https://www.prnewswire.com/news-releases/daydream-launches-ai-powered-search-and-discovery-solution-for-fashion-brands-and-retailers-302837597.html",
+    "notes": "AI fashion shopping agent (operator per App Store: DAHLIA LABS, INC.). CEO and co-founder Julie Bornstein (same July 2026 release). Stage: $50M seed, June 2024 (TechCrunch), outside 12 months, not staged; headcount 23 as of 2024 only, left empty. TRAP: Ashby board 'daydream' is an unrelated dental-billing company; Daydream's own board 'daydream-ai' was empty. Axios 2026-11-18 personal shopping agent launch returned 403, body unread, not staged. App Store price-comparison text is undated: pain context only. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-29",
+        "evidence_url": "https://www.prnewswire.com/news-releases/daydream-launches-ai-powered-search-and-discovery-solution-for-fashion-brands-and-retailers-302837597.html",
+        "evidence_note": "Launch of 'Powered by Daydream' for brands and retailers. 'Daydream's catalog now spans 325 retailers, more than 10,000 brands and 3 million products.' Dateline 'NEW YORK, July 29, 2026 /PRNewswire/'.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2025-11-18",
+        "evidence_url": "https://www.prnewswire.com/news-releases/daydream-launches-design-forward-iphone-app-to-advance-ai-driven-fashion-search-302618206.html",
+        "evidence_note": "iPhone app launch: 'instantly surface fashion matches from all the best brands in real time'. Dateline 'NEW YORK, Nov. 18, 2025 /PRNewswire/'.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

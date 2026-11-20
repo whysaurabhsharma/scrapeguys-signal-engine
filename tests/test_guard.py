@@ -101,6 +101,22 @@ expect("allow: mcp__sheets__get_values (after denylist)", call("mcp__sheets__get
 expect("allow: mcp__hubspot__search_crm_objects (after denylist)", call("mcp__hubspot__search_crm_objects"), True)
 expect("allow: NotebookEdit out/x.ipynb", call("NotebookEdit", notebook_path="out/x.ipynb", new_source="x"), True)
 
+# Rule 7: interpreter reading its program from stdin (hunt 3 bypass, 2026-11-20).
+expect("deny: heredoc into python -I -", call("Bash", command="python -I - a b <<'EOF'\nprint(1)\nEOF"), False)
+expect("deny: python - < file", call("Bash", command="python - < x.py"), False)
+expect("deny: cat x | python", call("Bash", command="cat x.py | python"), False)
+expect("deny: echo | python3 -", call("Bash", command="echo 'print(1)' | python3 -"), False)
+expect("deny: curl-less | sh", call("Bash", command="cat install.txt | sh"), False)
+expect("deny: | bash -s", call("Bash", command="cat x | bash -s"), False)
+expect("deny: node from heredoc", call("Bash", command="node <<'EOF'\nconsole.log(1)\nEOF"), False)
+expect("deny: perl from pipe", call("Bash", command="cat x.pl | perl"), False)
+expect("deny: cd && python -", call("Bash", command="cd /d/dev && python - <<'EOF'\nx\nEOF"), False)
+expect("allow: python script reading data on stdin", call("Bash", command="python scripts/ingest.py < data/staging/x.json"), True)
+expect("allow: pipe into python script", call("Bash", command="cat x.json | python scripts/ingest.py --dry-run"), True)
+expect("allow: python -m pytest", call("Bash", command="python -m pytest tests"), True)
+expect("allow: python --version", call("Bash", command="python --version"), True)
+expect("allow: bash script by path", call("Bash", command="bash scripts/run.sh"), True)
+
 # Fail closed.
 check("deny: malformed JSON", guard.evaluate_raw("{not json", ROOT) is not None)
 check("deny: non-object JSON", guard.evaluate_raw("[1,2]", ROOT) is not None)

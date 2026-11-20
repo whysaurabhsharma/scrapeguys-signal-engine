@@ -103,6 +103,8 @@ def rejection_cases():
         ("suppressed", account(website="https://www.brightdata.com"), "suppressed: brightdata.com (competitor)"),
         ("suppressed subdomain", account(website="https://jobs.openai.com"), "suppressed: openai.com"),
         ("bad icp", account(icp="fintech"), "field=icp"),
+        ("stage not in STAGES", account(stage="pre_series_a"),
+         "field=stage  'pre_series_a' is not one of seed, series_a"),
         ("dm without source", account(decision_maker="Jane Doe"), "field=dm_source"),
         ("no evidence_url", account(signals=[signal(evidence_url="")]), "field=evidence_url  is missing"),
         ("non-http url", account(signals=[signal(evidence_url="ftp://x")]), "does not start with http"),
@@ -118,6 +120,10 @@ def rejection_cases():
             out = sb.run(sb.stage("t.json", [rec]))
             check(f"reject: {name}", expect in out and "REJECTED" in out, out)
             check(f"reject writes nothing: {name}", sb.rows(ingest.ACCOUNTS) == [])
+
+    with Sandbox() as sb:
+        out = sb.run(sb.stage("t.json", [account(stage="")]))
+        check("empty stage is allowed (not found)", "REJECTED" not in out and "accounts added       1" in out, out)
 
     with Sandbox() as sb:
         out = sb.run(sb.stage("t.json", [account(signals=[signal(signal_date=""), signal(evidence_url="")])]))
@@ -191,6 +197,32 @@ def idempotency_cases():
         r = sb.rows(ingest.ACCOUNTS)[0]
         check("bare title does not overwrite a named DM's title",
               (r["decision_maker"], r["dm_title"]) == ("Jane Doe", "CTO"), r)
+
+    # Mutable signal fields: date_confidence and evidence_note only.
+    with Sandbox() as sb:
+        sb.run(sb.stage("a.json", [account(signals=[signal(date_confidence="approx")])]))
+        out = sb.run(sb.stage("b.json", [account(signals=[signal(date_confidence="ceiling")])]))
+        rows = sb.rows(ingest.SIGNALS)
+        check("changed date_confidence updates in place",
+              len(rows) == 1 and rows[0]["date_confidence"] == "ceiling", rows)
+        check("signals updated counted",
+              "signals updated      1" in out and "signals duplicate    0" in out, out)
+
+        after = sb.bytes()
+        out2 = sb.run(sb.stage("b.json", [account(signals=[signal(date_confidence="ceiling")])]))
+        check("unchanged re-run updates nothing",
+              "signals updated      0" in out2 and "signals duplicate    1" in out2, out2)
+        check("unchanged re-run is byte-identical", sb.bytes() == after)
+
+    with Sandbox() as sb:
+        sb.run(sb.stage("a.json", [account(signals=[signal()])]))
+        before = sb.bytes()
+        out = sb.run(sb.stage("b.json", [account(signals=[signal(signal_date="2026-09-01")])]))
+        rows = sb.rows(ingest.SIGNALS)
+        check("signal_date change on existing id is ignored",
+              len(rows) == 1 and rows[0]["signal_date"] == "2026-10-01", rows)
+        check("ignored signal_date change counts nothing and writes nothing",
+              "signals updated      0" in out and sb.bytes() == before, out)
 
     with Sandbox() as sb:
         f = sb.stage("t.json", [account()])

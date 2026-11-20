@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Moms Home",
+    "website": "https://momshome.in",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "seed",
+    "why_live_data": "Quick commerce is now 'nearly 30%' of Moms Home's revenue, and its cofounder says 'being present in a city does not mean a brand is available across every dark store in that market', yet the only availability figure it has is a third party's three-day Blinkit snapshot (72.2%, from 65.1% in Mumbai to 80.6% in Hyderabad), so it cannot see dark-store-level stock as it changes.",
+    "decision_maker": "Kumar Vaibhav",
+    "dm_title": "Cofounder",
+    "dm_source": "https://inc42.com/startups/how-moms-home-built-a-%E2%82%B910-cr-quick-commerce-business-by-rethinking-baby-essentials/",
+    "source_url": "https://inc42.com/startups/how-moms-home-built-a-%E2%82%B910-cr-quick-commerce-business-by-rethinking-baby-essentials/",
+    "notes": "Stage 'seed' (pre-Series A round; was the invalid 'pre_series_a', corrected 2026-11-20). Jaipur baby-essentials brand, founded 2018 by Kumar Vaibhav and Bhupendra Agrawal; quick commerce ~INR 10 Cr of INR 35 Cr FY26 revenue (Inc42 2026-10-28). icp_confidence MEDIUM: the dark-store pain is reported speech attributed to Vaibhav, not a direct quote; his direct quotes are general ('Just being available on quick commerce won't make your product fly'). The 72.2% availability figure is from Zodiac AI by Nitro Commerce, the Inc42 Quick Commerce Code series partner; no tool is named as used by Moms Home. Pre-Series A Rs 5 Cr, Entrackr 2024-01-29 (outside 12 months, not staged). Further $3M raise talks UNVERIFIED. No ATS, no complaint found. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-10-28",
+        "evidence_url": "https://inc42.com/startups/how-moms-home-built-a-%E2%82%B910-cr-quick-commerce-business-by-rethinking-baby-essentials/",
+        "evidence_note": "'However, Vaibhav pointed out that being present in a city does not mean a brand is available across every dark store in that market.' Blinkit on-shelf availability 72.2% over 11-13 Oct 2026 (Zodiac AI analysis). Inc42 dated 28 Oct 2026.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

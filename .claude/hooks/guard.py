@@ -15,6 +15,8 @@ What it blocks, and why (see CLAUDE.md, operating rules 1 and 5):
      publish, create_message, or anything containing "send"). Matched on the
      last "__" segment of the tool name, so read tools on the same server
      pass. Registered before any MCP server is connected.
+  7. Bash that feeds an interpreter its program on stdin (pipe, < or <<).
+     Narrows one bypass; see the comment above STDIN_INTERP_RE.
 
 This is a tripwire, not a sandbox. A determined script can still evade string
 matching; the permission deny list in settings.json is the second layer.
@@ -89,6 +91,27 @@ FILE_WRITERS = {
     "copy-item", "move-item", "remove-item",
 }
 SEGMENT_SPLIT_RE = re.compile(r"&&|\|\||[;|\n]")
+
+# Rule 7: an interpreter reading its program from stdin.
+#
+# This narrows one known bypass but does not close the class. A pattern
+# matcher sees only the command string, so any route that moves code out of
+# the string - stdin, a file written first, an env var - is invisible to it.
+# This was found in the third hunt on 2026-11-20 by a session that piped a
+# script into python from a heredoc (python -I - <<'EOF') after the Write
+# tool refused a scratch file outside the repo. That got around rule 5
+# (write outside the repo root). It did not touch the protected CSVs: the
+# inline-python check under rule 3 already denies stdin python that names
+# one. The hook is a backstop, not a proof.
+#
+# Denied: python/python3/py/sh/bash/zsh/dash/node/perl with no program
+# argument or with "-" as the program, whether fed by a pipe, "<" or "<<".
+# Allowed: a script path (python scripts/ingest.py < x.json reads DATA from
+# stdin, not code), and inline flags that keep the code in the visible
+# string (-c, -m, -e, -p, --version).
+STDIN_INTERP_RE = re.compile(r"^(python[\d.]*|py|sh|bash|zsh|dash|node|perl)$")
+INLINE_CODE_FLAGS = {"-c", "-m", "-e", "-E", "-p", "--eval", "--print",
+                     "-V", "--version", "-h", "--help"}
 
 # Rule 6: MCP send tools. Exact names, plus send verbs that lead the name
 # (post_to_channel, reply_all). A verb mid-name is not matched, so
@@ -203,6 +226,43 @@ def _check_file_tool(tool, tool_input, root, cwd):
     return None
 
 
+def _check_stdin_interpreter(cmd):
+    """Deny an interpreter whose program would come from stdin (rule 7)."""
+    for seg in SEGMENT_SPLIT_RE.split(cmd):
+        try:
+            tokens = shlex.split(seg, posix=True)
+        except ValueError:
+            tokens = seg.split()
+        tokens = [t for t in tokens if not re.match(r"^[A-Za-z_]\w*=", t)]  # env assignments
+        while tokens and tokens[0] in ("sudo", "env", "exec", "command", "nohup", "time"):
+            tokens = tokens[1:]
+        if not tokens:
+            continue
+        word = _basename(tokens[0]).removesuffix(".exe")
+        if not STDIN_INTERP_RE.match(word):
+            continue
+        program = None
+        for t in tokens[1:]:
+            if t.startswith("<") or t.startswith(">") or re.match(r"^\d*>", t):
+                break  # redirections: no program argument follows
+            if t in INLINE_CODE_FLAGS:
+                program = t  # code stays in the visible string, or no code runs
+                break
+            if t == "-" or t.startswith("-"):
+                if t == "-":
+                    break
+                continue
+            program = t
+            break
+        if program is None:
+            return (
+                f"Bash blocked: '{word}' would read its program from stdin. "
+                "Code piped or heredoc'd into an interpreter is invisible to this guard. "
+                "Put the script in scripts/ and run it by path."
+            )
+    return None
+
+
 def _check_bash(cmd):
     # Rule 1: send attempts.
     m = SEND_RE.search(cmd)
@@ -259,6 +319,11 @@ def _check_bash(cmd):
             "Bash blocked: inline python (-c or stdin) that names a protected CSV. "
             "Rule 5: run python scripts/ingest.py instead."
         )
+    # Rule 7: interpreter reading its program from stdin.
+    reason = _check_stdin_interpreter(cmd)
+    if reason:
+        return reason
+
     for seg in SEGMENT_SPLIT_RE.split(cmd):
         if not PROTECTED_RE.search(seg):
             continue

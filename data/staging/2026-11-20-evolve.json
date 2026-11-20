@@ -1,0 +1,40 @@
+[
+  {
+    "company": "Evolve",
+    "website": "https://evolve.com",
+    "country": "US",
+    "icp": "travel",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Evolve's SmartRates 'pulls in data on competitor availability' and 'tracks listings that compete directly with yours' to set one nightly rate across Airbnb, Vrbo and Booking.com, so without live listing data it cannot see what competing homes in the same market are charging or how much is still available when it reprices daily.",
+    "decision_maker": "Brian Egan",
+    "dm_title": "Co-Founder and CEO",
+    "dm_source": "https://www.prnewswire.com/news-releases/evolve-acquires-guestworks-portfolio-from-vacasa-in-strategic-asset-transaction-302625006.html",
+    "source_url": "https://careers.evolvevacationrental.com/blog/evolve/smartrates-the-secret-to-our-record-breaking-success",
+    "notes": "Largest tech-enabled vacation rental manager in North America (own words, Greenhouse posting 8197766003), Denver; 'We have direct partnerships with every major booking site and list your property on each of them.' (evolve.com/owner/vacation-rental-management, undated). SmartRates blog dated 2026-05-28. Source of its competitor data (in-house vs AirDNA/PriceLabs) not stated: icp_confidence medium. TRAP: Ashby board 'evolve' is a UK executive-search firm; Evolve's real board is Greenhouse 'evolvevacationrental'. Last funding $100M Feb 2022; employees 'nearly 800' in 2022 only, left empty. Senior Data Engineer (2026-08-25) has no pricing terms, not staged. No pricing or parity complaints on Trustpilot/BBB. Verifier: 4 SUPPORTED, 1 PARTIAL (blog quote truncated mid-sentence; blog is not a staged signal).",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-11-06",
+        "evidence_url": "https://boards-api.greenhouse.io/v1/boards/evolvevacationrental/jobs/8197766003",
+        "evidence_note": "Senior Product Designer, Direct Booking: leads design across 'search, dynamic pricing, mobile checkout, promotions, and AI trip planning.' Greenhouse first_published 2026-11-06T12:49:47-05:00. Weak: about pricing on its own site, not OTA parity.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-08-25",
+        "evidence_url": "https://boards-api.greenhouse.io/v1/boards/evolvevacationrental/jobs/7977372003",
+        "evidence_note": "Staff Machine Learning Engineer: 'Demand forecasting, dynamic pricing, revenue management, price-elasticity estimation, causal inference, or optimization.' Greenhouse first_published 2026-08-25T17:20:36-04:00.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2025-11-24",
+        "evidence_url": "https://www.prnewswire.com/news-releases/evolve-acquires-guestworks-portfolio-from-vacasa-in-strategic-asset-transaction-302625006.html",
+        "evidence_note": "Evolve 'today announced the acquisition of Guestworks, operated by Vacasa, a Casago company, in an asset purchase transaction'. Dateline 'DENVER, Nov. 24, 2025 /PRNewswire/'.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

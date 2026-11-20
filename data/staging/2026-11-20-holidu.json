@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Holidu",
+    "website": "https://www.holidu.com",
+    "country": "DE",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": 700,
+    "stage": "growth",
+    "why_live_data": "Holidu pushes each host's price to '25+ booking platforms, including Booking.com, Airbnb and Vrbo' and expects it to show 'within an hour', but without live data it cannot see what price is actually live on those channels afterwards, which is how a host found their home 'offered on Airbnb (which they managed) ... at a much lower price than the one I had set.'",
+    "decision_maker": "Johannes Siebers",
+    "dm_title": "CEO and Co-Founder",
+    "dm_source": "https://www.holidu.com/magazine/holidu-acquires-cybevasion",
+    "source_url": "https://www.holidu.com/host/product",
+    "notes": "Vacation rental booking platform plus host management software (Munich); management platform is over 70% of revenue per the gites.com release. Employees 'more than 700' per https://www.holidu.com/magazine/holidu-acquires-gites-com (2026-07-01). Michael Siebers is CTO and co-founder (same cybevasion page, June 2025). Stage: EUR 46M growth equity round (June 2025, outside 12 months, not staged). Ashby board has 11 postings, none naming pricing, parity or channels: no hiring signal. Second Trustpilot complaint 2026-08-16 (cancel-and-resell) not staged: not a parity issue. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-04-10",
+        "evidence_url": "https://www.trustpilot.com/reviews/69d94693af6a741e626f274e",
+        "evidence_note": "Host review: 'On that occasion, my property was offered on Airbnb (which they managed) to a French guest at a much lower price than the one I had set.' Review dated April 10, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-01",
+        "evidence_url": "https://www.holidu.com/magazine/holidu-acquires-gites-com",
+        "evidence_note": "'Munich, July 1st, 2026 - Holidu has acquired the Dutch holiday home portal Gites (gites.com), continuing its expansion across Europe.' Adds another channel to the network.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

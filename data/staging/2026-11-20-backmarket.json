@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Back Market",
+    "website": "https://www.backmarket.com",
+    "country": "FR",
+    "icp": "commerce",
+    "icp_confidence": "low",
+    "employees": 700,
+    "stage": "growth",
+    "why_live_data": "Back Market hires to answer 'How does competition shape our pricing?' and to keep 'Monitoring pricing and identifying inconsistencies' and 'product matching' in its trade-in catalogue, yet nothing it publishes shows a live view of the same devices' prices on competing refurbished marketplaces.",
+    "decision_maker": "Clément Petit",
+    "dm_title": "CEO (from 2026-09-01; previously CFO)",
+    "dm_source": "https://www.maddyness.com/uk/2026/06/08/back-market-to-appoint-a-new-ceo-for-the-first-time-in-12-years/",
+    "source_url": "https://www.maddyness.com/uk/2026/06/08/back-market-to-appoint-a-new-ceo-for-the-first-time-in-12-years/",
+    "notes": "Evidence is a job DUTY (monitor competitor pricing), not a stated gap. Weaker than a company describing a problem it has. Staged at low icp_confidence deliberately. Stage 'growth' evidenced by Series E ($510M, 2022) and profitability (was the invalid 'late', corrected 2026-11-20). Refurbished electronics marketplace, Paris, 17 countries, 700 staff (Maddyness 2026-06-08). icp_confidence LOW: pricing roles name competition and price monitoring but never state a gap or name competitors; closest call in this batch. Economist posting b49338f8 (publishedAt 2026-10-02, 'How does competition shape our pricing?') NOT staged as a signal: verifier PARTIAL on title spacing only; the quote itself was confirmed. Launch 2026-10-20 (Outlet, Back Bot, Back Check) UNVERIFIED: press pages 403. Last funding Series E 2022. CTO Dawn Baker named in 2023, not confirmed current. Verifier: 3 SUPPORTED, 1 PARTIAL.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-05",
+        "evidence_url": "https://jobs.ashbyhq.com/backmarket/9eae3809-5941-40d1-bc5a-9f1871618191",
+        "evidence_note": "Senior Data Scientist - Pricing: 'Drive pricing intelligence: design and implement Machine Learning models and optimization algorithms'; 'implement models and algorithms to optimize fees and pricing.' Ashby publishedAt 2026-10-05 via https://api.ashbyhq.com/posting-api/job-board/backmarket",
+        "date_confidence": "ceiling"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-09-16",
+        "evidence_url": "https://jobs.ashbyhq.com/backmarket/8feb95fc-6c41-4b1b-adc1-4d090da2809d",
+        "evidence_note": "Operations Data & Automation Apprentice: 'Monitoring pricing and identifying inconsistencies'; 'Maintaining the Trade-in Catalog and product matching'. Ashby publishedAt 2026-09-16 via https://api.ashbyhq.com/posting-api/job-board/backmarket",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

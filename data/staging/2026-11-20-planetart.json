@@ -1,0 +1,26 @@
+[
+  {
+    "company": "PlanetArt",
+    "website": "https://www.planetart.com",
+    "country": "US",
+    "icp": "commerce",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "PlanetArt is hiring a pricing analyst to 'Monitor and analyze competitor pricing, promotions, discounts, product offerings, and shipping costs' and to 'Validate competitive data and product comparisons to ensure accuracy', so it has no reliable live view of what rival personalised-product sellers are charging and promoting.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://apply.workable.com/api/v2/accounts/planetart/jobs/FE415DEE24",
+    "notes": "Evidence is a job DUTY (monitor competitor pricing), not a stated gap. Weaker than a company describing a problem it has. Staged at low icp_confidence deliberately. Calabasas, CA; 'leading seller of personalized and make-on-demand products worldwide'; brands FreePrints, FreePrints Photobooks, SimplytoImpress, Personal Creations, CafePress. icp_confidence LOW: the pain is a competitor-monitoring job duty, not a stated gap, and no posting says scraping; comparable to Back Market. ATS is Workable (published 2026-10-16 = created_at); Workable is outside the skill's date table, so approx. No named decision maker found from a public source. Found by ATS sweep. Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-16",
+        "evidence_url": "https://apply.workable.com/api/v2/accounts/planetart/jobs/FE415DEE24",
+        "evidence_note": "Sr. E-commerce Pricing Analyst: 'Monitor and analyze competitor pricing, promotions, discounts, product offerings, and shipping costs'; 'Assess competitor price changes and promotional activity to understand their potential impact'; 'Validate competitive data and product comparisons to ensure accuracy, consistency, and meaningful like-for-like analysis.' Workable published 2026-10-16.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

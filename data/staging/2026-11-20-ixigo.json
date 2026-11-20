@@ -1,0 +1,33 @@
+[
+  {
+    "company": "ixigo",
+    "website": "https://www.ixigo.com",
+    "country": "IN",
+    "icp": "travel",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "public",
+    "why_live_data": "ixigo now sells an agent that 'monitors eligible flight fares 24x7' because 'Flight prices change frequently', yet its hotel team is still asked to 'Monitor competitor listings' and check that 'rates, and inventory settings are correctly mapped' by hand, so without live data it cannot see how its hotel rates and listings compare with the OTAs selling the same rooms.",
+    "decision_maker": "Aloke Bajpai",
+    "dm_title": "CMD & Group CEO",
+    "dm_source": "https://investors.ixigo.com/about/",
+    "source_url": "https://www.mediainfoline.com/travel/ixigo-launches-smart-lock-an-agentic-ai-that-autonomously-monitors-and-locks-flight-fares",
+    "notes": "Indian OTA (Le Travenues Technology Ltd, NSE: IXIGO) for trains, flights, buses, hotels; began as flights metasearch. No source shows it running web-scale crawling in house. Other leaders on investors page: Rajnish Kumar Benedict (Director and Group Co-CEO), Ernesto Cohnen (SVP AI Products). ATS is SmartRecruiters (public API https://api.smartrecruiters.com/v1/companies/ixigo/postings); its releasedDate is not in the skill's date table and may reflect a repost, so the hiring signal is approx, never a Tier A basis on its own. HELLO hotel extranet launch (2026-02-26, 'enabling real-time parity') NOT staged: verifier PARTIAL, continuation of the quote unconfirmed. Q2 FY27 results (2026-10-17) not a signal type. Verifier: 4 SUPPORTED, 1 PARTIAL.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-09-17",
+        "evidence_url": "https://www.mediainfoline.com/travel/ixigo-launches-smart-lock-an-agentic-ai-that-autonomously-monitors-and-locks-flight-fares",
+        "evidence_note": "Smart Lock launch: 'monitors eligible flight fares 24x7 in the background against a traveller's target budget'; 'Flight prices change frequently, often requiring travellers to revisit booking platforms several times in search of better fares.' Article dated Sep 17, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-09-07",
+        "evidence_url": "https://jobs.smartrecruiters.com/ixigo/744000147845929-executive-business-development-operations-hotels-",
+        "evidence_note": "Executive - Business Development Operations (Hotels): 'Market Intelligence: Monitor competitor listings to ensure our content and presentation are always superior.' and 'ensure room types, rates, and inventory settings are correctly mapped'. SmartRecruiters releasedDate 2026-09-07 via public postings API.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

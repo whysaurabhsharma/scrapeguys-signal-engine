@@ -18,7 +18,18 @@ Idempotency, the property this script exists for:
     incoming value leaves the stored one alone. Ingest never blanks a field.
     decision_maker, dm_title and dm_source move as one unit, so a name is
     never left attached to someone else's source.
-  - a signal whose signal_id is already present is skipped as a duplicate.
+  - a signal whose signal_id is already present is not appended again. Its
+    MUTABLE fields, date_confidence and evidence_note, are updated when the
+    incoming value is non-empty and different; that row counts as "signals
+    updated". Identity and history fields (signal_id, account_id,
+    signal_type, signal_date, evidence_url, captured_at) are never changed:
+    signal_id is derived from account, type and URL, so a different
+    signal_date on the same id is ignored, not applied. An unchanged row
+    counts as a duplicate.
+    Why: ingest is the only writer, so if it cannot correct a field, a wrong
+    value can only be fixed by violating the data contract. Idempotency
+    means the same input gives the same state, not that the store is
+    immutable.
   - first_seen is set on first write and never overwritten.
   - captured_at is set to the run date when absent.
   - existing rows keep their order and bytes; new rows are appended. If
@@ -45,6 +56,7 @@ from common import (  # noqa: E402
     ICPS,
     SIGNAL_HEADERS,
     SIGNAL_MODEL,
+    STAGES,
     account_id,
     is_suppressed,
     load_suppress,
@@ -271,6 +283,13 @@ def validate_account(raw, where: str, suppress: dict, asof: date, run_date: str,
     if a["icp"] not in ICPS:
         errors.append(("icp", f"{a['icp']!r} is not one of {', '.join(ICPS)}"))
 
+    # STAGES is the vocabulary score.py maps to capacity. An unlisted value
+    # used to fall silently to "unknown"; empty is still allowed and means
+    # the stage was not found.
+    if a["stage"] and a["stage"] not in STAGES:
+        errors.append(("stage", f"{a['stage']!r} is not one of {', '.join(STAGES)}"
+                                " (leave empty if not found)"))
+
     if a["decision_maker"]:
         if not a["dm_source"]:
             errors.append(("dm_source", f"decision_maker {a['decision_maker']!r} "
@@ -335,12 +354,31 @@ def merge_account(existing: dict, incoming: dict) -> list:
     return changed
 
 
+SIGNAL_MUTABLE = ("date_confidence", "evidence_note")
+
+
+def merge_signal(existing: dict, incoming: dict) -> list:
+    """Update only the mutable fields of a stored signal. Returns changed names.
+
+    Identity and history (signal_id, account_id, signal_type, signal_date,
+    evidence_url, captured_at) are never touched. Empty incoming never blanks.
+    """
+    changed = []
+    for h in SIGNAL_MUTABLE:
+        new = incoming.get(h, "")
+        if new and new != existing.get(h, ""):
+            existing[h] = new
+            changed.append(h)
+    return changed
+
+
 def merge(accounts: list, signals: list, validated: list, run_date: str, rep: Report):
     """Fold validated records into the existing rows. Mutates both lists."""
     by_id = {r["account_id"]: r for r in accounts}
-    seen_signals = {r["signal_id"] for r in signals}
+    sig_by_id = {r["signal_id"]: r for r in signals}
     added, updated = set(), set()
     signals_added = signals_dup = 0
+    signals_updated = set()
 
     for acct_row, sig_rows in validated:
         aid = acct_row["account_id"]
@@ -363,12 +401,18 @@ def merge(accounts: list, signals: list, validated: list, run_date: str, rep: Re
 
         for s in sig_rows:
             sid = s["signal_id"]
-            if sid in seen_signals:
-                signals_dup += 1
-                rep.info("DUPLICATE", f"{who} {sid}", f"{s['signal_type']} {s['evidence_url']}")
+            stored = sig_by_id.get(sid)
+            if stored is not None:
+                changed = merge_signal(stored, s)
+                if changed:
+                    signals_updated.add(sid)
+                    rep.info("UPDATED", f"{who} {sid}", "fields: " + ", ".join(changed))
+                else:
+                    signals_dup += 1
+                    rep.info("DUPLICATE", f"{who} {sid}", f"{s['signal_type']} {s['evidence_url']}")
                 continue
             signals.append(s)
-            seen_signals.add(sid)
+            sig_by_id[sid] = s
             signals_added += 1
             rep.info("SIGNAL", f"{who} {sid}", f"{s['signal_type']} {s['signal_date']}")
 
@@ -376,6 +420,7 @@ def merge(accounts: list, signals: list, validated: list, run_date: str, rep: Re
         "accounts_added": len(added),
         "accounts_updated": len(updated),
         "signals_added": signals_added,
+        "signals_updated": len(signals_updated),
         "signals_duplicate": signals_dup,
     }
 
@@ -408,6 +453,7 @@ def print_summary(counts: dict, rep: Report, dry_run: bool) -> None:
     print(f"  accounts added       {counts['accounts_added']}")
     print(f"  accounts updated     {counts['accounts_updated']}")
     print(f"  signals added        {counts['signals_added']}")
+    print(f"  signals updated      {counts['signals_updated']}")
     print(f"  signals duplicate    {counts['signals_duplicate']}")
     print(f"  records rejected     {counts['records_rejected']}  "
           f"({rep.accounts_rejected} accounts, {rep.signals_rejected} signals)")
@@ -450,7 +496,7 @@ def main(argv=None) -> int:
     counts = merge(accounts, signals, validated, run_date, rep)
     counts["records_rejected"] = rep.records_rejected
     changed = (counts["accounts_added"] or counts["accounts_updated"]
-               or counts["signals_added"])
+               or counts["signals_added"] or counts["signals_updated"])
 
     if not args.dry_run and changed:
         # both temps written before either replace, so a crash mid-write

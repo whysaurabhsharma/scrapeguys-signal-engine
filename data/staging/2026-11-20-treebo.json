@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Treebo",
+    "website": "https://www.treebo.com",
+    "country": "IN",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Treebo sets room rates 'in real time using 50+ live signals: demand, competitor prices across all OTAs' and needs 'rate and availability data from every listing portal and every micro-market Treebo tracks', so without live portal data it prices its own hotels and its Hotel Superhero clients on stale competitor rates across 100+ Indian cities.",
+    "decision_maker": "Mayank Khandelwal",
+    "dm_title": "CTO",
+    "dm_source": "https://careers.treebo.com",
+    "source_url": "https://www.hotelsuperhero.com/",
+    "notes": "INCUMBENT: PromptCloud. The category is already bought; the conversation is displacement, not education. Indian economy hotel franchise chain (Treebo Hospitality Ventures), about 900 hotels per Skift 2026-07-31. Also sells Hotel Superhero (PMS, RMS, channel manager) to independent hotels: partly a software seller, but core is operating hotels, so kept as buyer, not vendor. INCUMBENT: PromptCloud (scraping vendor) case study names Treebo as a customer, quoting Khandelwal as 'Head of Engineering' (https://www.promptcloud.com/blog/customer-spotlight-treebo/, undated); displacement deal, not greenfield. Other named leaders on careers.treebo.com: Sidharth Gupta (CEO & Co-founder), Uday Singh (EVP & Head - Revenue Management), Manish Singhal (VP & Head - OTA Sales). Accor partnership called off per Skift 2026-07-31 (strategy news, not staged). No public ATS JSON (Darwinbox). Employees and stage not found. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2025-09-30",
+        "evidence_url": "https://hospibuz.com/hot-topics/thv-launches-its-ai-powered-hotel-management-system-hotel-superhero-as-a-saas-offering-for-independent-hotels-10519486",
+        "evidence_note": "THV launches Hotel Superhero as SaaS for independent hotels, 'including Property Management System, Revenue Management System, Channel Manager, Point of Sale (POS)'. Dateline '30 September 2025, Bangalore'; published 01 October 2025.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]
