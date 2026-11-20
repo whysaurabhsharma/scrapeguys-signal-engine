@@ -282,6 +282,12 @@ SEND_PATTERNS = [
 SCAN_SUFFIXES = {".py", ".md", ".json", ".txt", ".toml", ".yml", ".yaml", ".cfg", ".ini", ".sh", ".ps1", ".csv", ""}
 
 
+# C9 scope: files directly in the repo root, plus everything under scripts/
+# and .claude/ (guard.py included). It does NOT scan tests/.
+# tests/test_guard.py deliberately contains send-library strings as test
+# inputs for the guard, which is why tests/ is excluded. If this scope ever
+# widens to cover tests/, those strings must be split into fragments the way
+# guard.py's patterns are, or C9 will flag them.
 def c9_never_send(asof):
     files = [p for p in ROOT.iterdir() if p.is_file()]
     for sub in ("scripts", ".claude"):
