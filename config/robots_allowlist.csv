@@ -1,0 +1,2 @@
+host,reason,doc_url
+api.ashbyhq.com,"documented public job board API; robots.txt returns 401, which is an absent robots file rather than a disallow",https://developers.ashbyhq.com/docs/public-job-posting-api
