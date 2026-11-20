@@ -15,4 +15,6 @@ openai.com,no,runs web-scale crawling in house; would never outsource
 elevenlabs.io,no,builds its own crawling infrastructure at model-training scale
 stripe.com,no,payments infrastructure; no dependency on scraping third-party sites
 figma.com,no,design tool; its data is created in product not collected from the web
-notion.so,no,workspace software; no live external web data dependency
+notion.so,no,workspace software; no live external web data dependencyoyorooms.com,buy,hotel group distributing through many OTAs; rate parity across resellers is unseen without live data
+cleartrip.com,buy,OTA pulling fares and availability from dozens of suppliers that change constantly
+mamaearth.com,buy,Indian D2C brand across Blinkit Zepto Instamart Amazon Flipkart; price stock and placement change hourly
