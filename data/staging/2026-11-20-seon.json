@@ -1,0 +1,33 @@
+[
+  {
+    "company": "SEON",
+    "website": "https://seon.io",
+    "country": "HU",
+    "icp": "ai",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_c",
+    "why_live_data": "SEON's enrichment API scores email, phone and IP in real time from a constantly changing set of public sources on the live request path, so any source that blocks its proxies leaves a stale or missing signal in the fraud score at the moment of decision.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://api.ashbyhq.com/posting-api/job-board/seon",
+    "notes": "Ashby job id bd6b23d5-c582-4eb5-9b7b-b4877f3a2153, Data Enrichment Crawler Team. HTML job page is a JS shell (verifier PARTIAL); evidence and date are from the posting API. Series C stage from seon.io/resources/news/series-c/ (2025-09-16, outside window, not staged as signal). CEO Tamas Kadar named there; verifier PARTIAL on exact title, so left blank. Sells fraud scoring, not collection. Scraping is an input to its product, not the product. Vendor rule does not apply.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-09-24",
+        "evidence_url": "https://api.ashbyhq.com/posting-api/job-board/seon",
+        "evidence_note": "Associate Software Engineer - Web Scraping: 'our data collection runs on the live request path'; 'Work with our proxy infrastructure: understand selection and rotation, and help recover from blocks.'",
+        "date_confidence": "ceiling"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-09-16",
+        "evidence_url": "https://seon.io/resources/news/seon-expands-signal-intelligence-to-catch-fraud-rings/",
+        "evidence_note": "Signal intelligence expansion: 'Digital Footprint checks show where an email or phone appears across services people use over time.'",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

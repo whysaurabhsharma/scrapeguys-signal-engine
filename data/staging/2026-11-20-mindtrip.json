@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Mindtrip",
+    "website": "https://mindtrip.ai",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Mindtrip promises to monitor hotel 'pricing and availability... as rates change' from aggregator inventory, so it cannot see what a hotel's direct site or unconnected OTAs show at that moment, and an alert can rest on a rate that is already stale.",
+    "decision_maker": "Andy Moss",
+    "dm_title": "CEO, Founder",
+    "dm_source": "https://mindtrip.ai/team",
+    "source_url": "https://mindtrip.ai",
+    "notes": "AI travel planning and booking assistant. No public ATS board found (Ashby, Greenhouse, Lever all 404). Inventory named as Priceline, Nuitee, Expedia, Booking.com, Agoda, likely via APIs. Dec 2025 funding article returned 403; not staged. Web-data need is INFERRED, not evidenced: inventory may come via partner APIs. Staged to test whether the scorer ranks inferred need correctly, not because the evidence is strong.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-15",
+        "evidence_url": "https://www.prnewswire.com/news-releases/mindtrip-launches-mindtrip-stays-bringing-agentic-ai-to-hotel-search-and-booking-302826228.html",
+        "evidence_note": "Mindtrip Stays: 'The experience continuously monitors pricing and availability, surfacing savings opportunities as rates change.'",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-09-30",
+        "evidence_url": "https://www.prnewswire.com/news-releases/mindtrip-launches-personal-travel-assistant-that-knows-the-traveler-not-just-the-trip-302893318.html",
+        "evidence_note": "Personal Travel Assistant: agents can 'watch for a hotel price change'.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

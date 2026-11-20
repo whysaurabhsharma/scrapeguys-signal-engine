@@ -60,6 +60,11 @@ Four types only. No date, no signal.
 ## 9. Discovery sources, ranked by the hand test (19 Nov 2026)
 WORKS   ATS-targeted search, e.g. site:jobs.ashbyhq.com "web scraping"
         One query returned eight real companies stating the pain themselves.
+        Qualifier, from the first real hunt on 2026-11-20: ATS site: search
+        finds scraping ROLES well but is weak at finding BUYERS, because
+        vendor listings dominate the results. Two of three accounts in the
+        first hunt came from checking likely companies' job boards directly
+        instead.
 FAILS   Generic funding search. Returned AI mega-rounds, zero buyers. Killed.
 FAILS   Search-based discovery for India commerce. Returns market reports,
         not individual brands. Use seed lists in config/seeds/ instead.
@@ -84,3 +89,14 @@ Why only it  No send-capable server (mail, chat, CRM, social) is declared by
              this repo. That absence is the real never-send guarantee; the
              MCP denylist in .claude/hooks/guard.py is only a backstop.
 Credentials  None in the file. Auth comes from the environment / OAuth.
+
+## 13. First real run, 2026-11-20
+3 accounts staged, 5 signals, 0 rejected. Idempotency confirmed on real
+data: second ingest added nothing, 5 duplicates.
+Result: 0 Tier A, 1 Tier B, 2 nurture.
+SEON missed Tier A on score (56.2 vs 70) and on pain (11.2 vs 15), not on
+age (57 days, inside 90). Its hiring signal carries ceiling confidence
+(x0.75) and is 57 days into a 60-day half-life, so it contributes about 7
+of a possible 18.
+The thresholds were NOT changed to produce a Tier A. A run with nothing
+hot is a real answer.

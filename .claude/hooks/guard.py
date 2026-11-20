@@ -250,6 +250,10 @@ def _check_bash(cmd):
                     f"Bash blocked: tee into '{arg}'. "
                     "Rule 5: only scripts/*.py write the protected CSVs."
                 )
+    # Known false positive: this blocks `python -c` that only READS one of the
+    # three CSVs. Telling a read from a write requires parsing shell syntax,
+    # which is its own source of error, so this fails safe instead. Use the Read
+    # tool to read a CSV.
     if PROTECTED_RE.search(cmd) and PY_INLINE_RE.search(cmd):
         return (
             "Bash blocked: inline python (-c or stdin) that names a protected CSV. "

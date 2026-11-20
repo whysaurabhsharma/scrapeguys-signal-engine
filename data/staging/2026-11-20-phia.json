@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Phia",
+    "website": "https://phia.com",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_a",
+    "why_live_data": "Phia tells shoppers it has found 'the best price across 220,000+ sites' and alerts them when prices drop, so any retailer or resale price that changes between crawls shows the user a best price that is no longer true.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://phia.com",
+    "notes": "Consumer AI shopping agent (app + browser extension). Co-founders Sophia Kianni and Phoebe Gates named at pulse2.com; no technical decision maker found, so left blank. Only Ashby posting is a general 'Pitch Yourself' application: no hiring pain signal. A June 2026 $35.5M report (raising.fi) may be the same round; unverified, not staged.",
+    "signals": [
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-01-27",
+        "evidence_url": "https://phia.com/press",
+        "evidence_note": "Press page lists 'Phia Raises $35M Series A to Build the AI Alignment Layer for Commerce', January 27, 2026. Corroborated at https://pulse2.com/phia-35-million-series-a/ ('ingests billions of new products and processes millions of searches daily').",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

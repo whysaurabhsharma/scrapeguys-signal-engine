@@ -1,1 +1,4 @@
 account_id,company,website,icp,score,tier,reason,icp_match,pain,capacity,reachability,freshest_days
+ac_6c743db5fd,SEON,https://seon.io,ai,56.2,B,"Tier B: scores 56.2, between 50 and 70; freshest signal 57 days old.",30.0,11.2,15.0,0.0,57
+ac_abdb54c1c3,Phia,https://phia.com,ai,45.9,nurture,"Nurture: scores 45.9, below the Tier B line of 50; freshest signal 297 days old.",30.0,2.9,13.0,0.0,297
+ac_f799bf58f4,Mindtrip,https://mindtrip.ai,ai,34.7,nurture,"Nurture: scores 34.7, below the Tier B line of 50; freshest signal 51 days old.",10.0,4.7,5.0,15.0,51
