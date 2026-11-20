@@ -42,6 +42,8 @@ from common import (  # noqa: E402
     TIER_A_MAX_AGE_DAYS,
     TIER_A_MIN_PAIN,
     TIERS,
+    is_suppressed,
+    load_suppress,
     normalise_domain,
     parse_date,
 )
@@ -71,19 +73,6 @@ def read_csv(path: Path, required: list) -> list:
         if missing:
             sys.exit(f"score.py: {path.name} is missing columns: {', '.join(missing)}")
         return [{k: (v or "").strip() for k, v in row.items() if k} for row in reader]
-
-
-def read_suppress(path: Path) -> dict:
-    """normalised domain -> reason."""
-    if not path.exists():
-        return {}
-    out = {}
-    with path.open(encoding="utf-8-sig", newline="") as f:
-        for row in csv.DictReader(f):
-            d = normalise_domain(row.get("domain", ""))
-            if d:
-                out[d] = (row.get("reason") or "").strip() or "no reason given"
-    return out
 
 
 # ---------------------------------------------------------------- scoring
@@ -171,8 +160,11 @@ def tier_for(acct: dict, suppress: dict, total: float, pain: float, freshest):
         return "reject", "Rejected: no website on record, so the account cannot be identified."
 
     # 2. suppression list
-    if domain in suppress:
-        return "reject", f"Rejected: {domain} is on the suppression list ({suppress[domain]})."
+    hit = is_suppressed(domain, suppress)
+    if hit:
+        entry, why = hit
+        via = "" if entry == domain else f" via the {entry} entry"
+        return "reject", f"Rejected: {domain} is on the suppression list{via} ({why})."
 
     # 3. no pain
     if pain <= PAIN_EPSILON:
@@ -295,7 +287,7 @@ def main(argv=None) -> int:
 
     accounts = read_csv(ACCOUNTS, ACCOUNT_HEADERS)
     signals = read_csv(SIGNALS, SIGNAL_HEADERS)
-    suppress = read_suppress(SUPPRESS)
+    suppress = load_suppress(SUPPRESS)
 
     by_account = {}
     for sig in signals:

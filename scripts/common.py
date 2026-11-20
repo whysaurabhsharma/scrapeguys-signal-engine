@@ -1,7 +1,11 @@
 """Schema, weights and id rules. Imported by every script. Standard library only."""
+import csv
 import hashlib
 import re
 from datetime import date
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
 
 ACCOUNT_HEADERS = [
     "account_id", "company", "website", "country", "icp", "icp_confidence",
@@ -77,6 +81,44 @@ def account_id(website: str) -> str:
 def signal_id(acct: str, signal_type: str, evidence_url: str) -> str:
     key = f"{acct}|{signal_type}|{(evidence_url or '').strip().lower()}"
     return "sg_" + hashlib.sha256(key.encode()).hexdigest()[:10]
+
+
+# Suppression is defined once, here, and both ingest.py and score.py call it.
+# If the two scripts disagreed about whether a domain is suppressed, the system
+# would make two different claims about the same company: ingest would let it
+# in while score rejects it, or the reverse. One definition makes that impossible.
+
+def load_suppress(path="config/suppress.csv") -> dict:
+    """Normalised domain -> reason. A relative path resolves from the repo root.
+    A missing file means nothing is suppressed."""
+    p = Path(path)
+    if not p.is_absolute():
+        p = ROOT / p
+    if not p.exists():
+        return {}
+    table = {}
+    with p.open(encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            d = normalise_domain(row.get("domain", ""))
+            if d:
+                table[d] = (row.get("reason") or "").strip() or "no reason given"
+    return table
+
+
+def is_suppressed(domain: str, table: dict):
+    """(matched_domain, reason) or None.
+
+    Subdomain matching: a domain matches an entry if it equals it or ends with
+    "." + entry, so jobs.openai.com is suppressed by openai.com. The input is
+    normalised first, so a full URL is accepted too.
+    """
+    d = normalise_domain(domain)
+    if not d:
+        return None
+    for entry, reason in table.items():
+        if d == entry or d.endswith("." + entry):
+            return entry, reason
+    return None
 
 
 def parse_date(s: str) -> date:
