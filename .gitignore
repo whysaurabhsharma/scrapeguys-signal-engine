@@ -7,3 +7,5 @@ out/probe_log.json
 .DS_Store
 out/probe_log.json
 data/runs.log
+
+tmp_export/
