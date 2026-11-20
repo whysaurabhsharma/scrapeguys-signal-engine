@@ -82,6 +82,25 @@ expect("deny: wget", call("Bash", command="wget -q https://example.com"), False)
 expect("deny: /usr/bin/ssh", call("Bash", command="/usr/bin/ssh host"), False)
 expect("allow: 'sync' is not nc", call("Bash", command="git status && echo sync"), True)
 
+# MCP send tools (rule 1) and NotebookEdit (rule 5).
+expect("deny: mcp__gmail__send_message", call("mcp__gmail__send_message", to="a@b.c"), False)
+expect("deny: mcp__slack__post_message", call("mcp__slack__post_message", channel="x"), False)
+expect("deny: mcp__hubspot__send_email", call("mcp__hubspot__send_email"), False)
+expect("allow: mcp__sheets__get_values", call("mcp__sheets__get_values", range="A1"), True)
+expect("allow: mcp__hubspot__search_crm_objects", call("mcp__hubspot__search_crm_objects"), True)
+expect("deny: NotebookEdit data/accounts.csv", call("NotebookEdit", notebook_path="data/accounts.csv",
+                                                    new_source="x"), False)
+expect("deny: mcp forward", call("mcp__claude_ai_Gmail__forward"), False)
+expect("deny: mcp camelCase sendMessage", call("mcp__x__sendMessage"), False)
+expect("allow: mcp post mid-name is a read", call("mcp__hubspot__get_social_post_analytics"), True)
+for _name in ("manage_marketing_email", "manage_social_posts", "create_draft",
+              "manage_campaign_objects", "import-claude-design-from-url"):
+    expect(f"deny: denylist {_name}", call(f"mcp__claude_ai_HubSpot__{_name}"), False)
+expect("allow: trash_message is not a send", call("mcp__claude_ai_Gmail__trash_message"), True)
+expect("allow: mcp__sheets__get_values (after denylist)", call("mcp__sheets__get_values"), True)
+expect("allow: mcp__hubspot__search_crm_objects (after denylist)", call("mcp__hubspot__search_crm_objects"), True)
+expect("allow: NotebookEdit out/x.ipynb", call("NotebookEdit", notebook_path="out/x.ipynb", new_source="x"), True)
+
 # Fail closed.
 check("deny: malformed JSON", guard.evaluate_raw("{not json", ROOT) is not None)
 check("deny: non-object JSON", guard.evaluate_raw("[1,2]", ROOT) is not None)

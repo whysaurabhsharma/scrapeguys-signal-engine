@@ -6,11 +6,15 @@ or the guard itself crashes, the call is denied.
 
 What it blocks, and why (see CLAUDE.md, operating rules 1 and 5):
   1. Send attempts in Bash (mail libraries, mail -s, POST to messaging/CRM APIs).
-  2. Write/Edit to data/accounts.csv, data/signals.csv, data/scored.csv,
+  2. Write/Edit/NotebookEdit to data/accounts.csv, data/signals.csv, data/scored.csv,
      after resolving relative, ./ and .. paths.
   3. Bash writes to those files by redirect, tee, inline python, or a file tool.
   4. Bash network tools: curl, wget, nc, ssh, scp.
   5. Write to any path outside the repo root.
+  6. MCP tools whose name is a send action (send, reply, forward, post,
+     publish, create_message, or anything containing "send"). Matched on the
+     last "__" segment of the tool name, so read tools on the same server
+     pass. Registered before any MCP server is connected.
 
 This is a tripwire, not a sandbox. A determined script can still evade string
 matching; the permission deny list in settings.json is the second layer.
@@ -86,6 +90,37 @@ FILE_WRITERS = {
 }
 SEGMENT_SPLIT_RE = re.compile(r"&&|\|\||[;|\n]")
 
+# Rule 6: MCP send tools. Exact names, plus send verbs that lead the name
+# (post_to_channel, reply_all). A verb mid-name is not matched, so
+# get_social_post_analytics stays allowed. "send" anywhere in the name denies.
+MCP_SEND_NAMES = {
+    "send", "send_message", "send_email", "reply", "forward", "post",
+    "post_message", "publish", "create_message",
+}
+MCP_SEND_VERBS = {"send", "reply", "forward", "post", "publish"}
+
+# Send-capable MCP tools whose names contain no blocked word. Matched exactly
+# on the last "__" segment, case-insensitive, with "-" treated as "_".
+#
+# This denylist is a backstop, not a guarantee. It is name-based, so it goes
+# stale the day a vendor adds or renames a tool. The real guarantee is that
+# this repo declares no send-capable MCP server (no .mcp.json, no mcpServers
+# in settings). Account-level connectors (claude.ai) sit outside the repo;
+# disconnect them for this project rather than trusting this list.
+MCP_SEND_DENYLIST = {
+    "manage_marketing_email",
+    "manage_social_posts",
+    "create_draft",
+    "manage_campaign_objects",
+    "import_claude_design_from_url",
+}
+
+# File tools and the input key that holds their target path.
+FILE_TOOLS = {
+    "Write": "file_path", "Edit": "file_path", "MultiEdit": "file_path",
+    "NotebookEdit": "notebook_path",
+}
+
 
 def _deny(reason):
     return {
@@ -133,10 +168,29 @@ def _basename(token):
     return t.rsplit("/", 1)[-1].lower()
 
 
+def _check_mcp(tool):
+    """Deny an MCP tool whose last name segment is a send action."""
+    last = tool.rsplit("__", 1)[-1]
+    snake = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", last).lower().replace("-", "_")
+    words = [w for w in snake.split("_") if w]
+    if last.lower().replace("-", "_") in MCP_SEND_DENYLIST:
+        return (
+            f"MCP tool {tool} blocked: '{last}' is on the send-capable denylist. "
+            "Rule 1: NEVER SEND."
+        )
+    if snake in MCP_SEND_NAMES or "send" in snake or (words and words[0] in MCP_SEND_VERBS):
+        return (
+            f"MCP tool {tool} blocked: '{last}' is a send action. "
+            "Rule 1: NEVER SEND. Drafts are files marked DRAFT - NOT SENT."
+        )
+    return None
+
+
 def _check_file_tool(tool, tool_input, root, cwd):
-    path = tool_input.get("file_path")
+    key = FILE_TOOLS[tool]
+    path = tool_input.get(key)
     if not isinstance(path, str) or not path.strip():
-        return f"{tool} call has no file_path, so its target cannot be verified."
+        return f"{tool} call has no {key}, so its target cannot be verified."
     resolved = _norm(path, cwd)
     if _is_protected(resolved, root):
         return (
@@ -234,12 +288,16 @@ def decide(payload, repo_root=REPO_ROOT):
     cwd = payload.get("cwd")
     cwd = cwd if isinstance(cwd, str) and cwd.strip() else str(repo_root)
 
-    if tool in ("Write", "Edit", "MultiEdit", "Bash"):
+    if tool.startswith("mcp__"):
+        reason = _check_mcp(tool)
+        return _deny(reason) if reason else None
+
+    if tool in FILE_TOOLS or tool == "Bash":
         if not isinstance(tool_input, dict):
             return _deny(f"{tool} call has no tool_input object; failing closed.")
 
     reason = None
-    if tool in ("Write", "Edit", "MultiEdit"):
+    if tool in FILE_TOOLS:
         reason = _check_file_tool(tool, tool_input, repo_root, cwd)
     elif tool == "Bash":
         cmd = tool_input.get("command")
