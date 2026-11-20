@@ -190,6 +190,15 @@ therefore: no send credential in this repo, and no send-capable server
 declared by it. The hook and the deny rules are defence in depth, not the
 proof. Any claim that rests on the hook alone is overstated.
 
+Silent frontmatter failure, found 2026-11-20. The /report skill's YAML
+description contained a colon followed by a space, which broke every key
+below it. The skill still appeared in the / list, because a failed header
+falls back to the folder name, but its allowed-tools was never enforced -
+so a skill that read as constrained had no tool restrictions at all. All
+six descriptions are now quoted with a comment saying why. The lesson is
+the same as the guard's: a control that fails silently reads as a control
+that works.
+
 Corrections, 2026-11-20, fourth hunt. Two data-contract fixes, each
 applied to every record it covered, re-ingested through ingest.py:
 - Stage: three staged values were outside STAGES ("subsidiary", "late",
