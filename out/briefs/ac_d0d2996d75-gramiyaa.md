@@ -1,5 +1,6 @@
 # Gramiyaa
 DRAFT - NOT SENT
+HELD - pitching this account forecloses the Nitro Commerce channel. See out/partners.md. Decide the channel question before sending.
 
 ## The signal
 On 10 November 2026 Inc42 published an interview with cofounder Mohamed Yaseen for The Quick Commerce Code, a series Inc42 runs "in collaboration with Nitro Commerce", the vendor Gramiyaa already uses: "the brand uses tools such as Nitro Commerce to track these metrics". The evidence comes from the incumbent's own content. Yaseen: "We get caught between two giants fighting to acquire customers." Quick commerce is 35% of its revenue.
