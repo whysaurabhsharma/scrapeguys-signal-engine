@@ -146,7 +146,8 @@ def write_cases():
               all(s["account_id"] != thin["account_id"] for s in sgs), sgs)
         check("apply drops the colliding signal, keeps the new one", len(sgs) == 3, len(sgs))
         check("moved signal_id is re-derived",
-              all(s["signal_id"] == signal_id(s["account_id"], s["signal_type"], s["evidence_url"])
+              all(s["signal_id"] == signal_id(s["account_id"], s["signal_type"], s["evidence_url"],
+                                              s["source_ref"])
                   for s in sgs))
         check("apply prints the merge",
               f"MERGED    {thin['account_id']}" in out and "signal dropped" in out, out)

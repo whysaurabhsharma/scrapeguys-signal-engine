@@ -36,8 +36,16 @@ ACCOUNT_HEADERS = [
 
 SIGNAL_HEADERS = [
     "signal_id", "account_id", "signal_type", "signal_date", "captured_at",
-    "evidence_url", "evidence_note", "date_confidence",
+    "evidence_url", "evidence_note", "date_confidence", "source_ref",
 ]
+
+# The header signals.csv had before source_ref was added. ingest.py reads a
+# file still carrying it and rewrites it with SIGNAL_HEADERS.
+SIGNAL_HEADERS_V1 = SIGNAL_HEADERS[:-1]
+
+# source_ref: optional. A short stable id for one item inside a source, such
+# as an ATS job id when several postings share one board JSON endpoint.
+SOURCE_REF = re.compile(r"^[A-Za-z0-9._:-]{1,64}$")
 
 SCORED_HEADERS = [
     "account_id", "company", "website", "icp", "score", "tier", "reason",
@@ -104,8 +112,17 @@ def account_id(website: str) -> str:
     return "ac_" + hashlib.sha256(d.encode()).hexdigest()[:10]
 
 
-def signal_id(acct: str, signal_type: str, evidence_url: str) -> str:
+def signal_id(acct: str, signal_type: str, evidence_url: str, source_ref: str = "") -> str:
+    """Account, type and URL, plus source_ref when one is given.
+
+    Without source_ref the key, and so the id, is exactly what it was before
+    the field existed, so every stored signal_id stays valid. With it, two
+    postings behind one ATS JSON endpoint get two ids instead of colliding.
+    """
     key = f"{acct}|{signal_type}|{(evidence_url or '').strip().lower()}"
+    ref = (source_ref or "").strip()
+    if ref:
+        key += f"|{ref}"
     return "sg_" + hashlib.sha256(key.encode()).hexdigest()[:10]
 
 

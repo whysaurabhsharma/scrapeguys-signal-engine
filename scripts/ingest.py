@@ -22,10 +22,17 @@ Idempotency, the property this script exists for:
     MUTABLE fields, date_confidence and evidence_note, are updated when the
     incoming value is non-empty and different; that row counts as "signals
     updated". Identity and history fields (signal_id, account_id,
-    signal_type, signal_date, evidence_url, captured_at) are never changed:
-    signal_id is derived from account, type and URL, so a different
-    signal_date on the same id is ignored, not applied. An unchanged row
-    counts as a duplicate.
+    signal_type, signal_date, evidence_url, source_ref, captured_at) are
+    never changed: signal_id is derived from account, type, URL and the
+    optional source_ref, so a different signal_date on the same id is
+    ignored, not applied. An unchanged row counts as a duplicate.
+  - source_ref, optional, names one item inside a shared source (an ATS job
+    id on a board JSON endpoint). A stored row that carried the same item as
+    a "#<source_ref>" fragment on evidence_url, the workaround used before
+    the field existed, is replaced in place by the incoming row and counted
+    as "signals migrated". That is the one case where a stored id changes.
+  - a signals.csv still on the pre-source_ref header is read, and rewritten
+    with the current header and source_ref empty on every existing row.
     Why: ingest is the only writer, so if it cannot correct a field, a wrong
     value can only be fixed by violating the data contract. Idempotency
     means the same input gives the same state, not that the store is
@@ -55,7 +62,9 @@ from common import (  # noqa: E402
     DATE_CONFIDENCE,
     ICPS,
     SIGNAL_HEADERS,
+    SIGNAL_HEADERS_V1,
     SIGNAL_MODEL,
+    SOURCE_REF,
     STAGES,
     account_id,
     is_suppressed,
@@ -130,19 +139,25 @@ def clean(value, field: str = "") -> str:
     return s.lower() if field in LOWERCASE else s
 
 
-def read_table(path: Path, headers: list) -> list:
-    """Existing rows verbatim, as dicts. The header must match exactly."""
+def read_table(path: Path, headers: list, legacy=None):
+    """(existing rows verbatim as dicts, upgraded). The header must match
+    exactly, or equal `legacy`, an older header that is a prefix of `headers`.
+    A legacy file's rows get the new columns empty and upgraded is True, so
+    the caller rewrites the file with the current header."""
     if not path.exists():
-        return []
+        return [], False
     with path.open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
         if reader.fieldnames is None:
-            return []
-        if list(reader.fieldnames) != list(headers):
-            sys.exit(f"ingest.py: {path.name} header does not match common.py.\n"
-                     f"  found:    {','.join(reader.fieldnames)}\n"
-                     f"  expected: {','.join(headers)}")
-        return [dict(row) for row in reader]
+            return [], False
+        found = list(reader.fieldnames)
+        if found == list(headers):
+            return [dict(row) for row in reader], False
+        if legacy is not None and found == list(legacy):
+            return [{h: row.get(h) or "" for h in headers} for row in reader], True
+        sys.exit(f"ingest.py: {path.name} header does not match common.py.\n"
+                 f"  found:    {','.join(found)}\n"
+                 f"  expected: {','.join(headers)}")
 
 
 def resolve_inputs(names: list) -> list:
@@ -230,6 +245,11 @@ def validate_signal(raw, acct: str, who: str, asof: date, run_date: str, rep: Re
         if why:
             errors.append(("captured_at", why))
 
+    # optional; when given it is part of signal_id, so it must be stable and short
+    if s["source_ref"] and not SOURCE_REF.match(s["source_ref"]):
+        errors.append(("source_ref", f"{s['source_ref']!r} is not 1-64 characters "
+                                     "of letters, digits, '.', '_', ':' or '-'"))
+
     if errors:
         rep.rejected(who, errors, "signal")
         return None
@@ -243,7 +263,7 @@ def validate_signal(raw, acct: str, who: str, asof: date, run_date: str, rep: Re
     row = {h: "" for h in SIGNAL_HEADERS}
     row.update(s)
     row["account_id"] = acct
-    row["signal_id"] = signal_id(acct, s["signal_type"], url)
+    row["signal_id"] = signal_id(acct, s["signal_type"], url, s["source_ref"])
     return row
 
 
@@ -361,7 +381,7 @@ def merge_signal(existing: dict, incoming: dict) -> list:
     """Update only the mutable fields of a stored signal. Returns changed names.
 
     Identity and history (signal_id, account_id, signal_type, signal_date,
-    evidence_url, captured_at) are never touched. Empty incoming never blanks.
+    evidence_url, source_ref, captured_at) are never touched. Empty incoming never blanks.
     """
     changed = []
     for h in SIGNAL_MUTABLE:
@@ -372,12 +392,34 @@ def merge_signal(existing: dict, incoming: dict) -> list:
     return changed
 
 
+def fragment_row(signals: list, incoming: dict):
+    """The stored row this incoming signal supersedes, or None.
+
+    Before source_ref existed, a second posting on a shared ATS endpoint was
+    stored with its job id as a #fragment on evidence_url, because signal_id
+    had no other way to tell the two apart. A stored row with no source_ref,
+    the same account and type, and evidence_url equal to incoming url + "#" +
+    incoming source_ref is that workaround for the same item.
+    """
+    ref = incoming["source_ref"]
+    if not ref:
+        return None
+    want = f"{incoming['evidence_url']}#{ref}".strip().lower()
+    for r in signals:
+        if (not r.get("source_ref")
+                and r["account_id"] == incoming["account_id"]
+                and r["signal_type"] == incoming["signal_type"]
+                and r["evidence_url"].strip().lower() == want):
+            return r
+    return None
+
+
 def merge(accounts: list, signals: list, validated: list, run_date: str, rep: Report):
     """Fold validated records into the existing rows. Mutates both lists."""
     by_id = {r["account_id"]: r for r in accounts}
     sig_by_id = {r["signal_id"]: r for r in signals}
     added, updated = set(), set()
-    signals_added = signals_dup = 0
+    signals_added = signals_dup = signals_migrated = 0
     signals_updated = set()
 
     for acct_row, sig_rows in validated:
@@ -402,6 +444,18 @@ def merge(accounts: list, signals: list, validated: list, run_date: str, rep: Re
         for s in sig_rows:
             sid = s["signal_id"]
             stored = sig_by_id.get(sid)
+            old = None if stored is not None else fragment_row(signals, s)
+            if old is not None:
+                # the same item, stored under the pre-source_ref workaround:
+                # replaced in place, keeping its position and captured_at
+                s["captured_at"] = old["captured_at"] or s["captured_at"]
+                signals[signals.index(old)] = s
+                del sig_by_id[old["signal_id"]]
+                sig_by_id[sid] = s
+                signals_migrated += 1
+                rep.info("MIGRATED", f"{who} {old['signal_id']} -> {sid}",
+                         f"{old['evidence_url']} -> {s['evidence_url']} source_ref={s['source_ref']}")
+                continue
             if stored is not None:
                 changed = merge_signal(stored, s)
                 if changed:
@@ -422,6 +476,7 @@ def merge(accounts: list, signals: list, validated: list, run_date: str, rep: Re
         "signals_added": signals_added,
         "signals_updated": len(signals_updated),
         "signals_duplicate": signals_dup,
+        "signals_migrated": signals_migrated,
     }
 
 
@@ -455,6 +510,7 @@ def print_summary(counts: dict, rep: Report, dry_run: bool) -> None:
     print(f"  signals added        {counts['signals_added']}")
     print(f"  signals updated      {counts['signals_updated']}")
     print(f"  signals duplicate    {counts['signals_duplicate']}")
+    print(f"  signals migrated     {counts['signals_migrated']}")
     print(f"  records rejected     {counts['records_rejected']}  "
           f"({rep.accounts_rejected} accounts, {rep.signals_rejected} signals)")
 
@@ -483,8 +539,10 @@ def main(argv=None) -> int:
     loaded = [(p, load_json(p)) for p in files]  # all parse before anything is written
 
     suppress = load_suppress(SUPPRESS)
-    accounts = read_table(ACCOUNTS, ACCOUNT_HEADERS)
-    signals = read_table(SIGNALS, SIGNAL_HEADERS)
+    accounts, _ = read_table(ACCOUNTS, ACCOUNT_HEADERS)
+    signals, upgraded = read_table(SIGNALS, SIGNAL_HEADERS, legacy=SIGNAL_HEADERS_V1)
+    if upgraded:
+        rep.info("UPGRADED", SIGNALS.name, "header gains source_ref; existing rows get it empty")
 
     validated = []
     for path, records in loaded:
@@ -496,7 +554,8 @@ def main(argv=None) -> int:
     counts = merge(accounts, signals, validated, run_date, rep)
     counts["records_rejected"] = rep.records_rejected
     changed = (counts["accounts_added"] or counts["accounts_updated"]
-               or counts["signals_added"] or counts["signals_updated"])
+               or counts["signals_added"] or counts["signals_updated"]
+               or counts["signals_migrated"] or upgraded)
 
     if not args.dry_run and changed:
         # both temps written before either replace, so a crash mid-write

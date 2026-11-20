@@ -17,9 +17,10 @@
       {
         "signal_type": "hiring",
         "signal_date": "2026-08-24",
-        "evidence_url": "https://jobs.ashbyhq.com/alt/7d199f51-8c8c-48e9-baf7-aae4a6fe6513",
+        "evidence_url": "https://api.ashbyhq.com/posting-api/job-board/alt",
         "evidence_note": "Data Engineer role owning scrape pipelines for marketplace and auction data.",
-        "date_confidence": "ceiling"
+        "date_confidence": "ceiling",
+        "source_ref": "7d199f51-8c8c-48e9-baf7-aae4a6fe6513"
       }
     ]
   }

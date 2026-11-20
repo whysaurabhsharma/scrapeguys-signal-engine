@@ -173,7 +173,8 @@ def plan_merges(accounts: list, signals: list, pairs: list):
         target = remap[old]
         row = dict(s)
         row["account_id"] = target
-        row["signal_id"] = signal_id(target, row["signal_type"], row["evidence_url"])
+        row["signal_id"] = signal_id(target, row["signal_type"], row["evidence_url"],
+                                     row.get("source_ref", ""))
         if row["signal_id"] in kept_sids:
             dupes.setdefault(old, []).append((s["signal_id"], row["signal_id"]))
             continue

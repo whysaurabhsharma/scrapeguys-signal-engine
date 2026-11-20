@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import ingest  # noqa: E402
 import score  # noqa: E402
 from common import (ACCOUNT_HEADERS, SIGNAL_HEADERS, account_id,  # noqa: E402
-                    is_suppressed, load_suppress)
+                    is_suppressed, load_suppress, signal_id)
 
 ASOF = "2026-11-20"
 FAILS = []
@@ -246,7 +246,78 @@ def suppression_cases():
           tier == "reject" and "via the openai.com entry" in reason, reason)
 
 
+def source_ref_cases():
+    """source_ref splits signals that share one evidence_url, and leaves every
+    id without it exactly as it was before the field existed."""
+    acct, url = "ac_6192333d22", "https://api.ashbyhq.com/posting-api/job-board/alt"
+    a = signal_id(acct, "hiring", url, "a4be912d-a166-4373-ac52-fdead5ffc463")
+    b = signal_id(acct, "hiring", url, "67faa0cc-173a-4788-a9a8-255b836e424d")
+    check("same account, type, url; different source_ref -> different ids", a != b, (a, b))
+    # sg_fee53baf18 is the id the pre-change signal_id wrote to signals.csv
+    # for Alt's first signal; it must not move.
+    check("no source_ref -> id unchanged from before the field",
+          signal_id(acct, "hiring", url) == "sg_fee53baf18"
+          and signal_id(acct, "hiring", url, "") == "sg_fee53baf18"
+          and signal_id(acct, "hiring", url, "  ") == "sg_fee53baf18",
+          signal_id(acct, "hiring", url))
+    check("source_ref ids differ from the no-ref id",
+          "sg_fee53baf18" not in (a, b), (a, b))
+
+    board = "https://api.ashbyhq.com/posting-api/job-board/acme"
+    with Sandbox() as sb:
+        f = sb.stage("t.json", [account(signals=[
+            signal(evidence_url=board, source_ref="job-1"),
+            signal(evidence_url=board, source_ref="job-2", signal_date="2026-10-05")])])
+        out = sb.run(f)
+        sgs = sb.rows(ingest.SIGNALS)
+        check("ingest keeps both postings on one board",
+              len(sgs) == 2 and len({s["signal_id"] for s in sgs}) == 2
+              and [s["source_ref"] for s in sgs] == ["job-1", "job-2"], out)
+
+    with Sandbox() as sb:
+        f = sb.stage("t.json", [account(signals=[signal(source_ref="has space")])])
+        out = sb.run(f)
+        check("bad source_ref rejected", "field=source_ref" in out
+              and len(sb.rows(ingest.SIGNALS)) == 0, out)
+
+    with Sandbox() as sb:
+        f = sb.stage("t.json", [account(signals=[signal(evidence_url=board),
+                                                 signal(evidence_url=board + "#job-2")])])
+        sb.run(f)
+        old_sid = sb.rows(ingest.SIGNALS)[1]["signal_id"]
+        f = sb.stage("t.json", [account(signals=[signal(evidence_url=board),
+                                                 signal(evidence_url=board, source_ref="job-2")])])
+        out = sb.run(f)
+        sgs = sb.rows(ingest.SIGNALS)
+        check("fragment row migrated in place",
+              len(sgs) == 2 and sgs[1]["evidence_url"] == board and sgs[1]["source_ref"] == "job-2"
+              and sgs[1]["signal_id"] != old_sid and sgs[1]["signal_id"] != sgs[0]["signal_id"]
+              and "signals migrated     1" in out and f"{old_sid} -> " in out, out)
+        before = sb.bytes()
+        out = sb.run(f)
+        check("migration is idempotent", sb.bytes() == before
+              and "signals migrated     0" in out and "signals duplicate    2" in out, out)
+
+    with Sandbox() as sb:
+        legacy = [h for h in SIGNAL_HEADERS if h != "source_ref"]
+        sid = signal_id(account_id("https://acme.example"), "hiring", board)
+        with ingest.SIGNALS.open("w", encoding="utf-8", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow(legacy)
+            w.writerow([sid, account_id("https://acme.example"), "hiring", "2026-10-01",
+                        "2026-11-01", board, "note", "exact"])
+        f = sb.stage("t.json", [account(signals=[signal(evidence_url=board)])])
+        out = sb.run(f)
+        sgs = sb.rows(ingest.SIGNALS)
+        with ingest.SIGNALS.open(encoding="utf-8") as fh:
+            header = fh.readline().strip().split(",")
+        check("legacy header upgraded, stored id kept",
+              header == SIGNAL_HEADERS and len(sgs) == 1 and sgs[0]["signal_id"] == sid
+              and sgs[0]["source_ref"] == "" and "UPGRADED" in out, out)
+
+
 def main():
+    source_ref_cases()
     suppression_cases()
     rejection_cases()
     id_and_stamp_cases()
