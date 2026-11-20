@@ -1,0 +1,26 @@
+[
+  {
+    "company": "ElevenLabs",
+    "website": "https://elevenlabs.io",
+    "country": "",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://api.ashbyhq.com/posting-api/job-board/elevenlabs",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. It builds its own data collection at model-training scale, so no why_live_data written. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. The signal is a loose match ('gathered data', not crawling); it is recorded only to give the rejection a source. Verifier: date and quote SUPPORTED in the JSON; the HTML page confirms the title only.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-11",
+        "evidence_url": "https://api.ashbyhq.com/posting-api/job-board/elevenlabs",
+        "evidence_note": "Research Engineer (3d650946-5ac2-4729-9ae4-129c43fcd0b5): 'Experience conducting exploratory research to improve the quality of gathered data.' Ashby publishedAt 2026-10-11T15:38:27.496+00:00.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

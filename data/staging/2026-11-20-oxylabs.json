@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Oxylabs",
+    "website": "https://oxylabs.io",
+    "country": "",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://dealroom.co/news/162560-oxylabs-parent-launches-as-source-at-3-6b-valuation/",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. Proxy and scraping vendor, so no why_live_data written. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. No ATS JSON: Greenhouse, Lever and Ashby all 404. Verifier: SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-10-14",
+        "evidence_url": "https://dealroom.co/news/162560-oxylabs-parent-launches-as-source-at-3-6b-valuation/",
+        "evidence_note": "'A group of five web data companies, including Oxylabs, has launched under a new brand called Source.' Dated Oct 14, 2026, 14:40 UTC.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

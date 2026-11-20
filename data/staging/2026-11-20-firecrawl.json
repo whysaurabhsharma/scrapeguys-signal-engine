@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Firecrawl",
+    "website": "https://firecrawl.dev",
+    "country": "",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://api.ashbyhq.com/posting-api/job-board/firecrawl",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. Scraping API vendor, so no why_live_data written. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. Verifier: SUPPORTED (title, date, quote; posting id not independently echoed).",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-09-16",
+        "evidence_url": "https://api.ashbyhq.com/posting-api/job-board/firecrawl",
+        "evidence_note": "General Counsel: 'Every question about what we can crawl, license, build, sign, and ship comes to you first'. Ashby publishedAt 2026-09-16T12:36:43.504+00:00.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

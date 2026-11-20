@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Bright Data",
+    "website": "https://brightdata.com",
+    "country": "",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://finviz.com/news/401839/digitalocean-and-bright-data-unlock-the-web-for-ai-agents",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. Scraping and proxy vendor, so no why_live_data written. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. No ATS date: jobs are on Comeet, whose API needs a token. Verifier: SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-10-13",
+        "evidence_url": "https://finviz.com/news/401839/digitalocean-and-bright-data-unlock-the-web-for-ai-agents",
+        "evidence_note": "'DigitalOcean (NYSE: DOCN) and Bright Data today announced a partnership at The Open Intelligence Summit.' Business Wire copy dated October 13, 2026, 9:00 AM.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

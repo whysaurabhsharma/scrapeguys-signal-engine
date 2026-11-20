@@ -1,0 +1,26 @@
+[
+  {
+    "company": "OpenAI",
+    "website": "https://openai.com",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://developers.openai.com/api/docs/bots",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. Frontier lab crawling in house (GPTBot, OAI-SearchBot per the source_url), so no why_live_data written. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. OpenAI's own pages returned 403; the Ashby board is over the fetch limit. Verifier: SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-11-16",
+        "evidence_url": "https://www.tweaktown.com/news/114700/openai-launches-chatgpt-wallet-so-ai-agents-can-shop-for-you-using-your-own-card/index.html",
+        "evidence_note": "'OpenAI has launched ChatGPT Wallet, a new payment feature that lets its \"dots\" AI agents complete online purchases'. datePublished 2026-11-16T03:32:14-06:00. Press page, not OpenAI's own post.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

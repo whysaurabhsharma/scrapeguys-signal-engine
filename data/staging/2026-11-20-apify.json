@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Apify",
+    "website": "https://apify.com",
+    "country": "CZ",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://api.ashbyhq.com/posting-api/job-board/apify",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. Scraping platform vendor, so no why_live_data written. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. Country from Ashby address (Prague). Verifier: SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-10-14",
+        "evidence_url": "https://api.ashbyhq.com/posting-api/job-board/apify",
+        "evidence_note": "Platform Reliability Engineer (b921984a-050b-4e39-acc4-f061b98c7c35): 'Actors helping people and agents get real-time web data, track competitors, generate leads, or integrate their apps.' Ashby publishedAt 2026-10-14T16:14:26.368+00:00.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]

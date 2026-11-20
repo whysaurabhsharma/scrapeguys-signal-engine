@@ -454,18 +454,53 @@ def t7_assets(asof):
     return Result("T7", "Assets", PASS if found == len(ICPS) else MISS, reason, details + misses)
 
 
+T8_MIN_BUYERS = 5  # below this many matched buyers, a T8 PASS is marked THIN
+
+
 def t8_golden(asof):
+    """Golden set: buyers should reach A/B, non-buyers should not.
+
+    Buyers are judged only on scored.csv: a buyer must reach Tier A or B.
+
+    A golden "no" row counts as correctly handled if EITHER it scored
+    nurture/reject, OR it has ANY row in data/killlist.csv (suppressed,
+    vendor, wrong_buyer, off_icp, no_evidenced_why, no_dated_signal). Every
+    one of those is the system correctly declining to pitch it, earlier and
+    more cheaply than the scorer would. The original check looked only in
+    scored.csv and so could never pass: most golden non-buyers are suppressed
+    vendors that never reach scored.csv by design, and the rest are stopped
+    by the hunt's disqualify and why_live_data gates before ingest.
+
+    A non-buyer with no kill-list row and no score is unmatched, not a pass:
+    nobody hunted it, so nothing declined it.
+
+    Strength is reported, not just the verdict. Fewer than T8_MIN_BUYERS
+    matched buyers marks the line THIN: a rate over one row must not read
+    like a rate over ten.
+    """
     _, golden = read_rows(ROOT / "tests" / "golden.csv")
     _, scored = read_rows(DATA / "scored.csv")
+    _, killed = read_rows(DATA / "killlist.csv")
     tier_by_domain = {normalise_domain(r.get("website", "")): r.get("tier", "") for r in scored}
+    killed_code = {}
+    for k in killed:
+        kd = normalise_domain(k.get("domain", ""))
+        if kd:
+            killed_code[kd] = (k.get("reason_code") or "").strip().lower()  # latest row wins
     buy_total = sum(1 for g in golden if g.get("expected", "") == "buy")
     no_total = len(golden) - buy_total
     buy_hit = buy_n = no_hit = no_n = 0
+    no_killed = 0
     details = []
     for g in golden:
         d = normalise_domain(g.get("domain", ""))
         tier = tier_by_domain.get(d)
         if tier is None:
+            if g.get("expected", "") != "buy" and d in killed_code:
+                no_n, no_hit, no_killed = no_n + 1, no_hit + 1, no_killed + 1
+                details.append(f"{d}: expected no, declined ({killed_code[d]} in killlist.csv), ok")
+            elif g.get("expected", "") == "buy" and d in killed_code:
+                details.append(f"{d}: expected buy, declined ({killed_code[d]}), unscored, not counted")
             continue
         good = tier in (TIER_A, TIER_B)
         if g.get("expected", "") == "buy":
@@ -481,10 +516,13 @@ def t8_golden(asof):
 
     # A rate over zero matched rows is not a pass.
     passed = buy_n > 0 and no_n > 0 and buy_hit * 5 >= buy_n * 4 and no_hit * 5 >= no_n * 4
-    reason = (f"matched {buy_n + no_n}/{len(golden)} golden domain(s) in scored.csv "
-              f"({buy_n}/{buy_total} buyers, {no_n}/{no_total} non-buyers); "
-              f"buyers in A/B {pct(buy_hit, buy_n)}, non-buyers in nurture/reject "
-              f"{pct(no_hit, no_n)}; target 80% each")
+    thin = buy_n < T8_MIN_BUYERS
+    strength = (f"THIN: only {buy_n} buyer(s) matched, need {T8_MIN_BUYERS}. "
+                if thin else "")
+    reason = (f"{strength}buyers matched {buy_n}/{buy_total}, in A/B {pct(buy_hit, buy_n)}; "
+              f"non-buyers matched {no_n}/{no_total} ({no_n - no_killed} scored, "
+              f"{no_killed} declined in killlist.csv), handled {pct(no_hit, no_n)}; "
+              f"target 80% each")
     return Result("T8", "Golden set", PASS if passed else MISS, reason, details)
 
 

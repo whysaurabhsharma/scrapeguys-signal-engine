@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Zyte",
+    "website": "https://zyte.com",
+    "country": "",
+    "icp": "ai",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://apply.workable.com/api/v1/widget/accounts/zyte?details=true",
+    "notes": "Golden-set run (hunt 5). SUPPRESSED: staged deliberately so ingest's suppression gate rejects a real row; expected outcome is REJECTED. Scraping vendor, so no why_live_data written: scraping is its product, not its pain. icp set to 'ai' with icp_confidence 'low' ONLY so suppression is the sole rejection reason; not a buyer judgment. Verifier: SUPPORTED against the Workable feed (the HTML posting shows no date).",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-09-23",
+        "evidence_url": "https://apply.workable.com/api/v1/widget/accounts/zyte?details=true",
+        "evidence_note": "Senior Reverse Engineer - Remote (shortcode 3F8816489D): 'Understanding of browser engines, browser fingerprinting, and antibot/anti-scraping mechanisms.' Workable published_on 2026-09-23.",
+        "date_confidence": "ceiling"
+      }
+    ]
+  }
+]
