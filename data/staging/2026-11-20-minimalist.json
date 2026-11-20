@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Minimalist",
+    "website": "https://beminimalist.co",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Minimalist 'had no clue what was happening at the dark-store level or why our sales had dropped' until outside data showed it 'available in only 20 of the 100 dark stores', so without live data it cannot see its own stock-on-shelf by dark store on quick-commerce platforms.",
+    "decision_maker": "Aditya Mishra",
+    "dm_title": "Growth Manager (Quick Commerce)",
+    "dm_source": "https://gobblecube.ai/blog/decoding-revenue-growth-manager-minimalist-quick-commerce",
+    "source_url": "https://gobblecube.ai/blog/decoding-revenue-growth-manager-minimalist-quick-commerce",
+    "notes": "INCUMBENT: GobbleCube customer; displacement, not education. Pain lines are first-person ('we') narrative inside GobbleCube's case study, not an attributed quote; Aditya Mishra's only attributed quote is about ad spend. DM title from a Dec 2024 page, not re-confirmed. OWNERSHIP: Hindustan Unilever acquired 90.5% (announced 2025-01-22, https://techcrunch.com/2025/01/22/hindustan-unilever-acquires-peak-xv-backed-minimalist-for-over-340m ; completed 2025-04-22); founders run it for two years after close, so the buyer may move inside HUL around 2027. Acquisition not staged as funding. FY26 operating revenue INR 690.2 Cr (Inc42 2026-08-20). No public ATS. Only signal is 23 months old: nurture at best. Verifier: 1/1 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2024-12-18",
+        "evidence_url": "https://gobblecube.ai/blog/decoding-revenue-growth-manager-minimalist-quick-commerce",
+        "evidence_note": "'We had no clue what was happening at the dark-store level or why our sales had dropped.' and 'GobbleCube data showed us that we were available in only 20 of the 100 dark stores.' Page dated Dec 18, 2024.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

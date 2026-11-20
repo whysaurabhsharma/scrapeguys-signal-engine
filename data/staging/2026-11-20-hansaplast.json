@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Beiersdorf India (Hansaplast)",
+    "website": "https://www.beiersdorf.com",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Hansaplast's quick-commerce team said 'we had absolutely no information or insight into what's going on at a molecular, pin code or dark store level', so without live data it cannot see its own availability and listing by pin code and dark store on Blinkit and Zepto, where its new SKUs are now sold.",
+    "decision_maker": "Priyanka Agarwal",
+    "dm_title": "Marketing Director of Beiersdorf (Hansaplast)",
+    "dm_source": "https://gobblecube.ai/blog/tear-stick-win-how-hansaplast-peeled-its-way-into-qcomm-success",
+    "source_url": "https://gobblecube.ai/blog/tear-stick-win-how-hansaplast-peeled-its-way-into-qcomm-success",
+    "notes": "DOMAIN: no Hansaplast India site resolves (hansaplast.co.in ENOTFOUND, hansaplast.in refused); parent beiersdorf.com used, so this account is the India unit only - check dedupe if Beiersdorf global is ever added. INCUMBENT: GobbleCube customer; displacement, not education. Pain line is first-person narrative in an interview-style case study introducing Agarwal, not an explicit quotation. DM title from Jan 2025 page, not re-confirmed; Geetika Mehta, MD NIVEA India, named in the 2026-10-06 launch. Subsidiary of listed Beiersdorf AG; '400+ EMPLOYEES IN INDIA' on undated careers page, left empty. No dated ATS feed (SmartRecruiters 0, SuccessFactors RSS redirects). Verifier: 2/2 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2025-01-29",
+        "evidence_url": "https://gobblecube.ai/blog/tear-stick-win-how-hansaplast-peeled-its-way-into-qcomm-success",
+        "evidence_note": "'At our end, we had absolutely no information or insight into what's going on at a molecular, pin code or dark store level.' Page dated January 29, 2025.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-10-06",
+        "evidence_url": "https://www.mediainfoline.com/advertising/hansaplast-launches-new-washproof-printed-plasters-with-jonty-rhodes",
+        "evidence_note": "'Hansaplast Washproof Printed Plasters are now available across leading e-commerce and quick-commerce platforms.' Byline Oct 06, 2026.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

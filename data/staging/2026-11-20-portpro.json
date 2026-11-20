@@ -1,0 +1,27 @@
+[
+  {
+    "company": "PortPro",
+    "website": "https://portpro.io",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "series_a",
+    "why_live_data": "PortPro's drayage product 'automatically pulls in up to 13 different data points from the terminal website' for each container, and its own engineering posting names 'scraping failures, IP bans' and anti-bot/CAPTCHA work on that pipeline, so without reliable live collection it cannot see container availability, holds and key dates as terminals change them.",
+    "decision_maker": "Srinivasa Sarma",
+    "dm_title": "Chief Technology Officer",
+    "dm_source": "https://portpro.io/about-test",
+    "source_url": "https://portpro.io/features/drayage-carrier/container-tracking",
+    "notes": "Logistics vertical of the ai ICP: product answers container status from terminal websites it does not own. Signal is OLD (2025-03-11, ~20 months); no trigger in last 90 days, no 2025-2026 funding found (last round $12M, Business Wire 2023-01-26). UNVERIFIED: whether terminal data is public or read via customer portal credentials (help-centre snippet says 'valid credentials for each enabled port', login-gated, unread) - material to fit. DM source is a /about-test page (public but looks like staging). AI Agents launch 2025-05-13 not staged (not a web-data trigger). Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2025-03-11",
+        "evidence_url": "https://api.lever.co/v0/postings/portpro?mode=json",
+        "evidence_note": "Director of Software Engineering (Node.js & Web Scraping Expert): 'Manage real-time monitoring and alerting systems to detect scraping failures, IP bans, or performance bottlenecks.' and 'Develop solutions to bypass anti-bot mechanisms, including CAPTCHA handling'. Lever createdAt 1741696538869. Still live in API.",
+        "date_confidence": "exact",
+        "source_ref": "80a9ef69-2aaa-411d-9619-6a599ab3ba98"
+      }
+    ]
+  }
+]

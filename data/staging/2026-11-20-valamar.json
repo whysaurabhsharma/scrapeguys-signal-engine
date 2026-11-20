@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Valamar Riviera",
+    "website": "https://valamar-riviera.com",
+    "country": "HR",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Valamar's digital director says 'When the OTA handles the transaction, the hotel loses visibility on the final rate', so without live rate data it cannot see what OTAs and resellers actually charge for its rooms, and since July 2026 for the partner hotels it now distributes too.",
+    "decision_maker": "Davor Brenko",
+    "dm_title": "Management Board Member (Sales and Distribution, Revenue Management)",
+    "dm_source": "https://valamar-riviera.com/en/about-us/corporate-governance/",
+    "source_url": "https://www.travolution.com/news/travel-sectors/accommodation/research-reveals-otas-undercut-direct-hotel-rates-in-75-of-searches/",
+    "notes": "Croatian listed hotel and resort group (ZSE: RIVP). Corporate domain used; consumer site is valamar.com. Pain quote by Roberto Gobo, Director of Digital Strategy & Technology, published in Travolution's write-up of 123Compare.me's parity research (vendor-sourced context, Valamar's own words); 'operational blind spots' and 'unauthorized discounts' lines are article paraphrase, not staged. Possible INCUMBENT: 123Compare.me (not confirmed as a customer). Partner model: 'Valamar takes over sales, revenue management, digital marketing and distribution' for partner properties; Booking.com ~10% of reservations, ~65% direct (hrturizam, fragmentary). Employees conflicting (8,690 seasonal peak unverified vs ~4,400 estimates): left empty. No ATS found. No trigger in last 90 days. Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2025-08-01",
+        "evidence_url": "https://www.travolution.com/news/travel-sectors/accommodation/research-reveals-otas-undercut-direct-hotel-rates-in-75-of-searches/",
+        "evidence_note": "Roberto Gobo, Valamar: 'Disparity mostly happens when the hotel doesn't control the payment flow.' and 'When the OTA handles the transaction, the hotel loses visibility on the final rate.' Page dated August 1, 2025.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-16",
+        "evidence_url": "https://en.hrturizam.hr/partnered-with-valamar-hotels-campsites-direct-bookings",
+        "evidence_note": "'Partnered with Valamar' model launched: 'Valamar takes over sales, revenue management, digital marketing and distribution' for partner hotels and campsites. Page dated 16 July 2026.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

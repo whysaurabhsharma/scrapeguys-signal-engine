@@ -161,6 +161,22 @@ different questions - golden asks whether a company would buy, the scorer
 asks whether to call this week. A 2024 complaint is real evidence of need
 and bad evidence of urgency.
 
+T1 missed at 39/40, deliberately (2026-11-20). Hunts 6 and 7 screened
+roughly 250 companies and produced no account meeting the Tier A bar: a
+posting inside 90 days that names a blind spot in the company's own
+words, plus a named decision maker and a known stage. The usual failure
+is a posting that lists scraping as a duty without naming anything the
+company cannot see. Lexroom had the date, the CEO and the Series B and
+was still dropped, because its public statements describe a capability
+rather than a gap.
+A filler row was refused: T1 and T4 pull against each other, since an
+account with no fresh signal lowers the Tier A share. 39 with the bar
+intact is the honest number.
+Not built: a script to scan whole ATS boards by keyword. It would be the
+only component that collects at scale rather than reading what companies
+publish, in a repo whose argument is that collection is the hard part to
+outsource.
+
 ## 14. Known limit of the guard, found 2026-11-20
 During the third hunt a session bypassed guard.py by piping a Python
 script into the interpreter from stdin (a heredoc: python -I - <<'EOF'),

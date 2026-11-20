@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Turim Hotels Group",
+    "website": "https://turim-hotels.com",
+    "country": "PT",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Turim's revenue lead calls online rate parity 'the single biggest challenge' with inventory 'accessible across dozens of channels', so without live rate data it cannot see when a third-party platform undercuts its direct rate across its roughly 25 hotels.",
+    "decision_maker": "Francisco Faustino",
+    "dm_title": "Cluster Revenue & Ecommerce Manager",
+    "dm_source": "https://www.hyperguest.com/post/hyperguest-turim",
+    "source_url": "https://www.hyperguest.com/post/hyperguest-turim",
+    "notes": "Portuguese hotel group, founded 1992, ~25 hotels (Roiback case study, undated: https://en.roiback.com/cases/turim-hotels; page count from turim-hotels.com/en). Quote is published on a distribution vendor's (HyperGuest) case study; the pain is in Turim's own words. Roiback page also names Ricardo Neves Vieira, Commercial Executive Director ('compete on equal terms with the large OTAs'), undated. Pipeline openings on site ('Opening 2026' Sintra) have no announcement date: not staged. Minor launches (refurbishment 2025-08-12, restaurant 2025-11-18) not staged. No ATS (SmartRecruiters 0; own form, operational roles only). No trigger in last 90 days. Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2026-05-06",
+        "evidence_url": "https://www.hyperguest.com/post/hyperguest-turim",
+        "evidence_note": "Francisco Faustino: 'The single biggest challenge is online rate parity.' and 'In a landscape where inventory is accessible across dozens of channels, maintaining consistent pricing is a complex battle.' Page dated May 6, 2026.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

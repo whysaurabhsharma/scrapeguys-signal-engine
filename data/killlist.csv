@@ -77,3 +77,212 @@ date,company,domain,reason_code,reason,source_url
 2026-11-20,Mamaearth (Honasa Consumer),mamaearth.com,no_evidenced_why,"hunt 5 (golden): no machine-readable ATS (Greenhouse/Lever/Ashby 404, SmartRecruiters 0); Q2 FY27 coverage (2026-11-10) has no first-party quote on quick-commerce price, stock or placement visibility, only third-party paraphrase. Q2 FY27 transcript PDF not readable here (guard blocks download): REVISIT by hand. Golden label 'buy' not evidenced yet.",https://honasa.in/cdn/shop/files/TranscriptQ2FY27.pdf
 2026-11-20,Perplexity,perplexity.ai,wrong_buyer,"hunt 5 correction (user-confirmed): wrong_buyer stands. Runs its own crawler team (Search Crawler: Web Access Engineer, SRE, Index, Analyst roles 2026-10-08..2026-11-17) on a '200B+ URL index'; web-scale crawling is core infrastructure, same class as OpenAI. Supersedes the 'JUDGMENT CALL' caveat on the earlier row.",https://jobs.ashbyhq.com/Perplexity/f32bb0d4-fb91-4fa6-8d7d-bd1a70ce2836
 2026-11-20,Zyft,zyft.com,vendor,"Sells B2B 'Competitor price and promo tracking' 'via dashboard, raw data feeds, or custom setups' and 'continuously monitors millions of SKUs across 50,000+ retailers': a price-intelligence data vendor, same class as Pricefy and Product.ai. Conflicts with its golden buy label; label left for the human.",https://zyft.com/partnerships
+2026-11-20,InfoHawk,infohawk.com,vendor,"hunt 6: brand-abuse detection service; scrapers over ads, cloned sites and shops are its product (same class as iCOUNTER)",https://news.ycombinator.com/item?id=49922569
+2026-11-20,Vannevar Labs,vannevarlabs.com,vendor,hunt 6: defense OSINT AI; collected data is part of what it sells (same class as Babel Street),https://boards-api.greenhouse.io/v1/boards/vannevarlabs/jobs/5092167007
+2026-11-20,Labrynth,,no_dated_signal,"hunt 6: compliance AI, strong scraping/anti-bot role but no posting date; Built In shows removed 2026-02-27",https://builtin.com/job/senior-web-scraping-engineer-labrynth/7836112
+2026-11-20,Darrow,darrow.ai,no_dated_signal,"hunt 6: legal AI scanning public data; careers page undated, scraping wording only on unverified aggregator copies",https://www.darrow.ai/careers/position-1a_271
+2026-11-20,Yogi,meetyogi.com,vendor,hunt 6: consumer-insights product built on aggregated retailer reviews; collection is the product,https://news.ycombinator.com/item?id=49922569
+2026-11-20,mydatavalue,mydatavalue.com,vendor,hunt 6: AI revenue-management agents for hotels/STR; rate-intelligence vendor class (RoomPriceGenie precedent),https://news.ycombinator.com/item?id=50338728
+2026-11-20,Multiply,multiply.cloud,vendor,hunt 6: marketplace repricing software vendor,
+2026-11-20,WireScreen,,vendor,hunt 6: supply-chain intelligence vendor; scraped data is product,https://builtin.com/job/data-crawling-and-scraping-engineer/7325811
+2026-11-20,pst.ag,,vendor,hunt 6: trade-data provider,https://wellfound.com/jobs/4362965-ai-data-engineer
+2026-11-20,Starbridge,,vendor,hunt 6: public-sector sales-intelligence data vendor,
+2026-11-20,Sumble,,vendor,hunt 6: web-built knowledge graph sold as GTM data,
+2026-11-20,VOYGR,,vendor,hunt 6: location and business data API,
+2026-11-20,Parsagon,,vendor,hunt 6: regulatory data API,
+2026-11-20,Search Atlas,,vendor,hunt 6: SEO and search-data platform,
+2026-11-20,Middesk,,vendor,hunt 6: business-verification data product,
+2026-11-20,RateGain,,vendor,hunt 6: hotel rate-intelligence vendor,
+2026-11-20,Fornova,,vendor,hunt 6: hotel parity/distribution vendor,https://www.hospitalitynet.org/news/4090126.html
+2026-11-20,Bowerbird Technologies,,vendor,hunt 6: parity enforcement vendor (Lighthouse partner),
+2026-11-20,Revenue Analytics,,vendor,hunt 6: revenue-management vendor,
+2026-11-20,ROH,,vendor,hunt 6: revenue-management services vendor,
+2026-11-20,Canary Technologies,,vendor,hunt 6: hospitality software vendor,
+2026-11-20,Extenteam,,vendor,hunt 6: short-term rental outsourcing services,https://job-boards.greenhouse.io/extenteam/jobs/4647470008
+2026-11-20,Jobstash,,wrong_buyer,hunt 6: job aggregator,
+2026-11-20,Talent3600,,wrong_buyer,hunt 6: recruiter,
+2026-11-20,Hotelbeds,hotelbeds.com,wrong_buyer,"hunt 6: bedbank wholesaler; source of parity leakage, not its victim",https://www.hbxgroup.com/news-room/press-release/hotelbeds-partners-rategain-lead-sector-rate-integrity
+2026-11-20,Priceline,priceline.com,wrong_buyer,"hunt 6: OTA, reseller not rate owner",
+2026-11-20,Rocket Travel by Agoda,,wrong_buyer,hunt 6: OTA subsidiary,https://job-boards.greenhouse.io/rocketmiles
+2026-11-20,The Standard,standardhotels.com,no_dated_signal,"hunt 6: strong parity role ('partners that are violating the rate parity') but page undated, no ATS (mailto apply)",https://www.standardhotels.com/careers/CA
+2026-11-20,Trailborn,trailborn.com,no_dated_signal,"hunt 6: rate parity in revenue role; posting removed 2026-11-13, posted date only from search snippet",https://builtin.com/job/area-revenue-manager-west-coast-remote/11635768
+2026-11-20,Choice Hotels,choicehotels.com,no_dated_signal,"hunt 6: rate parity in channel role; removed 2026-07-31, no posted date",https://builtinlondon.uk/job/channel-performance-operations-manager/10467292
+2026-11-20,Hilton,hilton.com,no_dated_signal,"hunt 6: parity root-cause role posted 2025-08-26, closed, older than 12 months; no newer parity signal",https://hilton.referrals.selectminds.com/jobs/analyst-distribution-compliance-426340
+2026-11-20,Pyramid Global Hospitality,pyramidglobal.com,no_dated_signal,hunt 6: parity audit wording only in search snippet; Workday page did not render,https://benchmark.wd1.myworkdayjobs.com/pgh_careers/job/pyramid-global-hospitality---home-office/area-director--revenue-management_r0058159
+2026-11-20,Sixt,sixt.com,no_dated_signal,hunt 6: pricing role 404; date only from snippet,https://www.sixt.jobs/us/jobs/9119a76c-fe5f-4ddd-93dc-ea278ac3f334
+2026-11-20,Hertz,hertz.com,no_evidenced_why,hunt 6: pricing analyst role (2026-11-11 per aggregator) generic competitor landscape; no OTA or parity wording,
+2026-11-20,JetBlue,jetblue.com,no_evidenced_why,"hunt 6: revenue integrity role is fraud leakage, not OTA rate visibility",https://careers.jetblue.com/job/Long-Island-City-Manager-Fare-Rules-and-Revenue-Integrity-NY-11101/1432966900/
+2026-11-20,Four Seasons,fourseasons.com,no_dated_signal,hunt 6: parity role removed 2025-06-04; nothing within 12 months,
+2026-11-20,L+R Hotels,,no_dated_signal,hunt 6: only source PhocusWire 2025-06-24; nothing within 12 months,
+2026-11-20,First Hotels,,no_dated_signal,hunt 6: RateGain deal 2021-01-21; nothing within 12 months,
+2026-11-20,Auberge Resorts,aubergeresorts.com,no_dated_signal,hunt 6: SmartRecruiters posting gone; nothing within 12 months,
+2026-11-20,Juicebox,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Paraform,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Vooma,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Didero,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Outmarket,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Ancep,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Numeral,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,GovDash,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Insurify,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,PermitFlow,,no_evidenced_why,"hunt 6 ai screen: job board checked, no role or source names web data, scraping or freshness pain",
+2026-11-20,Cooper AI,,no_evidenced_why,hunt 6 ai screen: insurance carrier portals sit behind logins; fails public-sources rule,
+2026-11-20,Cardog,cardog.app,no_evidenced_why,"hunt 6: HN hiring 2026-10-01 (Firebase time, exact) describes datasets only ('Own the datasets: ... dealer listings'); in-house scraping stated 2023-12/2024-01 as capability; 'rebuilt every night' is a refresh cadence, not a stated blind spot (Ludex pattern). No funding found despite discovery lead.",https://news.ycombinator.com/item?id=49926872
+2026-11-20,Obi9,obi9.ai,no_evidenced_why,"hunt 6: HN hiring 2026-09-11 (Firebase time) describes the customer's pain (analysts monitoring government sites, clinical publications) and says 'Obi9 ingests all of it'; no stated difficulty or blind spot of its own; 1-10 staff, no DM, no funding",https://news.ycombinator.com/item?id=49661611
+2026-11-20,Beco,letsbeco.com,no_evidenced_why,"hunt 6: co-founder quote is about stock flow across warehouses and dark stores (logistics), not seeing price, stock or placement (Pee Safe pattern)",https://gobblecube.ai/blog/beco-nquering-qcomm-what-brands-can-learn-from-becos-clean-breakthrough
+2026-11-20,TYR Sport,,no_dated_signal,"hunt 6: MAP-violation pain on Wiser case study, undated, no named person",https://www.wiser.com/case-study-tyr-sport
+2026-11-20,Shapermen,,no_evidenced_why,"hunt 6: 2026-06-22 Delhi HC filing on Flipkart listing latching; undercutting already known and litigated, no stated visibility gap, no exec quote",https://www.medianama.com/2026/06/223-flipkart-latching-on-feature-under-scrutiny-delhi-hc-fix/
+2026-11-20,SuperYou,superyou.in,no_dated_signal,"hunt 6: 'real-time visibility' caption on vendor site, no quote, no date",https://zodiac.nitrocommerce.ai/
+2026-11-20,Moxie Beauty,,no_evidenced_why,"hunt 6: quote is about discoverability, not seeing price, stock or placement",https://inc42.com/features/beauty-brands-go-quick-commerce-first/
+2026-11-20,Haleon,haleon.com,no_dated_signal,"hunt 6: Profitero case study undated, no pain quote",
+2026-11-20,Innovist,,no_evidenced_why,"hunt 6 commerce screen: listing difficulty; not about seeing price, stock or placement",
+2026-11-20,Veeba,,no_evidenced_why,"hunt 6 commerce screen: strategy statement only; not about seeing price, stock or placement",
+2026-11-20,AWL Agri Business,,no_evidenced_why,"hunt 6 commerce screen: ad costs; not about seeing price, stock or placement",
+2026-11-20,Zydus Wellness,,no_evidenced_why,"hunt 6 commerce screen: ad costs; not about seeing price, stock or placement",
+2026-11-20,ITC,,no_evidenced_why,"hunt 6 commerce screen: no visibility statement; not about seeing price, stock or placement",
+2026-11-20,Perfora,,no_evidenced_why,"hunt 6 commerce screen: getting listed, Blume 2025-06-17; not about seeing price, stock or placement",
+2026-11-20,GobbleCube,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,42Signals,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Nitro Commerce,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Actowiz,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,MetricsCart,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Netscribes,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Wiser,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Trackstreet,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Marqvision,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Altosight,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,i2o Retail,,vendor,"hunt 6: digital-shelf, price-monitoring or retail-data vendor",
+2026-11-20,Kapture,,vendor,hunt 6: customer-support software vendor,
+2026-11-20,Prime Team Agency,,vendor,hunt 6: marketplace agency selling services to brands,
+2026-11-20,Proventus,,vendor,hunt 6: marketplace agency selling services to brands,
+2026-11-20,Zepto,zepto.com,wrong_buyer,hunt 6: quick-commerce platform; Atom analytics is its own product,
+2026-11-20,Midpage,midpage.ai,vendor,"hunt 6: legal AI, but postings say '5 multibillion-dollar organizations including Perplexity trust us as their legal data supplier'; collected data is sold",https://jobs.ashbyhq.com/midpage/bbfa2f36-fcb8-4779-9ca6-54f0a0181091
+2026-11-20,Wheelhouse,,vendor,hunt 6: STR revenue-management software (RoomPriceGenie class),https://job-boards.greenhouse.io/wheelhouse/jobs/4697043005
+2026-11-20,Checkr,checkr.com,no_evidenced_why,hunt 6: scrapers only a nice-to-have skill (first_published 2026-08-31),https://job-boards.greenhouse.io/checkr/jobs/8163203
+2026-11-20,Rentana,,no_evidenced_why,"hunt 6: 'normalize and scale messy third-party data' is normalisation, not a collection gap",
+2026-11-20,Tekmetric,,no_dated_signal,hunt 6: anti-scraping role no longer on Greenhouse,
+2026-11-20,Cofactr,,no_evidenced_why,hunt 6: supplier-website mention is ordering workflow; posting 2024-04,
+2026-11-20,BlueCargo,,no_dated_signal,hunt 6: scraping only a Wellfound skill tag; no ATS posting,
+2026-11-20,Starboard,,no_dated_signal,hunt 6: carrier-portal scraping posting gone (410); portals likely login-gated,
+2026-11-20,Drumkit,,no_dated_signal,"hunt 6: jobs on Notion only, no machine date",
+2026-11-20,Vivid Seats,vividseats.com,no_dated_signal,hunt 6: scraping role 5138220007 closed,
+2026-11-20,Legalist,,off_icp,hunt 6: litigation fund; CAPTCHA/proxy role expired,
+2026-11-20,EDITED,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,project44,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Portcast,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Turquoise Health,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,First Street,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,MixRank,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,MealMe,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Cooklist,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Unibui,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Charted Sea,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Competera,,vendor,"hunt 6: data, aggregation or scraping vendor; collected data is the product",
+2026-11-20,Belvo,,no_evidenced_why,hunt 6: data sources sit behind user logins; fails public-sources rule,
+2026-11-20,Arcadia,,no_evidenced_why,hunt 6: data sources sit behind user logins; fails public-sources rule,
+2026-11-20,Harper,,no_evidenced_why,hunt 6: data sources sit behind user logins; fails public-sources rule,
+2026-11-20,Adapt API,,no_evidenced_why,hunt 6: data sources sit behind user logins; fails public-sources rule,
+2026-11-20,Flexport,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,FleetWorks,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Parspec,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Mercura,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Jiga,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Kojo,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Lotlinx,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,CarGurus,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,NewsBreak,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,SeatGeek,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Anrok,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,SeekOut,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Zocdoc,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,EliseAI,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Palmetto,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,UpCodes,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,Automatiq,,no_evidenced_why,"hunt 6 ai screen: live board read, no scraping, freshness or collection pain",
+2026-11-20,StayBird Group of Hotels,staybird.in,no_evidenced_why,hunt 6: 'Rate-parity exposure grew with every added channel' is HyperGuest narration; named CEO says nothing on parity,https://www.hyperguest.com/post/hyperguest-staybird-group-of-hotels
+2026-11-20,Beaumier,,no_evidenced_why,"hunt 6: pain is reseller-chain length and brand control, not seeing rates; vendor narration",https://www.hyperguest.com/success-stories/how-beaumier-escaped-the-middleman-maze
+2026-11-20,Grupo Hotelero Brisas,,no_dated_signal,hunt 6: Triptease customer story has parity quote but no printed date,https://www.triptease.com/customer-stories/grupo-brisas
+2026-11-20,Meininger,,no_dated_signal,hunt 6: parity-tools role only on undated aggregator copy; Breezy JSON empty,
+2026-11-20,Lore Group,,no_dated_signal,hunt 6: distribution role (snippet 2026-05-18) 404; date unread,
+2026-11-20,Bob W,,no_dated_signal,hunt 6: parity posting closed (404/410),
+2026-11-20,Highgate,,no_dated_signal,hunt 6: parity posting closed (404/410),
+2026-11-20,Practice Hospitality,,no_dated_signal,hunt 6: parity posting closed (404/410),
+2026-11-20,Ruby Hotels,,no_evidenced_why,hunt 6: Greenhouse role has no parity duty,
+2026-11-20,Royal Group,,no_dated_signal,hunt 6: no date and no exec parity quote,
+2026-11-20,GCP Hospitality,,no_dated_signal,hunt 6: no date and no exec parity quote,
+2026-11-20,Triptease,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,HyperGuest,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,123Compare.me,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,The Hotels Network,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,Operto,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,Major Twins,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,HotelPartner,,vendor,"hunt 6: parity, distribution or revenue-management vendor/service",
+2026-11-20,WebBeds,,wrong_buyer,"hunt 6: OTA or bedbank; reseller, not rate owner",
+2026-11-20,Vrbo,,wrong_buyer,"hunt 6: OTA or bedbank; reseller, not rate owner",
+2026-11-20,Viator,,wrong_buyer,"hunt 6: OTA or bedbank; reseller, not rate owner",
+2026-11-20,GetYourGuide,,wrong_buyer,"hunt 6: OTA or bedbank; reseller, not rate owner",
+2026-11-20,Bustem,bustem.com,vendor,hunt 6: brand-protection service; 'real-time infringer detection (scraping + AI)' is the product (InfoHawk class); HN 2026-04-08,https://news.ycombinator.com/item?id=47692927
+2026-11-20,Kanary,kanary.com,vendor,"hunt 6 BORDERLINE: personal-exposure removal; states 'Risk sources appear and disappear' (HN 2026-07-01) but web monitoring is the service it sells (InfoHawk class), and Telegram/private brokers are login-gated. Revisit if the user rules monitoring services are buyers.",https://news.ycombinator.com/item?id=48752617
+2026-11-20,Lokker,lokker.com,off_icp,"hunt 6: privacy-compliance scanning of customers' own websites, not external web facts",https://news.ycombinator.com/item?id=49166092
+2026-11-20,Interview Resources,interviewresources.app,no_evidenced_why,hunt 6: research reports from Reddit/YouTube/Glassdoor; no freshness or collection pain; LinkedIn and Glassdoor partly login-gated,https://news.ycombinator.com/item?id=49534032
+2026-11-20,Terminal49,,no_dated_signal,"hunt 6: right fit (carrier/terminal scraping, 'bot mitigations...captchas') but posting closed, Workable board empty; no dated public source. Revisit if it hires again.",
+2026-11-20,Quorum,,no_dated_signal,hunt 6: 'AI Engineer - Scraping' for legislative data removed June 2025; no current posting,
+2026-11-20,Shovels,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Hearo,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,QuoIntelligence,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Brandfetch,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,CyberAtlas,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,String,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,cloro,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Proxybase,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Steel.dev,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Context.dev,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Intuned,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Massive,,vendor,"hunt 6: data, intelligence, scraping, proxy or browser-infra vendor",
+2026-11-20,Foji,,no_evidenced_why,hunt 6: automates insurance/payer portals behind logins; fails public-sources rule,
+2026-11-20,Tahoma AI,,no_evidenced_why,hunt 6: automates insurance/payer portals behind logins; fails public-sources rule,
+2026-11-20,Comvex,,no_evidenced_why,hunt 6: automates insurance/payer portals behind logins; fails public-sources rule,
+2026-11-20,Sheer Health,,no_evidenced_why,hunt 6: automates insurance/payer portals behind logins; fails public-sources rule,
+2026-11-20,Friendly Captcha,,off_icp,hunt 6: anti-bot/fraud defence; blocks scrapers,
+2026-11-20,ThreatMark,,off_icp,hunt 6: anti-bot/fraud defence; blocks scrapers,
+2026-11-20,PRISM+,prismplus.com,no_evidenced_why,"hunt 6 NEAR MISS: dedicated Market & Competitive Intelligence Analyst (Workable published_on 2026-09-09, ceiling) to 'Track and maintain accurate records of competitor pricing, discounts, bundles' with web scraping an advantage; routine tracking, no stated blind spot (Kasa/pslove precedent). Revisit if the user rules dedicated tracking roles are evidence.",https://apply.workable.com/j/9ACA6A0596
+2026-11-20,Colombian Brew Coffee,,no_evidenced_why,"hunt 6: standard KAM duty 'Monitor competitor pricing, assortment, and visibility' posted by recruiter Scrabble & Jigsaw; domain unverified; no ATS JSON date",https://jobs.humanbit.ai/scrabble-jigsaw/jobs/39a98895-4265-4dd6-be1b-8fdfd805e21a
+2026-11-20,Weee!,sayweee.com,no_evidenced_why,"hunt 6: buyer duty 'Research competitors' assortment, pricing' (first_published 2026-09-22); runs own marketplace",https://boards-api.greenhouse.io/v1/boards/weee/jobs?content=true
+2026-11-20,Bombas,bombas.com,no_evidenced_why,hunt 6: product-dev role 'Tracks marketplace and competitor offerings' (first_published 2026-11-16); nothing on price or stock,
+2026-11-20,Nutrafol,nutrafol.com,no_dated_signal,hunt 6: unauthorized-seller role gone from Greenhouse API; aggregator date 2025-08-04 only,
+2026-11-20,Lotus Dairy Products,,no_dated_signal,hunt 6: q-commerce KAM competitor-pricing duty; date only from search snippet,https://in.jooble.org/jdp/8164098168884006862
+2026-11-20,Two Brothers India,,no_dated_signal,hunt 6: KAM page undated,
+2026-11-20,California Nutralife,,no_dated_signal,hunt 6: foundit page 403; no date,
+2026-11-20,Scrabble & Jigsaw,,wrong_buyer,hunt 6: recruiter / job host,
+2026-11-20,MarQet,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,Unicommerce,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,Base,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,Corsearch,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,Hypersonix,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,ScrapeHero,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,DataWeave,,vendor,"hunt 6: commerce data, analytics, brand-protection or scraping vendor",
+2026-11-20,Blinkit,,wrong_buyer,hunt 6: marketplace / quick-commerce platform,
+2026-11-20,Instamart,,wrong_buyer,hunt 6: marketplace / quick-commerce platform,
+2026-11-20,Amazon,,wrong_buyer,hunt 6: marketplace / quick-commerce platform,
+2026-11-20,Walmart,,wrong_buyer,hunt 6: marketplace / quick-commerce platform,
+2026-11-20,Kanary,kanary.com,no_evidenced_why,"hunt 6 correction (user ruling): 'Risk sources appear and disappear' describes its product's problem domain, not a blind spot it has. Same pattern as Ludex and Zyft. Supersedes the earlier vendor row.",https://news.ycombinator.com/item?id=48752617
+2026-11-20,AscentAI,,no_dated_signal,"hunt 7: large-scale scraping/anti-bot posting (Greenhouse 7660711003, ~2026-03) now 404; no live dated signal",
+2026-11-20,SimpliSafe,simplisafe.com,no_evidenced_why,hunt 7: CI PM role (first_published 2026-10-01) tracks competitor pricing manually; no stated gap; weak marketplace fit; PE ownership unverified,https://boards-api.greenhouse.io/v1/boards/simplisafe/jobs/8237889
+2026-11-20,Tsenta,,no_dated_signal,"hunt 7: career-page watching role publishedAt 2026-07-05, outside window; aggregator-like",
+2026-11-20,Axel,,wrong_buyer,"hunt 7: AI travel agent that books itself (OTA-like); posting 2025-08-12, no scraping language",
+2026-11-20,The Flex,,no_evidenced_why,"hunt 7: 'Dynamic pricing intelligence' postings 2026-09-23, no scraping or rate monitoring; spinning out software (Base360)",
+2026-11-20,NielsenIQ,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Circana,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Stackline,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Jungle Scout,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Bluefish AI,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Modash,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Cruva,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Mainstay,,vendor,"hunt 7: data, market-intelligence or analytics vendor",
+2026-11-20,Pinwheel,,no_evidenced_why,hunt 7: payroll data behind logins,
+2026-11-20,Podean,,vendor,hunt 7: agency or consultancy,
+2026-11-20,10a Labs,,vendor,hunt 7: agency or consultancy,
+2026-11-20,Stay22,,wrong_buyer,hunt 7: travel aggregator or marketplace,
+2026-11-20,ResortPass,,wrong_buyer,hunt 7: travel aggregator or marketplace,
+2026-11-20,Indie Campers,,wrong_buyer,hunt 7: travel aggregator or marketplace,
+2026-11-20,Lexroom,lexroom.ai,no_evidenced_why,"hunt 7: fresh Ashby role (publishedAt 2026-11-17, ceiling) lists 'maintain web scrapers' as one junior duty; every source statement is capability ('continuously updated', 'aggiornate, certificate'); sourcing increasingly via acquisitions/partners (Brocardi, Query Juriste, Simone); no public source sites named. Series B 2026-05-19, CEO Paolo Fois. Revisit if it states a coverage or freshness gap.",https://api.ashbyhq.com/posting-api/job-board/lexroom

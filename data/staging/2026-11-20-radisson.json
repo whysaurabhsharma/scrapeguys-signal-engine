@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Radisson Hotel Group",
+    "website": "https://www.radissonhotels.com",
+    "country": "BE",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Radisson says it is replacing 'a legacy, reactive Best Online Rate Guarantee process' with real-time detection of 'lower third-party hotel rates' on Booking.com, Expedia, Agoda, Trip.com, MakeMyTrip and others, so it cannot see which OTA listings undercut its direct rate, property by property, unless it has live rate data from every one of those channels.",
+    "decision_maker": "Gianni Di Fede",
+    "dm_title": "Global Chief Commercial Officer",
+    "dm_source": "https://en.antaranews.com/news/422201/radisson-hotel-group-launches-hospitality-industry-leading-ai-powered-real-time-price-matching-technology",
+    "source_url": "https://www.prnewswire.co.uk/news-releases/radisson-hotel-group-launches-hospitality-industry-leading-ai-powered-real-time-price-matching-technology-302817491.html",
+    "notes": "INCUMBENT: Lighthouse + Bowerbird parity pilot ('Pilot with Radisson Hotel Group cut parity loss by ~25%', 'all targeted unauthorized sellers were removed within scope', 'Radisson has since expanded the program') - vendor's words, no Radisson quote; NOT staged as a signal because the date is PARTIAL (hoteldive slug 20260622 vs page June 25, 2026; hospitalitynet shows no year): https://www.hoteldive.com/press-release/20260622-lighthouse-and-bowerbird-technologies-give-hotels-the-first-end-to-end-solu/ . Price-match technology vendor not named. Conversation is displacement or coverage, not education. Country BE from the BRUSSELS dateline on its own releases. Careers pages (radissoncareers.com) name rate parity in property revenue roles but carry no machine date - not staged. ChatGPT app launch 2026-07-28 not staged. Verifier: 3/3 SUPPORTED on staged claims, 2 PARTIAL on the pilot date.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-03",
+        "evidence_url": "https://www.prnewswire.co.uk/news-releases/radisson-hotel-group-launches-hospitality-industry-leading-ai-powered-real-time-price-matching-technology-302817491.html",
+        "evidence_note": "'automatically detects and matches lower third-party hotel rates in real time'; 'By replacing a legacy, reactive Best Online Rate Guarantee process with a proactive and fully automated solution'. Dateline BRUSSELS, July 3, 2026.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

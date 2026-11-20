@@ -1,0 +1,34 @@
+[
+  {
+    "company": "Valdera",
+    "website": "https://www.valdera.com",
+    "country": "US",
+    "icp": "ai",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_a",
+    "why_live_data": "Valdera's procurement agents answer buyers from '400K+ Suppliers', and its own posting says it must run 'web scrapers and automated ETL workflows to keep supplier and product data current at scale' from 'supplier sites, distributor catalogs' and other public sources, so without live collection it cannot see which suppliers still list a chemical, at what spec, today.",
+    "decision_maker": "Sruti Arulmani",
+    "dm_title": "Co-founder and CEO",
+    "dm_source": "https://indexventures.com/perspectives/valdera-secures-15-million-to-help-manufacturers-make-the-next-generation-of-products-faster-safer-and-more-sustainably-than-ever-before",
+    "source_url": "https://jobs.lever.co/valdera/0e194789-14c4-4352-979c-9826b846bae1",
+    "notes": "Procurement vertical of the ai ICP. Platform, not a dataset reseller: homepage 'The agentic operating system trusted by top manufacturers'; it also offers suppliers 'real-time intelligence' inside the platform. Role owns 'the KPIs that measure overall data coverage' (same class as Alt). Builds collection in house today: the pitch is reliability and coverage, not first-time need. Hiring is 126 days old: no trigger in last 90 days. Total raised conflicting ($15M Series A vs $20.5M secondary), left as series_a. Forward Deployed Engineer (createdAt 2026-08-11) not staged: ERP integrations, not web data. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-07-17",
+        "evidence_url": "https://api.lever.co/v0/postings/valdera?mode=json",
+        "evidence_note": "Chemical Data Scientist: 'Develop and maintain web scrapers and automated ETL workflows to keep supplier and product data current at scale' from 'supplier sites, distributor catalogs, trade databases, and other public and semi-structured sources'. Lever createdAt 1784306348880.",
+        "date_confidence": "exact",
+        "source_ref": "0e194789-14c4-4352-979c-9826b846bae1"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2024-10-03",
+        "evidence_url": "https://indexventures.com/perspectives/valdera-secures-15-million-to-help-manufacturers-make-the-next-generation-of-products-faster-safer-and-more-sustainably-than-ever-before",
+        "evidence_note": "$15 million Series A led by Index Ventures. Page dated Oct. 3, 2024.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

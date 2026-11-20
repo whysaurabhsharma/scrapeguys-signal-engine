@@ -1,0 +1,35 @@
+[
+  {
+    "company": "PRISM+",
+    "website": "https://prismplus.sg",
+    "country": "SG",
+    "icp": "commerce",
+    "icp_confidence": "low",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "PRISM+ calls marketplaces 'one of our biggest channels' and hires an analyst to 'Track and maintain accurate records of competitor pricing, discounts, bundles and promotional activity on a regular cadence' across Malaysia, Thailand, Vietnam and Indonesia, so between those manual checks it cannot see competitor price and promotion moves on those marketplaces.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://apply.workable.com/j/9ACA6A0596",
+    "notes": "Evidence is a dedicated competitor-pricing analyst role - a job DUTY, not a stated gap. Weaker than a company describing a problem it has. Distinct from Kasa, which was dropped because competitor pricing was one line among an analyst's general tasks; a dedicated role is a stronger signal than a passing mention. Staged at low confidence deliberately. (User ruling 2026-11-20; reverses the hunt 6 PRISM+ kill-list row, which recorded the domain as prismplus.com in error - official site is prismplus.sg.) Singapore consumer electronics brand (TVs, monitors, appliances); the analyst role is KL-based/remote across TH, VN, ID. Role lists 'web scraping' among advantage skills. Workable published_on equals created_at for both roles (no repost seen), kept as ceiling per scope.md section 8. Leadership conflicting (Jonathan Wong CEO vs founder Jonathan Tan), DM left empty. Verifier: 4/4 SUPPORTED on staged claims; location PARTIAL (role not in Singapore).",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-09-09",
+        "evidence_url": "https://apply.workable.com/api/v1/widget/accounts/prismplus?details=true",
+        "evidence_note": "Market and Competitive Intelligence Analyst: 'Track and maintain accurate records of competitor pricing, discounts, bundles and promotional activity on a regular cadence'; 'Basic automation skills (e.g. scripting, web scraping or AI tools) to streamline data collection'. Workable published_on 2026-09-09.",
+        "date_confidence": "ceiling",
+        "source_ref": "9ACA6A0596"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-11-06",
+        "evidence_url": "https://apply.workable.com/api/v1/widget/accounts/prismplus?details=true",
+        "evidence_note": "Marketplace & E-Commerce Strategist (Singapore): 'Marketplaces are one of our biggest channels, and they're getting more complex: platform fees, ad spend, campaign slots'. Workable published_on 2026-11-06.",
+        "date_confidence": "ceiling",
+        "source_ref": "97F8D5C368"
+      }
+    ]
+  }
+]

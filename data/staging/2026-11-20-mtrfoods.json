@@ -1,0 +1,33 @@
+[
+  {
+    "company": "MTR Foods",
+    "website": "https://www.mtrfoods.com",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "MTR's products were 'live in 3,400+ hyper-local dark stores, yet they had reliable data from only 65 pin codes', and its own team said 'The data wasn't there to back it up', so without live data it cannot see which dark stores on Blinkit, Zepto and Instamart are out of stock or overstocked.",
+    "decision_maker": "Sanjay Sharma",
+    "dm_title": "MD and CEO, Orkla India",
+    "dm_source": "https://www.outlookbusiness.com/corporate/mtr-foods-maker-orkla-india-eyes-faster-growth-through-premiumisation-q-comm-acquisitions-ceo",
+    "source_url": "https://gobblecube.ai/blog/how-mtr-unlocked-growth-on-quick-commerce-platforms",
+    "notes": "INCUMBENT: GobbleCube customer ('clear visibility on product availability'); conversation is displacement or coverage, not education. Quote speaker 'Jena' has no surname or title on the page. The '65 pin codes' line is GobbleCube narrative, not quoted speech. Brand of Orkla India (listed NSE/BSE, IPO listed 2025-11-06 as pure offer for sale - not staged as funding, no capital raised). CEO statements: e-commerce 8.9% of sales growing 38%, 'Quick commerce is emerging as a key growth driver' (Outlook 2026-09-15) - strategy, not pain, not staged. DM is top executive, not the quick-commerce owner; none named publicly. No public ATS (SmartRecruiters OrklaIndia: 0). Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2025-10-24",
+        "evidence_url": "https://gobblecube.ai/blog/how-mtr-unlocked-growth-on-quick-commerce-platforms",
+        "evidence_note": "'It was all gut feeling,' said Jena. 'The data wasn't there to back it up.' Narrative: 'they had reliable data from only 65 pin codes' across 3,400+ dark stores. Page dated October 24, 2025.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-07-17",
+        "evidence_url": "https://www.angelone.in/news/stocks/orkla-s-mtr-launches-protein-breakfast-range-to-tap-india-s-growing-demand-for-high-protein-foods",
+        "evidence_note": "Protein Breakfast Range launched 'in the top four metro cities through quick-commerce platforms and leading general trade outlets'. Published July 17, 2026.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]
