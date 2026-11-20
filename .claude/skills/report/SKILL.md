@@ -1,5 +1,6 @@
 ---
 name: report
+# keep quoted: an unquoted description breaks every key below it, and the skill still lists but loses allowed-tools
 description: "Summarise a run: what went in, what came out, and what was rejected. Use when asked for a report, a summary, a readout or what happened."
 allowed-tools: Read, Write(out/**), Bash(python scripts/*)
 ---
