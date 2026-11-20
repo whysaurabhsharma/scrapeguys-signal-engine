@@ -133,6 +133,15 @@ product, and nascent.xyz sits outside all three ICPs. Changing a golden
 label to match a pipeline result is overfitting unless the evidence is
 what moved; here it was.
 
+Golden domain exclusion, 2026-11-20. Hunts 2, 3 and 4 were instructed to
+exclude every domain in tests/golden.csv. The reason: the golden labels
+were written from the same Phase 0.4 search that produced the first
+candidates, so a hunt allowed to find them would make the golden check a
+mirror rather than a test - it would only prove the pipeline rediscovered
+the companies used to write the labels. The cost is that golden has only
+ever tested one row, seon.io. The fix is more golden rows labelled from
+companies the pipeline has not seen, not fewer exclusions.
+
 ## 14. Known limit of the guard, found 2026-11-20
 During the third hunt a session bypassed guard.py by piping a Python
 script into the interpreter from stdin (a heredoc: python -I - <<'EOF'),
