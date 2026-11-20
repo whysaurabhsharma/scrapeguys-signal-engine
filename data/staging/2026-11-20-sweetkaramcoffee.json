@@ -1,0 +1,40 @@
+[
+  {
+    "company": "Sweet Karam Coffee",
+    "website": "https://sweetkaramcoffee.in",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_a",
+    "why_live_data": "Sweet Karam Coffee's CMO says 'availability or dark store penetration was a black box to us' and that the team was 'manually checking 10 or 15 pin codes', so without live data it cannot see its own stock and placement across quick-commerce dark stores.",
+    "decision_maker": "Veera Raghavan",
+    "dm_title": "CMO and co-founder",
+    "dm_source": "https://gobblecube.ai/blog/crunching-data-and-insights-how-sweet-karam-coffee-savoured-qcomm-success",
+    "source_url": "https://inc42.com/startups/how-sweet-karam-coffee-grew-to-%e2%82%b946-cr-by-turning-regional-snacks-into-daily-repeat/",
+    "notes": "INCUMBENT: GobbleCube. The complaint quote is the brand's own words published on a vendor (GobbleCube) blog, so the vendor chose which quotes to publish; pain is in the past tense, described as solved. Chennai snacks brand; FY25 revenue Rs 46 crore (Entrackr); 'marketplaces and quick commerce accounting for roughly 55% of sales' (Inc42 14 Feb 2026). Founders named on Inc42 3 Apr 2025: Anand Bharadwaj, Nalini Parthiban, Srivatsan Sundararaman, Veera Raghavan. Series A extension: Entrackr 19 Feb 2026 says 'set to raise'; Venture Intelligence 20 Feb 2026 confirms raised, so the closed date is staged. No public ATS. Golden buyer, hunted 2026-11-20. Verifier: 5/5 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2025-03-03",
+        "evidence_url": "https://gobblecube.ai/blog/crunching-data-and-insights-how-sweet-karam-coffee-savoured-qcomm-success",
+        "evidence_note": "Veera Raghavan, CMO: 'Before GobbleCube, availability or dark store penetration was a black box to us.' and 'Otherwise, we are manually checking 10 or 15 pin codes and then going to them with availability concerns.' Vendor case study, printed date Mar 3, 2025, no machine-readable date confirmed.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-02-20",
+        "evidence_url": "https://news.ventureintelligence.com/private-equity/south-indian-food-brand-sweet-karam-coffee-raises-rs.30-cr-in-series-a-extension",
+        "evidence_note": "'has raised INR 30 crore in a Series A extension round from existing investors Peak XV Partners' (INR 20 Cr) and Fireside Ventures (INR 10 Cr). Page dated February 20, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2025-04-03",
+        "evidence_url": "https://inc42.com/buzz/exclusive-sweet-karam-coffee-bags-8-mn-from-peak-xv-fireside-ventures",
+        "evidence_note": "'has raised $8 Mn in its Series A funding round led by Peak XV Partners'. Page dated 03 Apr'25.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

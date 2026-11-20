@@ -1,0 +1,35 @@
+[
+  {
+    "company": "Accor",
+    "website": "https://accor.com",
+    "country": "FR",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "public",
+    "why_live_data": "Accor's own job ads have staff 'chasing parity issues' and asked to 'identify non-compliant rates, unauthorized promotions, and distribution issues' across distribution channels, so without live data it cannot see where partners are reselling its rates out of parity.",
+    "decision_maker": "Shumi Khan",
+    "dm_title": "Global Senior Vice President of Business Performance & Revenue",
+    "dm_source": "https://hospitalitynet.org/appointment/79029442.html",
+    "source_url": "https://api.smartrecruiters.com/v1/companies/AccorCorpo/postings/744000162468309",
+    "notes": "Parity work sits in-house (Global Revenue Strategy, Global Pricing Excellence; 'rate parity and compliance monitoring tools' and 'Rate Compliance Committees' already exist). 2020 source names OTA Insight 'preferred rate intelligence partner' (hospitalitynet.org/news/4101656.html); current parity vendor UNVERIFIED. The fresh signal is an INTERN posting; the Rate Integrity manager role is closed (active false). Shumi Khan's title as held on 2025-01-13 (that page reports an HSMAI chair appointment, not her Accor appointment); current tenure unverified. Employees left empty: 380,000+ came from a search summary of the integrated report, not read. Portfolio Manager, Centre of Revenue Intelligence (744000159588535, 2026-11-04) not staged: no parity wording. Golden buyer, hunted 2026-11-20. Verifier: 3 SUPPORTED, 1 PARTIAL (DM appointment wording).",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-11-19",
+        "evidence_url": "https://api.smartrecruiters.com/v1/companies/AccorCorpo/postings/744000162468309",
+        "evidence_note": "Pricing project intern F/M/X, active: 'Support the monitoring of rate parity and rate compliance across distribution channels.'; 'Help identify non-compliant rates, unauthorized promotions, and distribution issues'. SmartRecruiters releasedDate 2026-11-19T09:22:17.470Z, no first-published field.",
+        "date_confidence": "ceiling",
+        "source_ref": "744000162468309"
+      },
+      {
+        "signal_type": "hiring",
+        "signal_date": "2025-12-09",
+        "evidence_url": "https://api.smartrecruiters.com/v1/companies/AccorCorpo/postings/744000097724670",
+        "evidence_note": "Manager of Rate Integrity & Compliance F/M/X (now closed): 'chasing parity issues'; 'an easy to execute penalty system for partners in breach of parity.' SmartRecruiters releasedDate 2025-12-09T14:05:21.839Z, no first-published field.",
+        "date_confidence": "ceiling",
+        "source_ref": "744000097724670"
+      }
+    ]
+  }
+]

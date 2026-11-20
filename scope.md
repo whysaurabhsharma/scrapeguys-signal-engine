@@ -93,6 +93,18 @@ FAILS   Search-based discovery for India commerce. Returns market reports,
         listing. WORKS instead: quick-commerce vendor case studies and
         founder press interviews, where a brand describes its own problem in
         its own words. Found Farmley, Gramiyaa and Moms Home that way.
+NOTE    ai ICP, harder than expected (2026-11-20). Three serious candidates
+        were rejected while looking for a seventh golden buyer: Wanderlog
+        (real blind spot, nearly four years old), Recipy (implies a gap,
+        never states one, sources via Instacart), Product.ai (strong quotes,
+        undated posting, runs its own collection and sells the data). The
+        pattern: AI shopping and travel assistants either crawl for
+        themselves or source through a platform API. The ai ICP as defined
+        is a narrower buyer than assumed.
+NOTE    Two golden buy labels failed the same test (2026-11-20): Ludex
+        admitted its prices are a day stale, Zyft disclaimed stock accuracy.
+        Neither is a company saying it cannot see something. A disclaimer
+        about your own product's limits is not a confession of a blind spot.
 
 ## 10. First five candidates (to verify before ingest)
 alt.xyz      commerce  pricing model fed by marketplace/auction scraping
@@ -141,6 +153,13 @@ mirror rather than a test - it would only prove the pipeline rediscovered
 the companies used to write the labels. The cost is that golden has only
 ever tested one row, seon.io. The fix is more golden rows labelled from
 companies the pipeline has not seen, not fewer exclusions.
+
+T8 diagnostic, 2026-11-20. The four golden buyers that scored nurture
+were re-scored at their own complaint's publication date: all four reach
+Tier B. The labels are right and the scorer is right. They measure
+different questions - golden asks whether a company would buy, the scorer
+asks whether to call this week. A 2024 complaint is real evidence of need
+and bad evidence of urgency.
 
 ## 14. Known limit of the guard, found 2026-11-20
 During the third hunt a session bypassed guard.py by piping a Python

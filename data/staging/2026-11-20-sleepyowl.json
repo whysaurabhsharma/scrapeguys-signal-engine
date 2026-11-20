@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Sleepy Owl Coffee",
+    "website": "https://sleepyowl.co",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "unknown",
+    "why_live_data": "Sleepy Owl's founder found his top-selling SKU missing on a quick-commerce app and said 'this is a gap that I would never be able to identify at a pin code level data', because 'quick-commerce operates at the locality level', so without live data it cannot see locality-level availability of its own SKUs.",
+    "decision_maker": "Arman Sood",
+    "dm_title": "Founder",
+    "dm_source": "https://gobblecube.ai/blog/decoding-revenue-founder-sleepy-owl",
+    "source_url": "https://www.indianstartuptimes.com/?p=25803",
+    "notes": "INCUMBENT: GobbleCube. The complaint quote is the brand's own words published on a vendor (GobbleCube) blog, so the vendor chose which quotes to publish; the post is written by GobbleCube's CEO, Arman Sood is interviewed. Sells on 'Blinkit, Swiggy Instamart and Zepto'; 'About 65% of revenue comes from online platforms' (Indian Startup Times, Jul 2026). FY26 revenue Rs 82 crore (Indian Retailer 6 Nov 2026). Stage left unknown: press names only a 'Series C2 preference shares' class, not a round. Apr 2026 funding reported as 'is raising', closure not confirmed. Rs 15 Cr Oct 2023 round has no dated primary source, not staged. Aggregator job listings (Quick Commerce KAM) not staged: no ATS date. Golden buyer, hunted 2026-11-20. Verifier: 4/4 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2024-01-29",
+        "evidence_url": "https://gobblecube.ai/blog/decoding-revenue-founder-sleepy-owl",
+        "evidence_note": "Arman Sood, Founder: 'I was checking the availability of my top-selling SKU on one of the Q-comm apps.' / 'Now this is a gap that I would never be able to identify at a pin code level data!' Vendor case study, printed date Jan 29, 2024, no machine-readable date confirmed.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-04-23",
+        "evidence_url": "https://entrackr.com/exclusive/exclusive-gauri-khan-family-trust-to-re-invests-in-sleepy-owl-11756620",
+        "evidence_note": "'Sleepy Owl is raising fresh funding of Rs 12 crore from new and existing investors'; 'Optiscape Network Holdings will lead the tranche with a Rs 5 crore investment'. Reported as a planned allotment, closure not confirmed. Page dated 23 Apr 2026.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

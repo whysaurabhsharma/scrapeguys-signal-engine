@@ -478,11 +478,21 @@ def t8_golden(asof):
     Strength is reported, not just the verdict. Fewer than T8_MIN_BUYERS
     matched buyers marks the line THIN: a rate over one row must not read
     like a rate over ten.
+
+    What the buyer half measures (2026-11-20): whether a labelled buyer is
+    ranked callable NOW, at --asof. That is stricter than whether it would
+    buy, which is what the golden label records. A buyer whose only evidence
+    is old decays to nurture without the scorer being wrong. So each buyer
+    that scores nurture or reject is re-scored, in a sandbox, at the date of
+    its own freshest signal, and the line reports how many of those misses
+    are AGED (A/B at that date) versus SCORER (nurture even then). The 80%
+    target is unchanged and still judged on the tier at --asof.
     """
     _, golden = read_rows(ROOT / "tests" / "golden.csv")
     _, scored = read_rows(DATA / "scored.csv")
     _, killed = read_rows(DATA / "killlist.csv")
     tier_by_domain = {normalise_domain(r.get("website", "")): r.get("tier", "") for r in scored}
+    id_by_domain = {normalise_domain(r.get("website", "")): r.get("account_id", "") for r in scored}
     killed_code = {}
     for k in killed:
         kd = normalise_domain(k.get("domain", ""))
@@ -493,6 +503,7 @@ def t8_golden(asof):
     buy_hit = buy_n = no_hit = no_n = 0
     no_killed = 0
     details = []
+    missed_buyers = []  # (domain, account_id, tier at asof) for buyers below B
     for g in golden:
         d = normalise_domain(g.get("domain", ""))
         tier = tier_by_domain.get(d)
@@ -507,10 +518,15 @@ def t8_golden(asof):
         if g.get("expected", "") == "buy":
             buy_n, buy_hit = buy_n + 1, buy_hit + good
             ok = good
+            if not good:
+                missed_buyers.append((d, id_by_domain.get(d, ""), tier))
+                continue  # detail line written below, with the at-freshest tier
         else:
             no_n, no_hit = no_n + 1, no_hit + (not good)
             ok = not good
         details.append(f"{d}: expected {g.get('expected', '')}, tier {tier}, {'ok' if ok else 'WRONG'}")
+
+    aged, scorer_err = _t8_classify_misses(missed_buyers, details)
 
     def pct(h, n):
         return f"{h}/{n} = {100.0 * h / n:.0f}%" if n else "0/0 = n/a"
@@ -520,11 +536,60 @@ def t8_golden(asof):
     thin = buy_n < T8_MIN_BUYERS
     strength = (f"THIN: only {buy_n} buyer(s) matched, need {T8_MIN_BUYERS}. "
                 if thin else "")
-    reason = (f"{strength}buyers matched {buy_n}/{buy_total}, in A/B {pct(buy_hit, buy_n)}; "
+    misses = ""
+    if missed_buyers:
+        misses = (f" (of {len(missed_buyers)} below B: {aged} AGED, A/B at their freshest "
+                  f"signal's date; {scorer_err} SCORER, nurture even then)")
+    reason = (f"{strength}buyers callable now: matched {buy_n}/{buy_total}, "
+              f"in A/B at asof {pct(buy_hit, buy_n)}{misses}; "
               f"non-buyers matched {no_n}/{no_total} ({no_n - no_killed} scored, "
               f"{no_killed} declined in killlist.csv), handled {pct(no_hit, no_n)}; "
               f"target 80% each")
     return Result("T8", "Golden set", PASS if passed else MISS, reason, details)
+
+
+def _t8_classify_misses(missed, details):
+    """Re-score each missed buyer at its freshest signal's date, in a sandbox.
+
+    Returns (aged, scorer). AGED: it reaches A/B at that date, so the miss is
+    the signal ageing, not the scorer. SCORER: nurture or reject even on the
+    day of its freshest signal. Appends one detail line per buyer.
+    """
+    if not missed:
+        return 0, 0
+    _, signals = read_rows(DATA / "signals.csv")
+    freshest = {}
+    for s in signals:
+        d = parse_date(s.get("signal_date", ""))
+        aid = s.get("account_id", "")
+        if d and (aid not in freshest or d > freshest[aid]):
+            freshest[aid] = d
+    aged = scorer = 0
+    tmp = make_sandbox()
+    try:
+        for domain, aid, tier_now in missed:
+            when = freshest.get(aid)
+            if when is None:
+                details.append(f"{domain}: expected buy, tier {tier_now} at asof, "
+                               f"no dated signal to re-score, WRONG")
+                scorer += 1
+                continue
+            out = tmp / f"t8_{aid}.csv"
+            r = run([PY, str(tmp / "scripts" / "score.py"), "--asof", when.isoformat(),
+                     "--out", str(out), "--quiet", "--no-log"], tmp)
+            _, rows = read_rows(out) if r.returncode == 0 else (None, [])
+            then = next((x.get("tier", "") for x in rows if x.get("account_id", "") == aid), "")
+            if then in (TIER_A, TIER_B):
+                aged += 1
+                verdict = "AGED"
+            else:
+                scorer += 1
+                verdict = "SCORER"
+            details.append(f"{domain}: expected buy, tier {tier_now} at asof, "
+                           f"tier {then or 'n/a'} at freshest signal {when.isoformat()}, {verdict}")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    return aged, scorer
 
 
 def t9_run_log(asof):

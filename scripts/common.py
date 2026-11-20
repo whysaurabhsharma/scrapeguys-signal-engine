@@ -19,6 +19,14 @@ lines in TIERS (A 70, B 50, nurture 30) are unchanged.
                      The age rule closes the same defect at one remove: fresh
                      funding supplying the freshness while a stale hiring
                      signal supplies the evidentiality.
+
+Structural property, found 2026-11-20, not designed: a complaint alone can
+never reach Tier A. Weight 12, halved to 6 by an approx date, against a Tier A
+minimum pain of 15; even exact-dated at 12 it falls short. Tier A therefore
+always requires a second signal type alongside a complaint. This is arguably
+correct - one customer complaining is not the same as a company hiring to fix
+it - but it emerged from the weights rather than being chosen, and it is
+recorded here so it is a decision rather than an accident.
 """
 import csv
 import hashlib

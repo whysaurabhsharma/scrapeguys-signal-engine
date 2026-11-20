@@ -1,0 +1,40 @@
+[
+  {
+    "company": "GO DESi",
+    "website": "https://godesi.in",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_b",
+    "why_live_data": "GO DESi's Head of Growth says that on quick commerce 'there is a lack of data visibility which makes you unsure of where you are present', so without live data it cannot see which cities and platforms list its SKUs, where availability is low, or how to price them.",
+    "decision_maker": "Vinay Kothari",
+    "dm_title": "Founder",
+    "dm_source": "https://inc42.com/?p=455165",
+    "source_url": "https://inc42.com/startups/how-go-desi-grew-to-%e2%82%b955-64-cr-by-winning-distribution-and-impulse-repeat/",
+    "notes": "INCUMBENT: GobbleCube. The complaint quote is the brand's own words published on a vendor (GobbleCube) blog, so the vendor chose which quotes to publish; pain is in the past tense, described as solved. Bengaluru snacks and mithai brand, FY25 revenue INR 55.64 Cr (Inc42 19 Feb 2026); 'top kaju katli brand on Zepto', '6-8% market share across leading quick-commerce platforms'. Smitkumar Raval (Head of Growth) on vendor page only, tenure unverified. Lead investor of Feb 2026 extension conflicts across sources (Enrission vs Aavishkaar), not relied on. No public ATS. Golden buyer, hunted 2026-11-20. Verifier: 4/4 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2024-12-31",
+        "evidence_url": "https://gobblecube.ai/blog/unwrapping-the-code-behind-go-desis-sweet-success",
+        "evidence_note": "Smitkumar Raval, Head of Growth at GO DESi: 'there is a lack of data visibility which makes you unsure of where you are present'; 'We were able to identify cities in which our availability was low'. Vendor case study, printed date Dec 31, 2024, no machine-readable date confirmed.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-02-11",
+        "evidence_url": "https://news.ventureintelligence.com/private-equity/packaged-traditional-foods-startup-godesi-raises-%242.8-m-led-by-enrission-india-capital",
+        "evidence_note": "USD 2.8 million Series B extension round; 'GoDesi plans to use the funding to strengthen its manufacturing capabilities and expand its product range and distribution.' Page dated February 11, 2026.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2024-05-02",
+        "evidence_url": "https://inc42.com/?p=455165",
+        "evidence_note": "INR 41 Cr led by Aavishkaar Capital; funds for 'geographical expansion, deepen its SKU presence'. Page dated 02 May'24.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

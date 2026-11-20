@@ -1,0 +1,26 @@
+[
+  {
+    "company": "BWH Hotels",
+    "website": "https://www.bwhhotels.com",
+    "country": "US",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "unknown",
+    "why_live_data": "BWH's rate-integrity manager says its rates 'get redistributed two, three, four, eight times' through OTA undercutting, opaque B2B resellers and mobile-only deals, so without live data it cannot see where its own rates break parity across those resellers.",
+    "decision_maker": "Kevin Roman",
+    "dm_title": "Senior Revenue Manager, Rate Integrity",
+    "dm_source": "https://www.mylighthouse.com/resources/blog/hotel-rate-parity-tips-best-western",
+    "source_url": "https://www.mylighthouse.com/resources/blog/hotel-rate-parity-tips-best-western",
+    "notes": "INCUMBENT: Lighthouse (formerly OTA Insight). Same page: 'Lighthouse gives us the reporting we need to take action'. The quote is on a vendor blog, so the vendor chose which quotes to publish. Parent of Best Western, WorldHotels, SureStay; member-owned, stage left unknown. CEO Larry Cuculic (Skift 2025-06-23). Kevin Roman's current tenure not checked. Launch signal (Upscale & Luxury Worldwide Sales division, hospitalitynet.org/news/4133058) NOT staged: verifier PARTIAL, page prints 'June 18' with no year. No public ATS (Greenhouse and Lever 404, Recruitee EMEA empty). Golden buyer, hunted 2026-11-20. Verifier: 2 SUPPORTED, 1 PARTIAL (launch, dropped).",
+    "signals": [
+      {
+        "signal_type": "complaint",
+        "signal_date": "2025-06-23",
+        "evidence_url": "https://www.mylighthouse.com/resources/blog/hotel-rate-parity-tips-best-western",
+        "evidence_note": "Kevin Roman, Senior Revenue Manager, Rate Integrity at BWH Hotels: 'Rates get redistributed two, three, four, eight times.' Page: 'Mobile-only deals, OTA undercutting, opaque B2B resellers, and rate-stacking promotions have made parity harder to spot'. Vendor blog, printed date 23 June, 2025, no machine-readable date confirmed.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]

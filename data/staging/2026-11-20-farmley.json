@@ -26,7 +26,7 @@
         "signal_date": "2025-03-11",
         "evidence_url": "https://gobblecube.ai/blog/stocking-smart-scaling-fast-behind-farmleys-insights-driven-growth-story",
         "evidence_note": "Farmley's Pankaj Goyal: 'Crawler-based data was disorganised and unsystematic.' and 'The challenge with demand projection was due to the unavailability of data and insights on SOH (Stock On-Hand) or the DOI (Days of Inventory).' Page dated Mar 11, 2025.",
-        "date_confidence": "exact"
+        "date_confidence": "approx"
       }
     ]
   }

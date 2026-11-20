@@ -5,19 +5,24 @@ ac_d0d2996d75,Gramiyaa,https://gramiyaa.com,commerce,74.6,A,Tier A: scores 74.6 
 ac_4fb1bced81,Troovy,https://troovyfoods.com,commerce,73.9,B,"Tier B: scores 73.9, enough for A, but pain is 13.9, below the Tier A minimum of 15 and its signals are funding only, and Tier A needs a complaint or hiring signal: funding or a launch shows budget exists, not that this pain exists.",30.0,13.9,15.0,15.0,24
 ac_a9fde22a06,Henfruit,https://henfruit.in,commerce,73.8,B,"Tier B: scores 73.8, enough for A, but its signals are funding only, and Tier A needs a complaint or hiring signal: funding or a launch shows budget exists, not that this pain exists.",30.0,15.8,13.0,15.0,2
 ac_6192333d22,Alt,https://alt.xyz,commerce,70.0,B,"Tier B: scores 70.0, enough for A, but pain is 10.0, below the Tier A minimum of 15.",30.0,10.0,15.0,15.0,26
+ac_1dd7879aec,Accor,https://accor.com,travel,68.3,B,"Tier B: scores 68.3, between 50 and 70; freshest signal 1 days old.",30.0,13.3,10.0,15.0,1
 ac_db16908242,Beni,https://www.joinbeni.com,ai,66.9,B,"Tier B: scores 66.9, between 50 and 70; freshest signal 1 days old.",30.0,13.9,8.0,15.0,1
 ac_3e4b6e5f9f,Holidu,https://www.holidu.com,travel,65.1,B,"Tier B: scores 65.1, between 50 and 70; freshest signal 142 days old.",30.0,5.1,15.0,15.0,142
+ac_1a4eed01ce,GO DESi,https://godesi.in,commerce,63.1,nurture,"Nurture: scores 63.1, enough for B, but pain is 3.1, below the Tier B minimum of 5; fit alone cannot lift an account above nurture.",30.0,3.1,15.0,15.0,282
 ac_aa3271cd5c,Plush,https://plushforher.com,commerce,62.1,nurture,"Nurture: scores 62.1, enough for B, but pain is 2.1, below the Tier B minimum of 5; fit alone cannot lift an account above nurture.",30.0,2.1,15.0,15.0,156
+ac_e8fe47b9b2,Sweet Karam Coffee,https://sweetkaramcoffee.in,commerce,61.3,nurture,"Nurture: scores 61.3, enough for B, but pain is 3.3, below the Tier B minimum of 5; fit alone cannot lift an account above nurture.",30.0,3.3,13.0,15.0,273
 ac_de0abfbd83,Farmley,https://farmley.com,commerce,60.6,nurture,"Nurture: scores 60.6, enough for B, but pain is 0.6, below the Tier B minimum of 5; fit alone cannot lift an account above nurture.",30.0,0.6,15.0,15.0,557
 ac_44569939d1,ixigo,https://www.ixigo.com,travel,59.3,B,"Tier B: scores 59.3, between 50 and 70; freshest signal 64 days old.",20.0,14.3,10.0,15.0,64
 ac_34c04c0c36,Daydream,https://daydream.ing,ai,58.8,B,"Tier B: scores 58.8, between 50 and 70; freshest signal 114 days old.",30.0,5.8,8.0,15.0,114
 ac_37932f5546,Evolve,https://evolve.com,travel,56.2,B,"Tier B: scores 56.2, between 50 and 70; freshest signal 14 days old.",20.0,16.2,5.0,15.0,14
 ac_6c743db5fd,SEON,https://seon.io,ai,56.2,B,"Tier B: scores 56.2, between 50 and 70; freshest signal 57 days old.",30.0,11.2,15.0,0.0,57
 ac_882f1ce94b,Wander,https://www.wander.com,travel,55.6,B,"Tier B: scores 55.6, between 50 and 70; freshest signal 46 days old.",20.0,5.6,15.0,15.0,46
+ac_15f1191b4d,Sleepy Owl Coffee,https://sleepyowl.co,commerce,54.7,nurture,"Nurture: scores 54.7, enough for B, but pain is 4.7, below the Tier B minimum of 5; fit alone cannot lift an account above nurture.",30.0,4.7,5.0,15.0,211
 ac_1b5595e54f,Vogo,https://www.vogo.com,travel,51.6,B,"Tier B: scores 51.6, between 50 and 70; freshest signal 7 days old.",30.0,16.6,5.0,0.0,7
 ac_1f3ac2e886,Moms Home,https://momshome.in,commerce,51.4,B,"Tier B: scores 51.4, between 50 and 70; freshest signal 23 days old.",20.0,8.4,8.0,15.0,23
 ac_a681a88cdc,Onton,https://onton.com,ai,50.8,B,"Tier B: scores 50.8, between 50 and 70; freshest signal 114 days old.",20.0,7.8,8.0,15.0,114
 ac_fc52217fb0,Treebo,https://www.treebo.com,travel,50.6,nurture,"Nurture: scores 50.6, enough for B, but pain is 0.6, below the Tier B minimum of 5; fit alone cannot lift an account above nurture.",30.0,0.6,5.0,15.0,416
+ac_fd7bf142d2,BWH Hotels,https://www.bwhhotels.com,travel,50.0,nurture,"Nurture: scores 50.0 on fit alone but has no live, dated signal, so it cannot rank above nurture.",30.0,0.0,5.0,15.0,515
 ac_70978434c6,Back Market,https://www.backmarket.com,commerce,47.9,nurture,"Nurture: scores 47.9, below the Tier B line of 50; freshest signal 46 days old.",10.0,7.9,15.0,15.0,46
 ac_abdb54c1c3,Phia,https://phia.com,ai,45.9,nurture,"Nurture: scores 45.9, below the Tier B line of 50; freshest signal 297 days old.",30.0,2.9,13.0,0.0,297
 ac_c4a0056c53,AvantStay,https://avantstay.com,travel,43.2,nurture,"Nurture: scores 43.2, below the Tier B line of 50; freshest signal 191 days old.",20.0,3.2,5.0,15.0,191
