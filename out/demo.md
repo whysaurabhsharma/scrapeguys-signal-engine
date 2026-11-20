@@ -1,22 +1,45 @@
-# Demo script, 90 seconds
+# Demo script, a two-minute opening
+
+**The only hard rule: stop talking whenever a file is open.** He reads
+faster than you talk, and silence while he reads is not dead air.
+
+This is not a 90-second script. It is a two-minute opening for a
+conversation that will be interrupted: 282 spoken words, roughly two
+minutes of talking, plus time while files are on screen.
 
 Read the quoted lines aloud. Brackets say what to click.
+Words in {braces}: drop them if the room is rushed. Everything else stays.
 Numbers from data/scored.csv, out/, and the acceptance run of 2026-11-20.
 
-## 1. The output
-[Open data/scored.csv, then out/briefs/]
+## 1. The opening
+Spoken to the ScrapeGuys CEO, Growth Manager interview.
 
-"39 companies across three buyer types: 9 AI, 13 travel, 17 commerce.
-20 have a dated, sourced signal from the last 90 days.
-3 reached Tier A: Lyst, Going and Gramiyaa. Each has a first message,
-drafted and not sent, that quotes their own public words with the URL.
-Each comes with a teardown of the pages they would need watched, showing
-where collection stopped. Gramiyaa's is on hold: pitching them would close
-off a partner channel."
+> **Do NOT claim a sample of the company's own data is attached.** Nothing
+> was collected. The assets are documented gaps, and out/probe_log.json
+> shows that in four seconds if the claim is overstated.
+
+"Your job description says inbound is being built from zero and the Growth
+Manager has to find where the buyers are. I didn't want to answer that with
+a plan, so I built the first version of the answer.
+
+It's a machine that looks for public signs that a company needs live web
+data right now, ranks them, and drafts the first message with a teardown of
+that company's own pages, showing where collection breaks.
+
+I ran your pitch on myself, without your keys. Zero of seven quick-commerce
+pages returned product data: five served challenge pages, and Blinkit's
+robots.txt refused before the other two were requested. That is your entire
+sales argument, and I now believe it from the inside rather than from your
+homepage.
+
+I built it because it's the actual job: client acquisition and channel
+discovery are the top two things in the role.
+
+It never sends anything. It prepares the work; a person decides."
 
 ## 2. The design decision
-"The model reads and judges; code does anything that has to be exact, so
-the ranking is reproducible and the data files cannot be corrupted."
+"The model reads and judges; code does anything that has to be exact{, so
+the ranking is reproducible and the data files cannot be corrupted}."
 
 ## 3. The acceptance run
 [Run: python scripts/acceptance.py]
@@ -26,16 +49,12 @@ Three targets miss. 39 accounts, not 40: two hunts screened about 250
 companies and none met the Tier A bar. Lexroom had the date, the CEO and the
 Series B, and was still dropped: it described a capability, not a gap.
 I refused a filler row, because T1 and T4 pull against each other.
-Tier A is 7.7 percent, under the 10 percent floor. And 3 of 7 known buyers
+{Tier A is 7.7 percent, under the 10 percent floor.} And 3 of 7 known buyers
 score A or B today; the other 4 have signals that have aged, not scoring
 errors."
 
 ## 4. The probe
-[Open out/assets/commerce-2026-11-20.md]
-
-"For Gramiyaa, we tried plain collection on Blinkit, Zepto and Instamart.
-0 of 7 pages returned product data. 5 got challenge pages, in 47 to 172
-milliseconds. Blinkit's robots.txt refused before a page was asked for."
+[Open out/assets/commerce-2026-11-20.md and stop talking.]
 
 ## THE THREE QUESTIONS
 
