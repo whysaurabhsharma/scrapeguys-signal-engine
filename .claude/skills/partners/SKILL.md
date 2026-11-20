@@ -1,6 +1,7 @@
 ---
 name: partners
-description: Identify partner archetypes who could resell or refer live-data collection, kept separate from the account pipeline. Use when asked about partners, channels, resellers or referrals.
+# keep quoted: an unquoted description breaks every key below it, and the skill still lists but loses allowed-tools
+description: "Identify partner archetypes who could resell or refer live-data collection, kept separate from the account pipeline. Use when asked about partners, channels, resellers or referrals."
 allowed-tools: Read, Write(out/**), WebSearch, WebFetch
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: score
-description: Run the scoring script and interrogate the resulting ranking. Use when asked to score, rank, tier or re-rank accounts.
+# keep quoted: an unquoted description breaks every key below it, and the skill still lists but loses allowed-tools
+description: "Run the scoring script and interrogate the resulting ranking. Use when asked to score, rank, tier or re-rank accounts."
 allowed-tools: Read, Bash(python scripts/*)
 ---
 

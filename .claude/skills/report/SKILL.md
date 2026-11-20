@@ -1,6 +1,6 @@
 ---
 name: report
-description: Summarise a run: what went in, what came out, and what was rejected. Use when asked for a report, a summary, a readout or what happened.
+description: "Summarise a run: what went in, what came out, and what was rejected. Use when asked for a report, a summary, a readout or what happened."
 allowed-tools: Read, Write(out/**), Bash(python scripts/*)
 ---
 

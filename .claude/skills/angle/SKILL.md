@@ -1,6 +1,7 @@
 ---
 name: angle
-description: Write a sourced first-touch brief for each Tier A account. Use when asked for angles, briefs, outreach drafts or what to say to an account.
+# keep quoted: an unquoted description breaks every key below it, and the skill still lists but loses allowed-tools
+description: "Write a sourced first-touch brief for each Tier A account. Use when asked for angles, briefs, outreach drafts or what to say to an account."
 allowed-tools: Read, Write(out/briefs/**), WebSearch, WebFetch
 ---
 

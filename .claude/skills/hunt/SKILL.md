@@ -1,6 +1,7 @@
 ---
 name: hunt
-description: Find companies showing public dated evidence of needing live web data, verify each one, and stage them for ingest. Use when asked to find, hunt, source or discover accounts.
+# keep quoted: an unquoted description breaks every key below it, and the skill still lists but loses allowed-tools
+description: "Find companies showing public dated evidence of needing live web data, verify each one, and stage them for ingest. Use when asked to find, hunt, source or discover accounts."
 allowed-tools: WebSearch, WebFetch, Read, Write(data/staging/**), Bash(python scripts/*)
 ---
 

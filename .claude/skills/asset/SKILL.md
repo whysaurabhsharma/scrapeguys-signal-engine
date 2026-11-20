@@ -1,6 +1,7 @@
 ---
 name: asset
-description: Build the small ICP-specific data asset that goes with a first touch, or the probe evidence that stands in for it. Use when asked for an asset, a sample, a teardown or proof.
+# keep quoted: an unquoted description breaks every key below it, and the skill still lists but loses allowed-tools
+description: "Build the small ICP-specific data asset that goes with a first touch, or the probe evidence that stands in for it. Use when asked for an asset, a sample, a teardown or proof."
 allowed-tools: Read, Write(out/assets/**), Bash(python scripts/*), WebSearch, WebFetch
 ---
 
