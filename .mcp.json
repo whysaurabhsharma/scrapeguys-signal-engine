@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sheets": {
+      "type": "http",
+      "url": "https://sheetsmcp.googleapis.com/mcp/v1"
+    }
+  }
+}

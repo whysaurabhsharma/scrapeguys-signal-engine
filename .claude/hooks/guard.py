@@ -104,8 +104,8 @@ MCP_SEND_VERBS = {"send", "reply", "forward", "post", "publish"}
 #
 # This denylist is a backstop, not a guarantee. It is name-based, so it goes
 # stale the day a vendor adds or renames a tool. The real guarantee is that
-# this repo declares no send-capable MCP server (no .mcp.json, no mcpServers
-# in settings). Account-level connectors (claude.ai) sit outside the repo;
+# this repo declares no send-capable MCP server: .mcp.json declares Google
+# Sheets only (see scope.md section 12). Account-level connectors (claude.ai) sit outside the repo;
 # disconnect them for this project rather than trusting this list.
 MCP_SEND_DENYLIST = {
     "manage_marketing_email",

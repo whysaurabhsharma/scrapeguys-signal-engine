@@ -75,3 +75,12 @@ icounter     ai        weaker fit, dark-web collection out of scope
 wynd labs / grass   operates a distributed crawler network: competitor
 Also set aside: OpenAI, ElevenLabs. Real signal, wrong buyer.
 The scorer needs a size CEILING, not just a floor.
+
+## 12. MCP servers this repo declares
+.mcp.json declares ONE server: Google Sheets. Nothing else, on purpose.
+Why Sheets   The pipeline's output is CSV. Sheets is how a non-technical
+             person opens, sorts and filters it.
+Why only it  No send-capable server (mail, chat, CRM, social) is declared by
+             this repo. That absence is the real never-send guarantee; the
+             MCP denylist in .claude/hooks/guard.py is only a backstop.
+Credentials  None in the file. Auth comes from the environment / OAuth.
