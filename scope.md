@@ -100,3 +100,10 @@ age (57 days, inside 90). Its hiring signal carries ceiling confidence
 of a possible 18.
 The thresholds were NOT changed to produce a Tier A. A run with nothing
 hot is a real answer.
+
+Two golden labels were corrected on 2026-11-20: cube.global and
+nascent.xyz, both buy to no. The correction came from evidence the hunt
+fetched, not from a score I wanted - cube.global sells collection as its
+product, and nascent.xyz sits outside all three ICPs. Changing a golden
+label to match a pipeline result is overfitting unless the evidence is
+what moved; here it was.

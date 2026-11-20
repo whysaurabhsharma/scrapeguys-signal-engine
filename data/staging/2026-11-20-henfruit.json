@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Henfruit",
+    "website": "https://henfruit.in",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": 300,
+    "stage": "series_a",
+    "why_live_data": "Henfruit sells eggs through Zepto, Swiggy Instamart, Blinkit and Milkbasket and is raising to widen online distribution, but it has no live view of its own SKUs' price, stock and placement on those apps, or of rival egg brands beside them, as they change through the day.",
+    "decision_maker": "Tarun Gupta",
+    "dm_title": "Founder",
+    "dm_source": "https://india.entrepreneur.com/business-news/henfruit-raises-usd-15-mn-series-a-from-lok-dsg-rpsg",
+    "source_url": "https://inc42.com/buzz/egg-brand-henfruit-raises-15-mn-in-first-external-funding-round/",
+    "notes": "Egg brand, HENFRUIT PROTEINS PRIVATE LIMITED. $15 Mn Series A, first external round since 2014 founding, from Lok Capital, DSG Consumer Partners, RPSG Capital Ventures (Entrackr says co-led). 'employs more than 300 people' (Inc42), so employees is a floor. HQ New Delhi from third-party sites only: UNVERIFIED, not used. No public ATS board. In config/seeds/india-qcommerce.csv. Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-11-18",
+        "evidence_url": "https://inc42.com/buzz/egg-brand-henfruit-raises-15-mn-in-first-external-funding-round/",
+        "evidence_note": "'has raised $15 Mn (about ₹140 Cr) in a Series A round'; 'The brand sells through its website and platforms including Zepto, Swiggy Instamart, Blinkit, and Milkbasket.' Same date on Entrackr and Entrepreneur India.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

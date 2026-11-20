@@ -70,6 +70,20 @@ Drop, and print one line per drop with its reason:
 Format: `DISQUALIFIED  <company>  <reason>`. Never drop silently.
 Having an engineering team is not a reason to disqualify.
 
+Every disqualification here, and every drop in any later step (STEP 5's
+`DROPPED`, a verifier failure, an account with no dated signal), is
+appended to `data/killlist.csv` AT THE TIME IT HAPPENS, not only reported
+in chat:
+
+    python scripts/killlist.py --date <today> --company "<name>" \
+        --domain <domain> --reason-code <code> --reason "<why>" \
+        --source-url <url>
+
+reason_code: suppressed, vendor, wrong_buyer, no_dated_signal,
+no_evidenced_why, off_icp. Leave domain or source_url empty rather than
+guess. A rejection that exists only in a transcript cannot appear in the
+kill list later.
+
 ## STEP 5 - Write why_live_data
 
 For each survivor, write `why_live_data` as ONE sentence naming what this

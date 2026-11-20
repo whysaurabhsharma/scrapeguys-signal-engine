@@ -1,4 +1,25 @@
-"""Schema, weights and id rules. Imported by every script. Standard library only."""
+"""Schema, weights and id rules. Imported by every script. Standard library only.
+
+Tier GATES, added 2026-11-20 after the second real run exposed them. These are
+new rules, not threshold values changed to alter a result. The numeric tier
+lines in TIERS (A 70, B 50, nurture 30) are unchanged.
+
+  TIER_B_MIN_PAIN    An account cannot reach Tier B unless pain >= 5, whatever
+                     its total. Implements the CLAUDE.md rule "No pain means
+                     nurture at best", previously enforced only at pain == 0.
+                     Exposed by Plush: fit fields alone (icp 30 + capacity 15
+                     + reachability 15 = 60) put it in Tier B on pain 2.1.
+
+  TIER_A_REQUIRES_EVIDENTIAL_SIGNAL / EVIDENTIAL_TYPES
+                     Tier A needs at least one counted signal of an evidential
+                     type (hiring, complaint) that is itself within
+                     TIER_A_MAX_AGE_DAYS. Funding and launch say budget or
+                     activity exists, not that this specific pain exists.
+                     Exposed by Henfruit: Tier A on a single funding round.
+                     The age rule closes the same defect at one remove: fresh
+                     funding supplying the freshness while a stale hiring
+                     signal supplies the evidentiality.
+"""
 import csv
 import hashlib
 import re
@@ -50,6 +71,11 @@ STAGES = {
 TIERS = {"A": 70, "B": 50, "nurture": 30}
 TIER_A_MIN_PAIN = 15
 TIER_A_MAX_AGE_DAYS = 90
+
+# gates, see module docstring; not thresholds
+TIER_B_MIN_PAIN = 5
+TIER_A_REQUIRES_EVIDENTIAL_SIGNAL = True
+EVIDENTIAL_TYPES = frozenset({"hiring", "complaint"})
 
 CEILINGS = {"icp_match": 30, "pain": 40, "capacity": 15, "reachability": 15}
 

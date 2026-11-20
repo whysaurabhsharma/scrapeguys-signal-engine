@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Wander",
+    "website": "https://www.wander.com",
+    "country": "US",
+    "icp": "travel",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "series_b",
+    "why_live_data": "Wander pushes operators to stop 'renting it from an OTA' and promises 'a consistent price from the feed to the property page', yet without live data it cannot see what the same homes are listed at on Airbnb, Vrbo and Booking.com against that direct price.",
+    "decision_maker": "John Andrew Entwistle",
+    "dm_title": "Founder & CEO",
+    "dm_source": "https://www.wander.com/article/september-at-wander-welcome-to-the-direct-booking-revolution",
+    "source_url": "https://www.wander.com/article/september-at-wander-welcome-to-the-direct-booking-revolution",
+    "notes": "Vacation rental marketplace plus WanderOS direct-booking platform for operators. ATS is Rippling; its public JSON has no date field, so no hiring signal staged. Closed, undated Pricing Strategy Analyst role named 'rate parity' and 'competitive benchmarking' (https://careers.redpoint.com/companies/wander/jobs/54080499-pricing-strategy-analyst): pain context only, not a signal. CEO essay 2026-08-12 (https://www.wander.com/article/the-ai-moment-in-travel) not staged: opinion, not a launch. $64.1M 2026 Series B figure UNVERIFIED, not used. Verifier: 4/4 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-10-05",
+        "evidence_url": "https://www.wander.com/article/september-at-wander-welcome-to-the-direct-booking-revolution",
+        "evidence_note": "Direct-booking product update (Custom Charges, Apple Pay/Google Pay checkout): 'Now, guests see a consistent price from the feed to the property page all the way through checkout.' Date printed on company blog.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "funding",
+        "signal_date": "2025-05-28",
+        "evidence_url": "https://www.vcaonline.com/news/2025052809/wander-raises-50m-series-b-to-build-the-trusted-brand-in-vacation-rentals/",
+        "evidence_note": "'$50 million Series B funding round, co-led by QED Investors and Fifth Wall'. Release dateline 'SAN FRANCISCO, May 28, 2025'.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

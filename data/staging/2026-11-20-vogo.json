@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Vogo",
+    "website": "https://www.vogo.com",
+    "country": "US",
+    "icp": "travel",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "Vogo is building from scratch a way to measure its displayed hotel prices against 'relevant OTA, hotel-direct, and closed-user-group benchmarks' and 'rate parity requirements', so today it cannot see, property by property, where its shown rate is beaten or out of parity on another channel.",
+    "decision_maker": "",
+    "dm_title": "",
+    "dm_source": "",
+    "source_url": "https://api.lever.co/v0/postings/vogo?mode=json",
+    "notes": "Dallas accommodations platform, 'launching out of Wilbur Labs in 2018'. Role reports to the COO; COO not publicly named, so DM left blank. VacationRenter link UNVERIFIED, not used. Homepage returned 403. No funding or launch signal found. Verifier: 4/4 SUPPORTED. Lever createdAt is creation, public date could be same day or later.",
+    "signals": [
+      {
+        "signal_type": "hiring",
+        "signal_date": "2026-11-13",
+        "evidence_url": "https://jobs.lever.co/vogo/1feaab47-1771-4070-ab55-e879f72f599c",
+        "evidence_note": "Senior Manager, Pricing & Revenue Optimization: 'Establish pricing compliance controls and monitoring for minimum public selling prices... rate parity requirements'; price monitoring 'against relevant OTA, hotel-direct, and closed-user-group benchmarks'. Date from Lever API createdAt 1794595539594.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

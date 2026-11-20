@@ -25,3 +25,8 @@ An account with no valid signal is rejected.
 
 Read every REJECTED line from ingest and fix the research,
 not the record.
+
+data/killlist.csv is a separate file, not under the ingest-only rule.
+It is APPEND-ONLY: written by scripts/killlist.py with csv.writer in
+append mode. Never rewrite, reorder or delete a row. A wrong row is
+corrected by appending a new one.

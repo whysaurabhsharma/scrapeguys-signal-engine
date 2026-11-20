@@ -1,0 +1,16 @@
+date,company,domain,reason_code,reason,source_url
+2026-11-20,Wynd Labs,wynd.network,suppressed,hunt 1: in config/suppress.csv; operates a distributed crawler network,
+2026-11-20,Firecrawl,firecrawl.dev,suppressed,hunt 1: in config/suppress.csv; scraping API competitor,
+2026-11-20,MeasureOne,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Sixtyfour,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Parallel.ai,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Kadoa,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Source.ai,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Datamint,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Coast,,vendor,"hunt 1: scraping, data or extraction vendor; domain and source not recorded at the time",
+2026-11-20,Nascent,nascent.xyz,off_icp,hunt 1: outside the three ICPs; source not recorded at the time,
+2026-11-20,Cube,cube.global,no_evidenced_why,hunt 1: could not write an evidenced why_live_data; source not recorded at the time,
+2026-11-20,Lighthouse,,vendor,hunt 2: hotel rate-intelligence vendor; its own revenue roles sell parity monitoring,https://job-boards.eu.greenhouse.io/lighthouse/jobs/4936582101
+2026-11-20,Transparent,,vendor,hunt 2: short-term rental market-data vendor,https://jobs.alleycorp.com/companies/transparent/jobs/72458935-revenue-manager-branded-hotels
+2026-11-20,The Whole Truth,thewholetruthfoods.com,no_evidenced_why,"hunt 2: no source ties it to Blinkit, Zepto or Instamart; no public ATS; newest funding 2026-02-04",https://india.entrepreneur.com/news-and-trends/clean-label-food-startup-the-whole-truth-secures-usd-51-mn/502423
+2026-11-20,Boldfit,boldfit.com,wrong_buyer,hunt 2: Fresh funding 2026-10-12 but the raise is for offline retail expansion; only quick-commerce tie is from 2024. Would pass a naive recent-funding filter. Rejected on what the money is for.,https://inc42.com/buzz/d2c-brand-boldfit-raises-₹400-cr-from-bharat-value-fund-for-retail-expansion/

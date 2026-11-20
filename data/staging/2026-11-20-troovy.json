@@ -1,0 +1,26 @@
+[
+  {
+    "company": "Troovy",
+    "website": "https://troovyfoods.com",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_b",
+    "why_live_data": "Quick commerce went from 11% to about half of Troovy's revenue and the new round is to 'strengthen its distribution across quick commerce', yet it has no live view of its own SKUs' price, stock and placement on those apps, or of the healthy-snack rivals listed beside them.",
+    "decision_maker": "Mansi Baranwal",
+    "dm_title": "Co-founder and CEO",
+    "dm_source": "https://india.entrepreneur.com/business-news/troovy-raises-rs-100-crore-in-series-b-round-led-by-fireside-ventures",
+    "source_url": "https://inc42.com/buzz/healthy-snacking-brand-troovy-bags-₹100-cr-to-expand-offline-presence-enter-new-categories/",
+    "notes": "Gurugram healthy-snack D2C brand (openthemagazine.com). Rs 100 Cr Series B led by Fireside Ventures, Sharrp Ventures participating. Fireside note: quick commerce 'approximately half of Troovy's revenue, up from 11% when it first invested' (https://openthemagazine.com/business/troovys-100-crore-bet-on-indias-crowded-healthy-snack-shelf). No article names Blinkit, Zepto or Instamart specifically. No public ATS board (Greenhouse/Ashby/Lever 404). From seed search via Inc42, not config/seeds list. Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "funding",
+        "signal_date": "2026-10-27",
+        "evidence_url": "https://india.entrepreneur.com/business-news/troovy-raises-rs-100-crore-in-series-b-round-led-by-fireside-ventures",
+        "evidence_note": "Rs 100 crore Series B led by Fireside Ventures. Inc42 same day: 'The D2C brand will also strengthen its distribution across quick commerce and offline channels.' Announcement date printed Oct 27, 2026 on both.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

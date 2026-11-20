@@ -39,8 +39,11 @@ from common import (  # noqa: E402
     SIGNAL_HEADERS,
     SIGNAL_MODEL,
     STAGES,
+    EVIDENTIAL_TYPES,
     TIER_A_MAX_AGE_DAYS,
     TIER_A_MIN_PAIN,
+    TIER_A_REQUIRES_EVIDENTIAL_SIGNAL,
+    TIER_B_MIN_PAIN,
     TIERS,
     is_suppressed,
     load_suppress,
@@ -144,14 +147,37 @@ def score_pain(signals: list, asof: date):
     return cap("pain", sum(best.values())), freshest, best
 
 
+def freshest_by_type(signals: list, asof: date) -> dict:
+    """{signal_type: age in days of its freshest COUNTED signal}.
+
+    Uses decayed(), so an unknown type, an undated signal or a future-dated
+    one is absent here exactly as it is absent from pain.
+    """
+    ages = {}
+    for sig in signals:
+        got = decayed(sig, asof)
+        if got is None:
+            continue
+        stype = sig["signal_type"].lower()
+        age = got[1]
+        if stype not in ages or age < ages[stype]:
+            ages[stype] = age
+    return ages
+
+
 # ---------------------------------------------------------------- tiers
 
-def tier_for(acct: dict, suppress: dict, total: float, pain: float, freshest):
+def tier_for(acct: dict, suppress: dict, total: float, pain: float, freshest,
+             type_ages=None):
     """(tier, reason). Rules applied in a fixed order; first match wins.
 
     total and pain arrive already rounded once to one decimal place (see
     decide), so the tier is decided on exactly the numbers that are shown.
+    type_ages is {signal_type: age in days of its freshest counted signal}
+    (see freshest_by_type). It defaults to empty so a caller that omits it
+    fails closed: no evidential signal, no A.
     """
+    type_ages = {t.lower(): age for t, age in (type_ages or {}).items()}
     website = acct.get("website", "")
     domain = normalise_domain(website)
 
@@ -174,7 +200,13 @@ def tier_for(acct: dict, suppress: dict, total: float, pain: float, freshest):
         return "reject", (f"Rejected: no live, dated signal and a fit score of {total:.1f}, "
                           f"below the nurture line of {TIERS['nurture']}.")
 
-    # 4. tier A threshold
+    # 4. tier B pain gate: below it, nurture at best whatever the total
+    if total >= TIERS["B"] and pain < TIER_B_MIN_PAIN:
+        return "nurture", (f"Nurture: scores {total:.1f}, enough for B, but pain is "
+                           f"{pain:.1f}, below the Tier B minimum of {TIER_B_MIN_PAIN}; "
+                           "fit alone cannot lift an account above nurture.")
+
+    # 5. tier A threshold
     if total >= TIERS["A"]:
         failed = []
         if pain < TIER_A_MIN_PAIN:
@@ -183,23 +215,41 @@ def tier_for(acct: dict, suppress: dict, total: float, pain: float, freshest):
             age = "unknown" if freshest is None else f"{freshest} days old"
             failed.append(f"the freshest signal is {age}, past the "
                           f"{TIER_A_MAX_AGE_DAYS}-day Tier A window")
+        # The evidential signal must itself be inside the Tier A window. Tier A
+        # means this pain is live now. Otherwise fresh funding supplies the
+        # freshness and a stale hiring signal supplies the evidentiality: the
+        # same defect as funding-only, at one remove.
+        if TIER_A_REQUIRES_EVIDENTIAL_SIGNAL:
+            want = " or ".join(sorted(EVIDENTIAL_TYPES))
+            ev = {t: a for t, a in type_ages.items() if t in EVIDENTIAL_TYPES}
+            if not ev:
+                have = ", ".join(sorted(type_ages)) or "none"
+                failed.append(f"its signals are {have} only, and Tier A needs a {want} "
+                              "signal: funding or a launch shows budget exists, not "
+                              "that this pain exists")
+            else:
+                etype, eage = min(ev.items(), key=lambda kv: (kv[1], kv[0]))
+                if eage > TIER_A_MAX_AGE_DAYS:
+                    failed.append(f"its freshest evidential signal ({etype}) is {eage} "
+                                  f"days old, past the {TIER_A_MAX_AGE_DAYS}-day Tier A "
+                                  "window, so the pain is not shown to be live now")
         if not failed:
             return "A", (f"Tier A: scores {total:.1f} with pain {pain:.1f} and a signal "
                          f"{freshest} days old.")
         return "B", (f"Tier B: scores {total:.1f}, enough for A, but "
                      + " and ".join(failed) + ".")
 
-    # 5. tier B
+    # 6. tier B
     if total >= TIERS["B"]:
         return "B", (f"Tier B: scores {total:.1f}, between {TIERS['B']} and {TIERS['A']}; "
                      f"freshest signal {freshest} days old.")
 
-    # 6. nurture
+    # 7. nurture
     if total >= TIERS["nurture"]:
         return "nurture", (f"Nurture: scores {total:.1f}, below the Tier B line of "
                            f"{TIERS['B']}; freshest signal {freshest} days old.")
 
-    # 7. reject
+    # 8. reject
     return "reject", (f"Rejected: scores {total:.1f}, below the nurture line of "
                       f"{TIERS['nurture']}.")
 
@@ -209,11 +259,12 @@ def round1(x: float) -> float:
     return float(Decimal(str(x)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
 
 
-def decide(acct: dict, suppress: dict, total_raw: float, pain_raw: float, freshest):
+def decide(acct: dict, suppress: dict, total_raw: float, pain_raw: float, freshest,
+           type_ages=None):
     """(total, pain, tier, reason). Rounds total and pain once, then decides on them."""
     total = round1(total_raw)
     pain = round1(pain_raw)
-    tier, reason = tier_for(acct, suppress, total, pain, freshest)
+    tier, reason = tier_for(acct, suppress, total, pain, freshest, type_ages)
     return total, pain, tier, reason
 
 
@@ -224,7 +275,9 @@ def score_account(acct: dict, signals: list, suppress: dict, asof: date) -> dict
     reach_raw = score_reachability(acct)
     total_raw = icp_raw + pain_raw + capacity_raw + reach_raw
 
-    total, pain, tier, reason = decide(acct, suppress, total_raw, pain_raw, freshest)
+    # only signals that actually counted (dated, known, not future) open the A gate
+    total, pain, tier, reason = decide(acct, suppress, total_raw, pain_raw, freshest,
+                                       freshest_by_type(signals, asof))
 
     # remaining parts rounded for display only; may differ from total by <= 0.2
     icp_match = round1(icp_raw)

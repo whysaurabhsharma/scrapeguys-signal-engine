@@ -1,8 +1,8 @@
 domain,expected,why
 alt.xyz,buy,pricing model fed by marketplace and auction scraping; role owns data coverage
 seon.io,buy,enrichment API runs collection on the live request path
-cube.global,buy,role names geo-blocking Cloudflare and CAPTCHA as the job
-nascent.xyz,buy,half the data role is proxy tuning and fleet health
+cube.global,no,Regulatory data provider - collection IS its product. Reclassified 2026-11-20 after hunt 1 fetched the actual pages. Original label was written from a job-description snippet without checking what CUBE sells.
+nascent.xyz,no,"Crypto trading fund. Scrapes heavily but sits outside all three ICPs, so it cannot be a buyer for this system. Reclassified 2026-11-20 after hunt 1."
 icounter.io,buy,collection at scale with anti-detection as core product need
 perplexity.ai,buy,answers depend on current web facts that go stale between crawls
 instacart.com,buy,catalogue and price accuracy across thousands of retailer sites

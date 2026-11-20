@@ -1,0 +1,40 @@
+[
+  {
+    "company": "AvantStay",
+    "website": "https://avantstay.com",
+    "country": "US",
+    "icp": "travel",
+    "icp_confidence": "medium",
+    "employees": "",
+    "stage": "",
+    "why_live_data": "AvantStay sells 3,000+ properties through Airbnb, Vrbo, Expedia, Booking.com, Wander and its own site and has analysts 'audit listing performance' on each by hand, so between audits it cannot see where a property's rate or availability has drifted on one channel.",
+    "decision_maker": "Reuben Doetsch",
+    "dm_title": "Co-Founder",
+    "dm_source": "https://www.prnewswire.com/news-releases/avantstay-and-wander-announce-strategic-partnership-to-expand-luxury-distribution-and-supply-growth-302662143.html",
+    "source_url": "https://careers.kula.ai/avantstay/64388-growth-analyst",
+    "notes": "Short-term rental and hotel operator, West Hollywood CA. ATS is Kula (careers.kula.ai/avantstay), no documented JSON API and no dates, so the Growth Analyst role ('Audit listing performance on Airbnb, Vrbo, Expedia, Booking.com and our direct site') is pain context only, not a signal. 'Distribution Analyst / price parity across OTAs' lead could not be found: UNVERIFIED, not used. No signal inside 90 days; newest is 2026-05-13. Last equity raise $160M, 2021-12-15, not staged (too old). Verifier: 4/4 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-05-13",
+        "evidence_url": "https://www.prnewswire.com/news-releases/avantstay-expands-south-florida-presence-with-nexo-residences-302770267.html",
+        "evidence_note": "Expands South Florida with Nexo Residences, North Miami Beach. Boilerplate: 'more than 3,000 premier properties across 65 markets'. PR Newswire dateline.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-04-20",
+        "evidence_url": "https://www.prnewswire.com/news-releases/avantstay-expands-hotel-portfolio-with-laguna-beach-takeover-302747032.html",
+        "evidence_note": "Takes over The Mara Laguna Beach, 66 rooms: 'AvantStay's ninth takeover of a former Sonder-operated property.' PR Newswire dateline.",
+        "date_confidence": "exact"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-01-15",
+        "evidence_url": "https://www.prnewswire.com/news-releases/avantstay-and-wander-announce-strategic-partnership-to-expand-luxury-distribution-and-supply-growth-302662143.html",
+        "evidence_note": "Partnership with Wander: 'the distribution of AvantStay's luxury properties on Wander's booking platform'. Adds another channel to monitor. PR Newswire dateline.",
+        "date_confidence": "exact"
+      }
+    ]
+  }
+]

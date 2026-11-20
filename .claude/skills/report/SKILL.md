@@ -10,7 +10,7 @@ Follow these steps in order. Do not skip, merge or reorder them.
 This skill reads and summarises. It never stages, never edits a CSV, never sends.
 
 ## STEP 1 - Read the inputs
-Read data/runs.log, data/accounts.csv, data/signals.csv, data/scored.csv,
+Read data/runs.log, data/killlist.csv, data/accounts.csv, data/signals.csv, data/scored.csv,
 out/briefs/, out/assets/ and out/probe_log.json.
 If a file is missing, note it. Do not substitute a guess.
 
@@ -25,7 +25,10 @@ Accounts by tier. Briefs written. Assets built. One line each.
 ### The kill list
 Every company rejected or disqualified, with the reason. This section is the
 point of the report: a filter that rejects nothing is not a filter.
-Group by reason: suppressed, no dated signal, no evidenced why, wrong buyer.
+The kill list section reads data/killlist.csv. Never rebuild it from memory
+or chat; if a rejection is not in that file, it is not in the report.
+Group by reason_code: suppressed, vendor, wrong_buyer, no_dated_signal,
+no_evidenced_why, off_icp.
 Never truncate the kill list to save space: it is the section that proves
 the filter is real.
 

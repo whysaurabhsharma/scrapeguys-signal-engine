@@ -1,0 +1,40 @@
+[
+  {
+    "company": "Plush",
+    "website": "https://plushforher.com",
+    "country": "IN",
+    "icp": "commerce",
+    "icp_confidence": "high",
+    "employees": "",
+    "stage": "series_b",
+    "why_live_data": "Plush calls quick commerce 'an important growth engine' and has run launches with both Blinkit and Instamart, but it cannot see its period-care SKUs' price, stock and search placement against rival femcare brands, city by city, on those apps as they change.",
+    "decision_maker": "Prince Kapoor",
+    "dm_title": "Co-founder",
+    "dm_source": "https://www.afaqs.com/news/advertising/plush-instamarts-new-ad-tackles-period-struggles-with-quick-fix-9485822",
+    "source_url": "https://pulse.d2cinsider.com/plush-targets-presence-in-25-cities-as-womens-wellness-brand-expands-offline-footprint-and-product-portfolio/",
+    "notes": "Chennai femcare D2C brand. From config/seeds/india-qcommerce.csv. Series B INR 40 Cr, 2025-06-05 (Inc42), not verifier-checked, not staged. No public ATS (careers by email only). No signal inside 90 days; newest 2026-06-17. base.com 'sponsored search inside Instamart and Blinkit' claim and Zepto tie UNVERIFIED, not used. Verifier: 3/3 SUPPORTED.",
+    "signals": [
+      {
+        "signal_type": "launch",
+        "signal_date": "2026-06-17",
+        "evidence_url": "https://pulse.d2cinsider.com/plush-targets-presence-in-25-cities-as-womens-wellness-brand-expands-offline-footprint-and-product-portfolio/",
+        "evidence_note": "Expansion to 25 cities; 'expanded into quick commerce'; quick commerce 'has become an important growth engine'. Trade-site printed date.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2025-07-11",
+        "evidence_url": "https://www.afaqs.com/news/advertising/plush-instamarts-new-ad-tackles-period-struggles-with-quick-fix-9485822",
+        "evidence_note": "'Plush, a women's wellness brand, has partnered with Instamart to launch its Seamless Period Panty.' Printed 11 Jul 2025 17:36 IST.",
+        "date_confidence": "approx"
+      },
+      {
+        "signal_type": "launch",
+        "signal_date": "2025-05-29",
+        "evidence_url": "https://marketech-apac.com/plush-and-blinkit-deliver-notices-to-homes-in-bold-menstrual-hygiene-campaign/",
+        "evidence_note": "'India-based femcare brand Plush has partnered with quick commerce platform Blinkit'. Printed date.",
+        "date_confidence": "approx"
+      }
+    ]
+  }
+]
