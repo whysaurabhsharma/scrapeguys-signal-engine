@@ -1,7 +1,16 @@
 """Acceptance checks for the repo. Standard library only.
 
-Prints PASS, FAIL, WARN or NOT YET BUILT for each check with a one-line
-reason, then a summary. Exits 1 if any check FAILs.
+Two groups of checks.
+
+CORE (C1-C10, G): PASS, FAIL, WARN or NOT YET BUILT. A CORE failure means
+the machine is broken. Exits 1 if any CORE check FAILs.
+
+TARGET (T1-T9): PASS or MISS, always with the actual number. A TARGET miss
+means there is not yet enough output, not that anything is broken. It does
+not change the exit code unless --strict is given.
+
+Verdict: NOT WORKING if any CORE fails, WORKING if all CORE and TARGET
+checks pass, CORRECT BUT THIN otherwise.
 
 Never modifies data/. Anything that writes (ingest, score) runs inside a
 temporary copy of scripts/, config/ and data/, so ROOT in those scripts
@@ -9,6 +18,7 @@ resolves to the copy. data/ is hashed before and after the run and the
 result is reported as a final guard check.
 
     python scripts/acceptance.py [--asof YYYY-MM-DD] [--quiet] [--json]
+                                 [--strict] [--sample N]
 """
 import argparse
 import csv
@@ -31,6 +41,7 @@ from common import (  # noqa: E402
     SIGNAL_HEADERS,
     is_suppressed,
     load_suppress,
+    normalise_domain,
     parse_date,
 )
 
@@ -43,7 +54,7 @@ TABLES = {
 PY = sys.executable or "python"
 SUBPROCESS_TIMEOUT = 300
 
-PASS, FAIL, WARN, NYB = "PASS", "FAIL", "WARN", "NOT YET BUILT"
+PASS, FAIL, WARN, NYB, MISS = "PASS", "FAIL", "WARN", "NOT YET BUILT", "MISS"
 
 
 class Result:
@@ -335,6 +346,180 @@ CHECKS = [c1_schema, c2_referential, c3_idempotency, c4_determinism, c5_provenan
           c6_dates, c7_suppression, c8_guard, c9_never_send, c10_tests]
 
 
+# ---------------------------------------------------------------- targets
+#
+# TARGET checks measure how much output exists, not whether the machine is
+# correct. Every reason carries the actual number, so a verdict is never
+# read without it.
+
+ICPS = ("ai", "travel", "commerce")
+TIER_A, TIER_B = "A", "B"
+ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def _score(row):
+    try:
+        return float(row.get("score", "") or 0)
+    except ValueError:
+        return 0.0
+
+
+def tier_a_rows():
+    """Tier A rows from scored.csv, highest score first, ties by account_id."""
+    _, scored = read_rows(DATA / "scored.csv")
+    rows = [r for r in scored if r.get("tier", "") == TIER_A]
+    return sorted(rows, key=lambda r: (-_score(r), r.get("account_id", "")))
+
+
+def brief_for(acct_id):
+    d = ROOT / "out" / "briefs"
+    hits = sorted(d.glob(f"{acct_id}-*.md")) if d.exists() else []
+    return hits[0] if hits else None
+
+
+def t1_volume(asof):
+    _, scored = read_rows(DATA / "scored.csv")
+    n = len(scored)
+    return Result("T1", "Volume", PASS if n >= 40 else MISS, f"{n} account(s) scored, target 40")
+
+
+def t2_icp_coverage(asof):
+    _, scored = read_rows(DATA / "scored.csv")
+    counts = {i: sum(1 for r in scored if r.get("icp", "") == i) for i in ICPS}
+    ok = all(c >= 8 for c in counts.values())
+    shown = ", ".join(f"{i} {c}" for i, c in counts.items())
+    return Result("T2", "ICP coverage", PASS if ok else MISS, f"{shown}; target 8 each")
+
+
+def t3_signal_types(asof):
+    _, signals = read_rows(DATA / "signals.csv")
+    types = sorted({s.get("signal_type", "").strip() for s in signals if s.get("signal_type", "").strip()})
+    return Result("T3", "Signal types", PASS if len(types) >= 4 else MISS,
+                  f"{len(types)} type(s) in use ({', '.join(types) or 'none'}), target 4")
+
+
+def t4_tier_a_share(asof):
+    _, scored = read_rows(DATA / "scored.csv")
+    a = sum(1 for r in scored if r.get("tier", "") == TIER_A)
+    pct = 100.0 * a / len(scored) if scored else 0.0
+    ok = bool(scored) and 10.0 <= pct <= 40.0
+    return Result("T4", "Tier A share", PASS if ok else MISS,
+                  f"{a}/{len(scored)} Tier A = {pct:.1f}%, target 10-40%")
+
+
+def t5_briefs(asof):
+    top = tier_a_rows()[:10]
+    missing = [f"{r.get('company', '')} ({r.get('account_id', '')})"
+               for r in top if not brief_for(r.get("account_id", ""))]
+    if not top:
+        return Result("T5", "Briefs", MISS, "0 Tier A accounts, so 0 briefs to check")
+    reason = f"{len(top) - len(missing)}/{len(top)} of the first ten Tier A have a brief in out/briefs/"
+    if missing:
+        reason += f"; missing: {', '.join(missing)}"
+    return Result("T5", "Briefs", MISS if missing else PASS, reason, missing)
+
+
+def t6_decision_makers(asof):
+    _, accounts = read_rows(DATA / "accounts.csv")
+    by_id = {a.get("account_id", ""): a for a in accounts}
+    top = tier_a_rows()
+    named = [r for r in top
+             if by_id.get(r.get("account_id", ""), {}).get("decision_maker", "").strip()
+             and by_id.get(r.get("account_id", ""), {}).get("dm_source", "").strip()]
+    ok = bool(top) and len(named) * 2 >= len(top)
+    return Result("T6", "Decision makers", PASS if ok else MISS,
+                  f"{len(named)}/{len(top)} Tier A have a named decision maker with dm_source, target half")
+
+
+def t7_assets(asof):
+    adir = ROOT / "out" / "assets"
+    found, misses, details = 0, [], []
+    for icp in ICPS:
+        files = sorted(adir.glob(f"{icp}-*.md")) if adir.exists() else []
+        if not files:
+            misses.append(f"{icp}: no asset")
+            continue
+        f = files[-1]  # latest by dated filename
+        head = f.read_text(encoding="utf-8", errors="replace").splitlines()[:3]
+        # A date is a header, not a finding: strip ISO dates before looking
+        # for a digit, or every dated asset passes on its date line alone.
+        if re.search(r"\d", ISO_DATE.sub("", "\n".join(head))):
+            found += 1
+            details.append(f"{icp}: {f.name} has a number in its first three lines")
+        else:
+            misses.append(f"{icp}: {f.name} has no number in its first three lines, ISO dates ignored")
+    reason = f"{found}/{len(ICPS)} ICP asset(s) carry a number in their first three lines"
+    if misses:
+        reason += f"; {'; '.join(misses)}"
+    return Result("T7", "Assets", PASS if found == len(ICPS) else MISS, reason, details + misses)
+
+
+def t8_golden(asof):
+    _, golden = read_rows(ROOT / "tests" / "golden.csv")
+    _, scored = read_rows(DATA / "scored.csv")
+    tier_by_domain = {normalise_domain(r.get("website", "")): r.get("tier", "") for r in scored}
+    buy_total = sum(1 for g in golden if g.get("expected", "") == "buy")
+    no_total = len(golden) - buy_total
+    buy_hit = buy_n = no_hit = no_n = 0
+    details = []
+    for g in golden:
+        d = normalise_domain(g.get("domain", ""))
+        tier = tier_by_domain.get(d)
+        if tier is None:
+            continue
+        good = tier in (TIER_A, TIER_B)
+        if g.get("expected", "") == "buy":
+            buy_n, buy_hit = buy_n + 1, buy_hit + good
+            ok = good
+        else:
+            no_n, no_hit = no_n + 1, no_hit + (not good)
+            ok = not good
+        details.append(f"{d}: expected {g.get('expected', '')}, tier {tier}, {'ok' if ok else 'WRONG'}")
+
+    def pct(h, n):
+        return f"{h}/{n} = {100.0 * h / n:.0f}%" if n else "0/0 = n/a"
+
+    # A rate over zero matched rows is not a pass.
+    passed = buy_n > 0 and no_n > 0 and buy_hit * 5 >= buy_n * 4 and no_hit * 5 >= no_n * 4
+    reason = (f"matched {buy_n + no_n}/{len(golden)} golden domain(s) in scored.csv "
+              f"({buy_n}/{buy_total} buyers, {no_n}/{no_total} non-buyers); "
+              f"buyers in A/B {pct(buy_hit, buy_n)}, non-buyers in nurture/reject "
+              f"{pct(no_hit, no_n)}; target 80% each")
+    return Result("T8", "Golden set", PASS if passed else MISS, reason, details)
+
+
+def t9_run_log(asof):
+    log = DATA / "runs.log"
+    lines = log.read_text(encoding="utf-8", errors="replace").splitlines() if log.exists() else []
+    names = [l.split("\t")[1] for l in lines if l.count("\t") >= 1]
+    ingests, scores = names.count("ingest.py"), names.count("score.py")
+    return Result("T9", "Run log", PASS if ingests >= 2 and scores >= 1 else MISS,
+                  f"{ingests} ingest(s), {scores} score(s) in data/runs.log; target 2 and 1")
+
+
+TARGETS = [t1_volume, t2_icp_coverage, t3_signal_types, t4_tier_a_share, t5_briefs,
+           t6_decision_makers, t7_assets, t8_golden, t9_run_log]
+
+
+def sample_lines(n):
+    _, accounts = read_rows(DATA / "accounts.csv")
+    by_id = {a.get("account_id", ""): a for a in accounts}
+    all_a = tier_a_rows()
+    out = [f"\nSAMPLE: {min(n, len(all_a))} of {len(all_a)} Tier A account(s), for the human checks"]
+    for i, r in enumerate(all_a[:n], 1):
+        acct = by_id.get(r.get("account_id", ""), {})
+        brief = brief_for(r.get("account_id", ""))
+        dm = acct.get("decision_maker", "").strip()
+        dm_txt = (f"{dm}, {acct.get('dm_title', '').strip() or 'title unknown'} "
+                  f"(source: {acct.get('dm_source', '').strip() or 'NONE'})") if dm else "none named"
+        out += [f"  {i}. {r.get('company', '')} ({r.get('account_id', '')}, {r.get('icp', '')})",
+                f"     score:  {r.get('score', '')}",
+                f"     reason: {r.get('reason', '')}",
+                f"     brief:  {brief.relative_to(ROOT).as_posix() if brief else 'MISSING'}",
+                f"     dm:     {dm_txt}"]
+    return out
+
+
 # ---------------------------------------------------------------- main
 
 def parse_args(argv=None):
@@ -342,6 +527,9 @@ def parse_args(argv=None):
     p.add_argument("--asof", help="as-of date, YYYY-MM-DD (default: today)")
     p.add_argument("--quiet", action="store_true", help="print only non-PASS checks and the summary")
     p.add_argument("--json", action="store_true", help="machine-readable output on stdout")
+    p.add_argument("--strict", action="store_true", help="exit 1 on TARGET misses too")
+    p.add_argument("--sample", type=int, default=0, metavar="N",
+                   help="print N Tier A accounts with score, reason, brief and decision maker")
     return p.parse_args(argv)
 
 
@@ -367,21 +555,51 @@ def main(argv=None) -> int:
         changed = sorted(k for k in set(before) | set(after) if before.get(k) != after.get(k))
         results.append(Result("G", "data/ untouched", FAIL, f"data/ changed during run: {', '.join(changed)}", changed))
 
+    targets = []
+    for check in TARGETS:
+        try:
+            targets.append(check(asof))
+        except Exception as e:  # a crashing target is a miss, never a silent skip
+            cid = check.__name__.split("_")[0].upper()
+            targets.append(Result(cid, check.__name__, MISS, f"check crashed: {type(e).__name__}: {e}"))
+
     counts = {s: sum(1 for r in results if r.status == s) for s in (PASS, FAIL, WARN, NYB)}
-    ok = counts[FAIL] == 0
+    core_ok = counts[FAIL] == 0
+    t_pass = sum(1 for t in targets if t.status == PASS)
+    if not core_ok:
+        verdict = "NOT WORKING"
+    elif counts[PASS] == len(results) and t_pass == len(targets):
+        verdict = "WORKING"
+    else:
+        verdict = "CORRECT BUT THIN"
+    exit_code = 0 if core_ok and (not args.strict or t_pass == len(targets)) else 1
 
     if args.json:
-        print(json.dumps({"asof": asof.isoformat(), "ok": ok, "counts": counts,
-                          "checks": [r.as_dict() for r in results]}, indent=2))
-    else:
-        width = max(len(r.status) for r in results)
-        for r in results:
-            if args.quiet and r.status == PASS:
-                continue
+        print(json.dumps({"asof": asof.isoformat(), "ok": core_ok, "verdict": verdict,
+                          "strict": args.strict, "counts": counts,
+                          "core": {"pass": counts[PASS], "total": len(results)},
+                          "target": {"pass": t_pass, "total": len(targets)},
+                          "checks": [r.as_dict() for r in results],
+                          "targets": [t.as_dict() for t in targets]}, indent=2))
+        return exit_code
+
+    width = max(len(r.status) for r in results + targets)
+    print("CORE: is the machine correct?")
+    for r in results:
+        if not (args.quiet and r.status == PASS):
             print(f"{r.status:<{width}}  {r.cid:<3} {r.name}: {r.reason}")
-        print(f"\nSummary (asof {asof}): {counts[PASS]} pass, {counts[FAIL]} fail, "
-              f"{counts[WARN]} warn, {counts[NYB]} not yet built. {'OK' if ok else 'FAILED'}")
-    return 0 if ok else 1
+    print("\nTARGET: is there enough output?")
+    for t in targets:
+        if not (args.quiet and t.status == PASS):
+            print(f"{t.status:<{width}}  {t.cid:<3} {t.name}: {t.reason}")
+    if args.sample > 0:
+        print("\n".join(sample_lines(args.sample)))
+    print(f"\nasof {asof}. CORE: {counts[PASS]} pass, {counts[FAIL]} fail, {counts[WARN]} warn, "
+          f"{counts[NYB]} not yet built. TARGET: {t_pass} pass, {len(targets) - t_pass} miss"
+          f"{' (--strict: misses exit 1)' if args.strict else ''}.")
+    print(f"CORE {counts[PASS]}/{len(results)}   TARGET {t_pass}/{len(targets)}")
+    print(f"VERDICT: {verdict}")
+    return exit_code
 
 
 if __name__ == "__main__":
