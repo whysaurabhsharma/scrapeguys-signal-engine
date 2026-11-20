@@ -8,10 +8,12 @@ It holds a prospect list of named companies and briefs on where each one is weak
 
 ## Start here
 
+- [out/signal-engine-guide.html](out/signal-engine-guide.html): a single-page field guide to the whole system (pipeline, scoring model, results, weak spots and lessons) for a reader who wants the picture without opening the code. It is written about the system, not produced by it: every other file in out/ is pipeline output, this one is documentation.
 - [out/demo.md](out/demo.md): the 90-second walkthrough and three prepared answers.
 - [out/briefs/ac_84003d1913-going.md](out/briefs/ac_84003d1913-going.md): a sourced first touch, marked DRAFT - NOT SENT.
 - [out/assets/commerce-2026-11-20.md](out/assets/commerce-2026-11-20.md): 0 of 7 quick-commerce pages returned product content to a plain client.
 - [out/report-2026-11-20.md](out/report-2026-11-20.md): what went in, what came out, what was rejected and why.
+- [out/partners.md](out/partners.md): the partner archetypes, and the channel conflict. The top-ranked channel, Nitro Commerce, is the incumbent the Gramiyaa brief pitches against, which is why that brief is held.
 
 ## What it produced (run of 2026-11-20)
 
@@ -23,8 +25,17 @@ It holds a prospect list of named companies and briefs on where each one is weak
 | Tier A | Lyst (ai, 76.1), Going (travel, 75.1), Gramiyaa (commerce, 74.6) | data/scored.csv |
 | Recorded rejections | 287 | data/killlist.csv |
 | Briefs | 3, one per Tier A; Gramiyaa HELD | out/briefs/ |
-| Assets | 3, one per ICP | out/assets/ |
-| URLs probed | 27: usable 8, blocked 8, robots-skipped 6, error 4, JS 1 | out/probe_log.json |
+| Assets | 3, one per ICP; each has a matching &lt;icp&gt;-&lt;date&gt;-urls.txt holding the exact target list that was probed | out/assets/ |
+| URLs probed | 27: usable 8, blocked 8, robots-skipped 6, error 4, JS 1 | out/probe_log.json (gitignored, see below) |
+
+out/probe_log.json is gitignored, so a clean clone does not have it, and the 27 above cannot be checked from the repo alone. Regenerate it with the three target lists (20 probes) plus the seven ATS endpoint probes (five URLs, two of them probed twice):
+
+    python scripts/probe.py --urls out/assets/ai-2026-11-20-urls.txt
+    python scripts/probe.py --urls out/assets/commerce-2026-11-20-urls.txt
+    python scripts/probe.py --urls out/assets/travel-2026-11-20-urls.txt
+    python scripts/probe.py --url https://boards-api.greenhouse.io/v1/boards/figma/jobs --url https://api.ashbyhq.com/posting-api/job-board/alt --url https://api.ashbyhq.com/posting-api/job-board/seon --url https://jobs.ashbyhq.com/alt/7d199f51-8c8c-48e9-baf7-aae4a6fe6513 --url https://jobs.ashbyhq.com/seon/bd6b23d5-c582-4eb5-9b7b-b4877f3a2153
+
+A re-probe measures the sites as they are today, so verdicts can differ from the 2026-11-20 run.
 
 ## The design decision
 
