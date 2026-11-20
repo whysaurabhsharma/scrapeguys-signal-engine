@@ -74,7 +74,8 @@ def read_rows(path: Path):
     if not path.exists():
         return None, []
     with path.open(encoding="utf-8-sig", newline="") as f:
-        reader = csv.reader(f)
+        # Rows whose first cell starts with "#" are comments (golden.csv uses one).
+        reader = (r for r in csv.reader(f) if not (r and r[0].lstrip().startswith("#")))
         header = next(reader, [])
         rows = [dict(zip(header, r)) for r in reader if any(c.strip() for c in r)]
     return header, rows

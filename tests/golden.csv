@@ -1,11 +1,12 @@
+"# Five labels corrected 2026-11-20 (icounter, perplexity, instacart, oyorooms, cleartrip) after a hunt applied the STEP 5 evidence standard to them. The original labels were written from search snippets without that standard. The correction was driven by the evidence test, not by how the pipeline ranked them: Mamaearth was kept as buy despite scoring nothing, and Perplexity was flipped to no despite a real need."
 domain,expected,why
 alt.xyz,buy,pricing model fed by marketplace and auction scraping; role owns data coverage
 seon.io,buy,enrichment API runs collection on the live request path
 cube.global,no,Regulatory data provider - collection IS its product. Reclassified 2026-11-20 after hunt 1 fetched the actual pages. Original label was written from a job-description snippet without checking what CUBE sells.
 nascent.xyz,no,"Crypto trading fund. Scrapes heavily but sits outside all three ICPs, so it cannot be a buyer for this system. Reclassified 2026-11-20 after hunt 1."
-icounter.io,buy,collection at scale with anti-detection as core product need
-perplexity.ai,buy,answers depend on current web facts that go stale between crawls
-instacart.com,buy,catalogue and price accuracy across thousands of retailer sites
+icounter.com,no,Threat intelligence vendor - owned and operated global intelligence collection IS the product.
+perplexity.ai,no,"Real need, wrong buyer: runs its own crawler team over a 200B+ URL index. Same class as openai.com."
+instacart.com,no,Catalog comes from retailer-pushed feeds; retail partners control pricing. No public evidence of a web-data need.
 brightdata.com,no,scraping vendor; this is their product not their pain
 oxylabs.io,no,proxy vendor; competitor
 zyte.com,no,scraping vendor; competitor
@@ -16,6 +17,6 @@ elevenlabs.io,no,builds its own crawling infrastructure at model-training scale
 stripe.com,no,payments infrastructure; no dependency on scraping third-party sites
 figma.com,no,design tool; its data is created in product not collected from the web
 notion.so,no,workspace software; no live external web data dependency
-oyorooms.com,buy,hotel group distributing through many OTAs; rate parity across resellers is unseen without live data
-cleartrip.com,buy,OTA pulling fares and availability from dozens of suppliers that change constantly
-mamaearth.com,buy,Indian D2C brand across Blinkit Zepto Instamart Amazon Flipkart; price stock and placement change hourly
+oyorooms.com,no,Evidence contradicts the label: OYO stated in 2020 it runs in-house competitive pricing intelligence engines.
+cleartrip.com,no,"No public evidence in Cleartrip's own words. The label was reasoning from the category, not the company."
+mamaearth.com,buy,"CEO on the Q1 FY27 call: data from quick-commerce teams is at category level, so Honasa has no SKU-level view of its own price, stock or placement."
