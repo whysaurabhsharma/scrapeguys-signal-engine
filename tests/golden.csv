@@ -1,4 +1,18 @@
 domain,expected,why
-alt.xyz,buy,"pricing model fed by marketplace scraping, role owns data coverage"
+alt.xyz,buy,pricing model fed by marketplace and auction scraping; role owns data coverage
 seon.io,buy,enrichment API runs collection on the live request path
-cube.global,buy,"role names geo-blocking, Cloudflare and CAPTCHA as the job"
+cube.global,buy,role names geo-blocking Cloudflare and CAPTCHA as the job
+nascent.xyz,buy,half the data role is proxy tuning and fleet health
+icounter.io,buy,collection at scale with anti-detection as core product need
+perplexity.ai,buy,answers depend on current web facts that go stale between crawls
+instacart.com,buy,catalogue and price accuracy across thousands of retailer sites
+brightdata.com,no,scraping vendor; this is their product not their pain
+oxylabs.io,no,proxy vendor; competitor
+zyte.com,no,scraping vendor; competitor
+apify.com,no,scraping platform; competitor
+firecrawl.dev,no,scraping API; competitor
+openai.com,no,runs web-scale crawling in house; would never outsource
+elevenlabs.io,no,builds its own crawling infrastructure at model-training scale
+stripe.com,no,payments infrastructure; no dependency on scraping third-party sites
+figma.com,no,design tool; its data is created in product not collected from the web
+notion.so,no,workspace software; no live external web data dependency
