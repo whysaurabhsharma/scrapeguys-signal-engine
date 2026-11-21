@@ -101,7 +101,7 @@ date,company,domain,reason_code,reason,source_url
 2026-11-20,Extenteam,,vendor,hunt 6: short-term rental outsourcing services,https://job-boards.greenhouse.io/extenteam/jobs/4647470008
 2026-11-20,Jobstash,,wrong_buyer,hunt 6: job aggregator,
 2026-11-20,Talent3600,,wrong_buyer,hunt 6: recruiter,
-2026-11-20,Hotelbeds,hotelbeds.com,wrong_buyer,"hunt 6: bedbank wholesaler; source of parity leakage, not its victim",https://www.hbxgroup.com/news-room/press-release/hotelbeds-partners-rategain-lead-sector-rate-integrity
+2026-11-20,Hotelbeds,hotelbeds.com,wrong_buyer,"hunt 6: wholesaler, not the rate owner",https://www.hbxgroup.com/news-room/press-release/hotelbeds-partners-rategain-lead-sector-rate-integrity
 2026-11-20,Priceline,priceline.com,wrong_buyer,"hunt 6: OTA, reseller not rate owner",
 2026-11-20,Rocket Travel by Agoda,,wrong_buyer,hunt 6: OTA subsidiary,https://job-boards.greenhouse.io/rocketmiles
 2026-11-20,The Standard,standardhotels.com,no_dated_signal,"hunt 6: strong parity role ('partners that are violating the rate parity') but page undated, no ATS (mailto apply)",https://www.standardhotels.com/careers/CA

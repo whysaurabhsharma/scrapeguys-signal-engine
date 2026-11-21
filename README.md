@@ -4,12 +4,11 @@ Finds companies with public, dated evidence that they need live web data, scores
 
 ## Why this repo is private
 
-It holds a prospect list of named companies and briefs on where each one is weak. Every claim traces to a public URL, but the companies did not ask for the assembled result, so it is not for publishing.
+It holds a prospect list of named companies and briefs on what each one has said, in public, that it cannot see. Every claim traces to a public URL, but the companies did not ask for the assembled result, so it is not for publishing.
 
 ## Start here
 
 - [out/signal-engine-guide.html](out/signal-engine-guide.html): a single-page field guide to the whole system (pipeline, scoring model, results, weak spots and lessons) for a reader who wants the picture without opening the code. It is written about the system, not produced by it: every other file in out/ is pipeline output, this one is documentation.
-- [out/demo.md](out/demo.md): the 90-second walkthrough and three prepared answers.
 - [out/briefs/ac_84003d1913-going.md](out/briefs/ac_84003d1913-going.md): a sourced first touch, marked DRAFT - NOT SENT.
 - [out/assets/commerce-2026-11-20.md](out/assets/commerce-2026-11-20.md): 0 of 7 quick-commerce pages returned product content to a plain client.
 - [out/report-2026-11-20.md](out/report-2026-11-20.md): what went in, what came out, what was rejected and why.
@@ -101,7 +100,7 @@ Output of the final run, 2026-11-20, exit 0:
 
 ## What this does badly
 
-- **Going leaves Tier A on 2026-12-22.** Its freshest signals are Ashby `publishedAt`, ceiling dates. Its only exact-dated signal is the 2026-09-23 launch.
+- **Going leaves Tier A on 2026-12-17.** Decay takes its score to 69.9 that day. Its freshest signals are Ashby `publishedAt`, ceiling dates. Its only exact-dated signal is the 2026-09-23 launch.
 - **Gramiyaa's pain evidence comes from its incumbent vendor.** The complaint source is an Inc42 series co-produced with Nitro Commerce. Funding date is approximate. Brief HELD.
 - **Tier A is 3 accounts.** One per ICP; the ai Tier A, Lyst, rests on 3 Trustpilot reviews plus one ceiling-dated hiring signal.
 - **32 of 74 signals lack an exact date:** 14 ceiling, 18 approx.

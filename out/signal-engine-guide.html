@@ -166,9 +166,8 @@ td .why{display:block;color:var(--muted);font-size:.8rem;margin-top:2px;max-widt
     <li><a href="#acceptance">Acceptance checks</a></li>
     <li><a href="#golden">Golden set</a></li>
     <li><a href="#partners">Partners</a></li>
-    <li><a href="#weak">Weak spots</a></li>
+    <li><a href="#weak">Known limits</a></li>
     <li><a href="#lessons">Lessons</a></li>
-    <li><a href="#interview">Interview prep</a></li>
     <li><a href="#run">Run it</a></li>
     <li><a href="#glossary">Glossary</a></li>
   </ol>
@@ -252,7 +251,7 @@ td .why{display:block;color:var(--muted);font-size:.8rem;margin-top:2px;max-widt
       <tr><td><code>config/</code></td><td>suppress.csv (16), robots_allowlist.csv (1), seeds/india-qcommerce.csv (12 brands)</td><td>Ashby's API is allowlisted because its robots.txt returns 401.</td></tr>
       <tr><td><code>data/</code></td><td>accounts, signals, scored, killlist, runs.log, staging/</td><td>45 staging files + EXAMPLE.json fixture. <code>runs.log</code> is gitignored.</td></tr>
       <tr><td><code>tests/</code></td><td>golden.csv + 5 test files</td><td>No pytest; each runs as <code>python tests/test_x.py</code>.</td></tr>
-      <tr><td><code>out/</code></td><td>briefs (3), assets (3 + URL lists), partners.md, report, demo.md</td><td>Everything human-facing.</td></tr>
+      <tr><td><code>out/</code></td><td>briefs (3), assets (3 + URL lists), partners.md, report</td><td>Everything human-facing.</td></tr>
     </tbody></table></div>
 </section>
 
@@ -430,7 +429,7 @@ pain         = sum over types of the STRONGEST signal of that type
       <p class="small"><strong>Cannot see:</strong> whether a fare it alerts on is still bookable at that price.</p>
       <p class="small"><strong>DM:</strong> David Krauter, CEO since 2026-03-09. Formerly Scott's Cheap Flights. Bootstrapped.</p>
       <p class="small"><strong>Cost section:</strong> UNVERIFIED, no public evidence.</p>
-      <div class="note small">Both hiring dates are Ashby ceilings. Decay drops the score to 69.9 on <strong>2026-12-17</strong> (B), five days before the 2026-12-22 date the README gives.</div></div>
+      <div class="note small">Both hiring dates are Ashby ceilings. Decay drops the score to 69.9 on <strong>2026-12-17</strong> (B). The hiring posts stay inside the 90-day evidential window until February 2027, so decay, not the window, ends Tier A.</div></div>
     <div class="card"><h3>Gramiyaa <span class="pill pA">A 74.6</span> <span class="tag">commerce · IN</span></h3>
       <p class="small"><strong>Signal:</strong> Inc42 interview, 10 Nov 2026: the cofounder says the brand gets "caught between two giants"; "An intern manually checked pin codes". Series A, INR 21 Cr (Dealroom date 9 Oct, approx).</p>
       <p class="small"><strong>Cannot see:</strong> independent per-pincode price, rank and stock on Blinkit, Zepto, Instamart.</p>
@@ -504,7 +503,6 @@ pain         = sum over types of the STRONGEST signal of that type
       <tr><td>6</td><td>MCP tools named as send actions (send, reply, forward, post, publish) plus a denylist (create_draft, manage_marketing_email and others)</td></tr>
       <tr><td>7</td><td>An interpreter reading its program from stdin (pipe, <code>&lt;</code>, <code>&lt;&lt;</code>)</td></tr>
     </tbody></table></div>
-  <div class="note"><strong>Known bypass, volunteered:</strong> in the third hunt a session piped Python into the interpreter via a heredoc after Write refused a scratch file outside the repo. It did not touch the CSVs. Rule 7 now blocks that route, but pattern matching cannot close the whole class. Your claude.ai account has Gmail and HubSpot connected, so in your own session the hook is what stands in the way. Side effects you will hit: inline Python that merely <em>names</em> a protected CSV is blocked even when it only reads, and rule 5 blocks writes to temp folders outside the repo.</div>
 </section>
 
 <section id="acceptance">
@@ -568,7 +566,7 @@ pain         = sum over types of the STRONGEST signal of that type
 
 <section id="weak">
   <div class="eyebrow">What this does badly</div>
-  <h2>Weak spots to know before anyone asks</h2>
+  <h2>Known limits</h2>
   <div class="grid2">
     <div class="card"><ul class="small">
       <li><strong>Tier A is 3 accounts</strong>, one per ICP, each with a written caveat.</li>
@@ -582,7 +580,6 @@ pain         = sum over types of the STRONGEST signal of that type
       <li><strong>Searches per hunt were never logged.</strong> The funnel starts at candidates.</li>
       <li><strong>6 of 39 accounts</strong> have no named decision maker (SEON, Vogo, Phia, RestaurantSupply.com, PlanetArt, PRISM+).</li>
       <li><strong>The weights are a guess</strong> checked against 26 labelled rows; closed-won data would calibrate them.</li>
-      <li><strong>out/report-2026-11-20.md is stale:</strong> it shows 24 accounts and 58 kill rows from an earlier pass. The README holds the current 39 / 287.</li>
     </ul></div>
   </div>
 </section>
@@ -601,18 +598,6 @@ pain         = sum over types of the STRONGEST signal of that type
     <li><div><b>The hook was bypassed in practice.</b> The never-send claim now rests on what the repo lacks.</div></li>
     <li><div><b>An unquoted colon in frontmatter dropped allowed-tools silently.</b> A control that fails silently reads as one that works.</div></li>
   </ol>
-</section>
-
-<section id="interview">
-  <div class="eyebrow">out/demo.md</div>
-  <h2>Interview prep</h2>
-  <p class="lede">A two-minute opening (about 282 spoken words) for the ScrapeGuys CEO, Growth Manager role. Hard rule: stop talking whenever a file is open.</p>
-  <div class="grid3">
-    <div class="card"><h4>"What did it get wrong?"</h4><p class="small">Five golden labels written from snippets failed the evidence standard and were corrected from evidence. A skill header's unquoted colon silently dropped its tool limits.</p></div>
-    <div class="card"><h4>"What would you change with our data?"</h4><p class="small">The weights and the suppression list. Closed-won and closed-lost accounts calibrate the weights; the customer list goes straight into suppression.</p></div>
-    <div class="card"><h4>"Could this send?"</h4><p class="small">No credential and one Sheets server. Then volunteer the limit: the hook is a backstop, and the stdin bypass is in scope.md §14.</p></div>
-  </div>
-  <div class="note">Do not claim a sample of the company's own data is attached. Nothing was collected; the assets are documented gaps, and probe_log.json shows that in seconds.</div>
 </section>
 
 <section id="run">
